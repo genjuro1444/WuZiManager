@@ -1,0 +1,245 @@
+body {
+    background-color: #f0f0f0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+[v-cloak] {
+    display: none;
+}
+
+.aui-content {
+    padding: 0px;
+    background-color: #f00;
+}
+
+.aui-content.top {
+    z-index: 999;
+    position: fixed;
+    top: 0;
+    right: 0px;
+    left: 0px;
+    padding: 0px;
+    /*margin-bottom: 20px;*/
+    background-color: #fff;
+}
+.pdt_top{
+  background: #fff;
+  padding: 0px 14px;
+}
+.pdt_sousuo{
+  width: 88%;
+  background: #f5f5f5;
+  height: 1.8rem;
+  border-radius: 50px;
+  float: left;
+  margin-top: 10px;
+}
+.pdt_sousuo input{
+  padding-left: 16px;
+  font-size: 0.7rem;
+}
+.pdt_sousuo input[type="search"]{
+  height: 1.8rem;
+}
+.pdt_sousuo input[type="search"]::placeholder{
+  color: #bbb;
+}
+.aui-list .aui-list-item-inner {
+    padding-left: 14px;
+    padding-right: 0px;
+}
+.aui-list .aui-list-item-media {
+    width: 5rem;
+    height: 5rem;
+    margin: 18px 0px;
+    padding: 0px;
+    overflow: hidden;
+    border-radius: 6px;
+    /*background: #f00;*/
+}
+.aui-list .aui-list-item-media img {
+  /*width: 100%;*/
+      border-radius: 6px;
+}
+.aui-list .pro-list-item-title {
+    font-size: 0.7rem;
+    line-height: 1rem;
+    padding-top: 0.4rem;
+    color: #333;
+    text-shadow: 0px 0px 0px #333;
+    /*margin-bottom: 1.3rem;*/
+}
+.pro_dis{
+  line-height: 1.2rem;
+}
+.aui-list .item_buy,.aui-list .item_pj {
+    font-size: 0.6rem;
+    color: #999;
+}
+.pr10{
+  padding-right: 20px;
+  float: left;
+}
+.aui-list-item-text.pro_price{
+  width: 95%;
+  /*margin: 10px 0 0 0;*/
+  position: absolute;
+  bottom: 16px;
+}
+.pro_price img{
+  width: 1.5rem;
+}
+.aui-list-item-text.pro_price .item_price{
+  width: 60%;
+  float: left;
+
+}
+.aui-list .item_price {
+    color: red;
+    font-size: 0.5rem;
+}
+.item_price span{
+  font-size: 1rem;
+  text-shadow: 0px 0px 0px red;
+  font-family:"Arial";
+}
+
+
+.menu_box {
+    width: 100%;
+    overflow-x: hidden;
+    overflow-x: auto;
+    white-space: nowrap;
+    z-index: 999;
+    background-color: #fff;
+    font-size: 0.8rem;
+    border-bottom: solid 10px #f0f0f0;
+    /*margin-bottom: 20px;*/
+    padding: 0 10px;
+}
+
+.menu_box label {
+    margin-right: 10px;
+    line-height: 2rem;
+    padding: 0 10px;
+    background: #fff;
+}
+
+.menu_box label.active {
+    color: #ffc107;
+    border-bottom: solid 3px #ffc107;
+}
+
+.aui-media-list .aui-list-item {
+    padding: 0 14px;
+    background-size: 100% 0px;
+}
+
+
+.btn_line{
+    border: none;
+    background-size: 100% 1px;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-image: linear-gradient(0,#f0f0f0,#f0f0f0 50%,transparent 50%);
+    background-image: -webkit-linear-gradient(90deg,#f0f0f0,#f0f0f0 50%,transparent 50%);
+}
+.aui-list-item-text .item_rate{
+  font-size: 0.6rem;
+}
+
+
+
+
+
+
+.aui-list .aui-list-item-title img {
+    width: 1rem;
+    display: inline-table;
+}
+
+.aui-row .aui-col-xs-4 {
+    text-align: center;
+    width: 25%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.aui-row .aui-col-xs-4 label {
+    font-size: 0.7rem;
+}
+
+.aui-row .aui-col-xs-4 img {
+    width: 0.8rem;
+    position: absolute;
+    top: 50%;
+    right: 50%;
+    margin-right: -30px;
+    margin-top: -7px;
+}
+
+.aui-row .aui-col-xs-4.active label {
+    color: #ffc107;
+}
+
+
+
+
+
+.aui-list .item_address .iconfont {
+    font-size: 0.6rem;
+}
+
+.aui-list .item_distance {
+    font-size: 0.6rem;
+    width: 3rem;
+    text-align: right;
+}
+
+.sub_menu_box {
+    width: 100%;
+   /* overflow-x: hidden;
+    overflow-x: auto;
+    white-space: nowrap;*/
+    z-index: 999;
+    background-color: #f0f0f0;
+    padding: 5px 10px 10px 10px;
+}
+
+.sub_menu_box label {
+    border: solid 1px #ccc;
+    border-radius: 15px;
+    color: #808080;
+    font-size: 0.7rem;
+    padding: 0px 15px;
+    margin-right: 10px;
+    background-color: #fff;
+    line-height: 1.2rem;
+    margin-top: 5px;
+}
+
+.sub_menu_box label.active {
+    border: solid 1px #ffc107;
+    background-color: #ffc107;
+    color: #fff;
+}
+.aui-media-list .aui_list_item_footer{
+    height: 5px;
+    background-color: #dddddd;
+}
+.cl{
+  clear:both;
+}
+.cartbtn{
+  position: absolute;
+  bottom: 1rem;
+  right: 0;
+  width: 50px;
+}
+.cartbtn img{
+  width: 1.5rem;
+}

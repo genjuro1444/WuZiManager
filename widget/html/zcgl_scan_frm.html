@@ -1,0 +1,97 @@
+﻿<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>资产列表</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../css/aui.css" />
+    <link rel="stylesheet" type="text/css" href="../css/aui-pull-refresh.css" />
+    <link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
+    <link rel="stylesheet" type="text/css" href="./css/gridlist.css" />
+    <link rel="stylesheet" type="text/css" href="../css/comm.css" />
+</head>
+
+<body>
+    <div id="app">
+        <section class="aui-grid fixed-top">
+            <div class="aui-row">
+                <div class="aui-col-xs-9">
+                    <div class="aui-grid-label grey">小计：{{form.totalcount}}</div>
+                </div>
+                <div class="aui-col-xs-3" v-on:click="do_search()">
+                    <div class="aui-grid-label"><span class="search-btn ft110"><i class="icon iconfont iconfilter"></i>筛选</span></div>
+                </div>
+            </div>
+        </section>
+        <section id="main_refresh" class="aui-refresh-content">
+            <div class="aui-content">
+                <ul class="aui-list aui-form-list" v-for="item in list" v-on:click="do_add_zc(item.ID)">
+                    <li class="aui-list-header"><span v-bind:class="convertcss(item.Status)">{{item.StatusDesc}}</span>资产编码：{{item.Code}}</li>
+                    <li class="aui-list-item">
+                        <div class="aui-list-item-inner">
+                            <div class="aui-list-item-label">
+                                资产名称：
+                            </div>
+                            <div class="aui-list-item-input">
+                                {{item.Name}}
+                            </div>
+                        </div>
+                    </li>
+                    <li class="aui-list-item">
+                        <div class="aui-list-item-inner">
+                            <div class="aui-list-item-label">
+                                资产分类：
+                            </div>
+                            <div class="aui-list-item-input">
+                                {{item.Title}}
+                            </div>
+                        </div>
+                    </li>
+                    <li class="aui-list-item">
+                        <div class="aui-list-item-inner">
+                            <div class="aui-list-item-label">
+                                品牌-型号：
+                            </div>
+                            <div class="aui-list-item-input">
+                                {{item.BrandName}}-{{item.Version}}
+                            </div>
+                        </div>
+                    </li>
+                    <li class="aui-list-item">
+                        <div class="aui-list-item-inner">
+                            <div class="aui-list-item-label">
+                                使用人-部门：
+                            </div>
+                            <div class="aui-list-item-input">
+                                {{item.UserDesc}}-{{item.UserGW}}
+                            </div>
+                        </div>
+                    </li>
+                    <li class="aui-list-item">
+                        <div class="aui-list-item-inner">
+                            <div class="aui-list-item-label">
+                                存放地点：
+                            </div>
+                            <div class="aui-list-item-input">
+                                {{item.LocTitle}}
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </div>
+</body>
+<script type="text/javascript" src="../script/api.js "></script>
+<script type="text/javascript" src="../script/aui-toast.js"></script>
+<script type="text/javascript" src="../script/aui-pull-refresh.js"></script>
+<script type="text/javascript" src="../script/aui-scroll.js"></script>
+<script type="text/javascript" src="../script/vue.js"></script>
+<script type="text/javascript" src="../script/config.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript" src="js/zcgl_scan.js "></script>
+
+</html>

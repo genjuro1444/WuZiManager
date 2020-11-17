@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>我的订单</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../css/aui.css" />
+    <link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
+    <link rel="stylesheet" type="text/css" href="css/dl_orderlistwin.css" />
+</head>
+
+<body>
+    <div id="app" v-cloak>
+        <div class="aui-tab" id="tab">
+            <div id="tabbar0" class="aui-tab-item aui-active" v-on:click="randomSwitchBtn('全部',0)">全部
+            </div>
+            <div id="tabbar1" class="aui-tab-item" v-on:click="randomSwitchBtn('待付款',1)">待付款
+            </div>
+            <div id="tabbar2" class="aui-tab-item" v-on:click="randomSwitchBtn('待发货',2)">待发货
+            </div>
+            <div id="tabbar3" class="aui-tab-item" v-on:click="randomSwitchBtn('待收货',3)">待收货
+            </div>
+            <div id="tabbar4" class="aui-tab-item" v-on:click="randomSwitchBtn('已完成',4)">已完成
+            </div>
+            <div id="tabbar5" class="aui-tab-item" v-on:click="randomSwitchBtn('退款中',5)">退款中
+            </div>
+            <div id="tabbar6" class="aui-tab-item" v-on:click="randomSwitchBtn('退款失败',6)">退款失败
+            </div>
+            <div id="tabbar7" class="aui-tab-item" v-on:click="randomSwitchBtn('已关闭',7)">已关闭/退款
+            </div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/config.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript " src="../script/vue.js "></script>
+<script type="text/javascript" src="../script/aui-tab.js"></script>
+<script type="text/javascript " src="js/dl_orderlistwin.js "></script>
+
+</html>

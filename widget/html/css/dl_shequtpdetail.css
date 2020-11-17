@@ -1,0 +1,106 @@
+html,body{
+    background:#f0f0f0;
+}
+.fl{
+    float: left;
+}
+.fr{
+    float: right;
+}
+.cl{
+    clear: both;
+}
+.tp_box{
+background-color:#fff;
+border-radius: 10px;
+margin:5px;
+width:30%;
+height:220px;
+display: block;
+float: left;
+}
+
+.aui-grid{
+    background:none;
+    margin-top: 10px;
+}
+.tp_box_num{
+    text-align: center;
+    font-size: 0.7rem;
+}
+.tp_box_name{
+    text-align: center;
+    font-size: 0.7rem;
+    margin-top: 5px;
+}
+.tp_box_input{
+    text-align: center;
+    background:#2BA4FD;
+    border-radius: 20px;
+    width:80px;
+    height:25px;
+    margin:5px auto 0 auto;
+    color:#fff;
+    font-size: 0.7rem;
+    line-height: 25px;
+}
+.tp_box_input_ccc{
+    margin:5px auto 0 auto;
+    text-align: center;
+    background:#ccc;
+    border-radius: 20px;
+    width:80px;
+    height:25px;
+    color:#fff;
+    font-size: 0.7rem;
+    line-height: 25px;
+}
+h3{
+	text-align: center;
+	padding: 10px 0;
+	font-size: 1rem;
+}
+.aui-content {
+    padding: 0 14px;
+    background:none;
+}
+.aui-row .aui-col-xs-4{
+	padding: 10px;
+}
+.aui-row .aui-grid-label.title{
+	color:#333;
+}
+.aui-row .aui-grid-label.vote{
+	background-color: #00bcd4;
+	color:#fff;
+	line-height: 30px;
+}
+.aui-row .aui-grid-label.done{
+	background-color: #ccc;
+}
+.vote_img{
+    width:3rem;
+    height:3rem;
+    border-radius:3rem;
+    overflow: hidden;
+}
+.vote_img img{
+    margin: 0 auto;
+    width: 100%;
+}
+
+.tp_box_img{
+    width:100px;
+    height: 100px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+.tp_box_img img{
+    width:88%;
+    margin: 0 auto;
+    border-radius: 50rem;
+}
+/*.tp_box_img{
+    margin: 0 auto;
+    width:80%;
+}*/

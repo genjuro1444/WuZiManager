@@ -1,0 +1,63 @@
+body {
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+}
+
+[v-cloak] {
+    display: none;
+}
+
+.aui-content.content {
+    margin-bottom: 50px;
+}
+
+.chat_bottom {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    min-height: 40px;
+    z-index: 100;
+}
+
+table.chat_table {
+    background-color: #fff;
+    border-spacing: 0;
+    width: 100%;
+    border-top: solid 1px #ccc;
+}
+
+table.chat_table td {
+    text-align: center;
+    vertical-align: middle;
+    min-height: 40px;
+    padding: 0px;
+}
+
+table.chat_table td.first {}
+
+table.chat_table td.second {
+    text-align: left;
+    padding-left: 10px;
+}
+
+table.chat_table td.third {
+    width: 2.5rem;
+    text-align: right;
+    color: #ffc107;
+    padding-right: 10px;
+    font-weight: bold;
+}
+
+table.chat_table td.second textarea {
+    vertical-align: middle;
+}
+
+.aui-chat .aui-chat-right .aui-chat-inner,.aui-chat .aui-chat-right .aui-chat-content {
+    max-width: 100%;
+}
+.aui-chat .aui-chat-media img {
+    width: 2rem;
+    height: 2rem;
+}

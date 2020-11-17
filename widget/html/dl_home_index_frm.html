@@ -1,0 +1,188 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>首页</title>
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../css/aui.css" />
+    <link rel="stylesheet" type="text/css" href="../css/aui-pull-refresh.css" />
+    <link rel="stylesheet" type="text/css" href="../css/aui-slide.css" />
+    <link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
+    <link rel="stylesheet" type="text/css" href="css/dl_home_index.css" />
+    <style type="text/css">
+        .bb-line {
+            border: none;
+            background-size: 100% 1px;
+            background-repeat: no-repeat;
+            background-position: bottom;
+            background-image: linear-gradient(0, #eeeeee, #eeeeee 50%, transparent 50%);
+            background-image: -webkit-linear-gradient(90deg, #eeeeee, #eeeeee 50%, transparent 50%);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app" v-cloak>
+        <div class="shadow" v-if="couponform.show_coupon" v-on:click="close_coupon_banner()"></div>
+        <div id="coupon_banner_bg" class="coupon_banner" v-if="couponform.show_coupon" style="background-image: url('../image/icons/coupon_banner.png')">
+            <img v-on:click="close_coupon_banner()" class="pop_close" src="../image/icons/close.png" />
+            <div class="coupon_content">
+                <div class="coupon_center" v-on:click="open_coupon()">
+                    <div v-for="item in couponform.list" class="coupon_img">
+                        <div class="coupon_cover" v-bind:style="{'background-image':item.background_img}">
+                            <div class="coupon_title">{{item.UseTitle}}</div>
+                            <div class="coupon_subtitle">{{item.UseSubTitle}}</div>
+                        </div>
+                    </div>
+                    <div v-for="item in couponform.expiring_list" class="coupon_img">
+                        <div class="coupon_cover" v-bind:style="{'background-image':item.background_img}">
+                            <div class="coupon_title">{{item.UseTitle}}</div>
+                            <div class="coupon_subtitle">{{item.UseSubTitle}}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="coupon_footer">
+                    <div v-if="couponform.list.length>0" class="aui-btn aui-btn-block" v-on:click="do_take_all_coupon()">领取优惠券</div>
+                    <div v-if="couponform.expiring_list.length>0" class="aui-btn aui-btn-block">查看优惠券</div>
+                    <label v-on:click="do_read_all_coupon()">不再提醒</label>
+                </div>
+            </div>
+        </div>
+        <section id="main_refresh" class="aui-refresh-content" style="background:#ea7825; padding-top:0rem;">
+            <div class="aui-content header" style="background:#FFffff; border-radius:0.5rem 0.5rem 0rem 0rem; ">
+                <!-- <div id="aui-slide" v-if="imagelist.length>0">
+                    <div class="aui-slide-wrap">
+                        <div class="aui-slide-node" v-for="item in imagelist" v-on:click="open_rotating(item)">
+                            <img v-bind:src="item.cacheurl">
+                        </div>
+                    </div>
+                    <div class="aui-slide-page-wrap">
+                    </div>
+                </div> -->
+                <section class="aui-grid bb-line">
+                    <div class="aui-row">
+                        <div class="aui-col-xs-3 col_box" v-on:click="open_win(item.title,item.name,item.require_login)" v-for="item in servicelist">
+                            <img v-bind:src="item.src" />
+                            <div class="aui-grid-label">{{item.title}}</div>
+                        </div>
+                    </div>
+                </section>
+                <!--公告 -->
+                <div class="gongao">
+                    <div class="gg-icon">
+                        <img src="../image/icons/gonggao_icon.png">
+                    </div>
+                    <div id="scrolllayer" class="gg-msg">
+                        <div id="scrollmessage">
+                            <div v-bind:data-id="item.id" name="notify_item" v-for="item in notifylist" class="gg-msg-item aui-ellipsis-1">{{item.title}}</div>
+                        </div>
+                    </div>
+                    <div class="gg-more" v-on:click="open_gonggao_list()">
+                        <i class="icon iconfont iconicon1"></i>
+                    </div>
+                </div>
+                <div id="aui-slide" class="banner">
+                    <div class="aui-slide-wrap">
+                        <div v-on:click="open_rotating(item)" class="aui-slide-node" v-for="item in imagelist">
+                            <img v-bind:src="item.imageurl" />
+                        </div>
+                    </div>
+                    <div class="aui-slide-page-wrap">
+                        <!--分页容器-->
+                    </div>
+                </div>
+            </div>
+            <!-- 社区商城 -->
+            <div class="aui-shequ category bt10">
+                <div class="shequ-title">社区商城</div>
+                <div class="aui-card-list">
+                    <div class="aui-row aui-row-padded plr10">
+                        <div class="aui-col-xs-5" v-on:click="doOpenMall()">
+                            <img src="../image/zxsc.png" />
+                        </div>
+                        <div class="aui-col-xs-5" v-on:click="open_nearby_businesslist(1)">
+                            <img src="../image/zbsj.png" />
+                        </div>
+                        <div class="aui-col-xs-5" v-on:click="doOpenBBs()">
+                            <img src="../image/sqlt.png" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 优选商品 -->
+            <div class="products">
+                <div class="pro-name bb-line">
+                    <div class="pro_nameitem">
+                        <div class="pro-sp" v-on:click="doSelectTab(1)" v-bind:class="{'sp_chk':tabIndex==1}">优选商品</div>
+                        <div class="pro-sp" v-on:click="doSelectTab(2)" v-bind:class="{'sp_chk':tabIndex==2}">优选商家</div>
+                    </div>
+                    <div class="pro_more" v-on:click="open_Moreproduct()">更多</div>
+                </div>
+                <section v-show="tabIndex==1" class="aui_flex" id="content_box">
+                    <div v-for="(item,index) in productlist" class="aui_flex_item_6" v-bind:id="index+'_item'">
+                        <div class="col_xs_pro p6" v-on:click="open_productDetails(item.title,item.RelatedID)">
+                            <div class="pro-img">
+                                <img v-bind:src="item.imageurl" />
+                            </div>
+                            <div class="pro_msg">
+                                <div class="pro_msg_main twoline">{{item.title}}</div>
+                                <div class="msg_px">
+                                    <div class="pro_msg_price">￥<span>{{parseFloat(item.pricevalue).toFixed(2)}}</span></div>
+                                    <div class="pro_msg_count">成交量{{item.salecount}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section v-show="tabIndex==2" class="aui_flex" id="content_box1">
+                    <ul class="aui-list aui-media-list businessbox" v-for="(item,index) in businesslist">
+                        <li class="aui-list-item">
+                            <div class="aui-media-list-item-inner" v-on:click="open_BusinessDetails(item.title,item.RelatedID)">
+                                <div class="aui-list-item-media">
+                                    <img v-bind:src="item.imageurl" />
+                                </div>
+                                <div class="aui-list-item-inner">
+                                    <div class="aui-list-item-title aui-ellipsis-2">
+                                        {{item.title}}
+                                    </div>
+                                    <div class="aui-list-item-text">
+                                        <span class="item_address aui-ellipsis">
+                                        <i class="icon iconfont icon-dizhi"></i>
+                                        {{item.address}}
+                                        </span>
+                                    </div>
+                                    <div class="aui-list-item-text">
+                                        <span class="item_address aui-ellipsis">
+                                        <i class="icon iconfont icon-dizhi"></i>
+                                        {{item.summary}}
+                                        </span>
+                                    </div>
+                                    <div class="aui-list-item-text" style="margin: 5px 0 0 0;">
+                                        <span class="item_rate">
+                                              营业时间：{{item.BusinessHoursStart}}-{{item.BusinessHoursEnd}}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </section>
+            </div>
+        </section>
+    </div>
+</body>
+<script type="text/javascript" src="../script/api.js "></script>
+<script type="text/javascript" src="../script/vue.js "></script>
+<script type="text/javascript" src="../script/config.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript" src="../script/aui-pull-refresh.js"></script>
+<script type="text/javascript" src="../script/aui-slide.js"></script>
+<script type="text/javascript" src="../script/aui-popup.js"></script>
+<script type="text/javascript" src="js/dl_home_index.js"></script>
+<!-- ?r=Math.random() -->
+
+</html>

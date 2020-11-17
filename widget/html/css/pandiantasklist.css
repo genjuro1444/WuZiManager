@@ -1,0 +1,119 @@
+html, body {
+    height: auto;
+}
+
+#main_refresh {
+    position: absolute;
+    top: 35px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+#app, .aui-refresh-content {
+    height: auto;
+}
+
+.aui-list.aui-form-list {
+    width: 96%;
+    margin: 4px 2% 7px 2%;
+    border-radius: 3px;
+    box-shadow: 0 0 4px rgba(0, 0, 0, .1);
+    padding: 3px 0 0 0;
+}
+
+.aui-list .aui-list-header {
+    display: block;
+    background-color: #fff;
+    font-size: 0.75rem;
+    padding: 5px 10px;
+}
+
+.aui-list .aui-list-item {
+    min-height: 1.35rem;
+    padding: 0 10px;
+    font-size: 0.75rem;
+}
+
+.aui-list .aui-list-item.last {
+    border-bottom: solid 1px #ddd;
+    padding: 5px 10px;
+}
+
+.aui-list .aui-list-item-inner {
+    min-height: 1.35rem;
+}
+
+.aui-list-item .iconfont {
+    color: #29ab91;
+    font-size: 0.65rem;
+}
+
+.aui-grid [class*=aui-col-] {
+    padding: 10px 0;
+}
+
+.aui-grid .aui-grid-label {
+    margin-top: 0;
+    color: #fff;
+    font-size: 0.65rem;
+}
+
+.aui-grid .aui-grid-label span {
+    padding: 2px 7px 1px 7px;
+    display: inline-block;
+    border-radius: 2px;
+}
+
+.aui-grid .aui-grid-label .count {
+    color: #000;
+}
+
+.weipan {
+    background: #d3d2d7;
+}
+
+.yipan {
+    background: #47a0db;
+}
+
+.panying {
+    background: #83b24b;
+}
+
+.pankui {
+    background: #f46e78;
+}
+
+.aui-right-search {
+    line-height: 35px;
+    height: 35px;
+    position: absolute;
+    right: 10px;
+    text-align: right;
+    padding: 0 5px 0 5px;
+}
+
+.aui-right-search .search-btn {
+    border-left: solid 1px #f1f1f1;
+    padding-left: 20px;
+    line-height: 20px;
+}
+
+.aui-right-search .search-btn .iconfont {
+    font-size: 110%;
+    color: #616161;
+}
+
+.aui-left-count {
+    line-height: 35px;
+    height: 35px;
+    position: absolute;
+    left: 10px;
+    text-align: left;
+}
+
+.aui-left-count label {
+    font-size: 0.8rem;
+    color: #888;
+}

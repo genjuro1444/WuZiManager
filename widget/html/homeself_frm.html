@@ -1,0 +1,111 @@
+﻿
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>我的</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../css/aui.css" />
+    <link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
+    <link rel="stylesheet" type="text/css" href="../css/comm.css" />
+    <link rel="stylesheet" type="text/css" href="css/home_self.css" />
+    <style type="text/css">
+        .text-white {
+            color: #ffffff !important;
+            text-align: center;
+        }
+
+        .aui-list .aui-list-item {
+            padding: 0.2rem;
+        }
+
+        .aui-list .aui-list-item-media {
+            height: 5rem;
+            padding: 0;
+            margin: 1rem 0;
+        }
+
+            .aui-list .aui-list-item-media img {
+                width: 5rem;
+                height: 5rem;
+                max-width: 5rem;
+                max-height: 5rem;
+                border-radius: 50%;
+                margin: 0 auto;
+            }
+
+        .aui-btn.logout {
+            width: 100%;
+            text-align: center;
+            background-color: #fff;
+            height: 2rem;
+            line-height: 2rem;
+        }
+
+        .aui-list .aui-list-item-title {
+            font-size: 0.8rem;
+        }
+
+        .aui-list .aui-list-item-inner {
+            padding: 0;
+            min-height: 1.5rem;
+        }
+
+        .aui-btn {
+            font-size: 0.78rem;
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 顶部 -->
+        <section class="aui-content">
+            <div v-on:click="do_edit_self()" class="aui-list aui-media-list aui-list-noborder aui-bg-info">
+                <div class="aui-list-item aui-list-item-middle" style="background-color:#29ab91 !important;">
+                    <div class="aui-media-list-item-inner">
+                        <div class="aui-list-item-media" style="width:100%;">
+                            <img v-bind:src="file.headimg" class="aui-img-round">
+                        </div>
+                    </div>
+                    <div class="aui-list-item-inner">
+                        <div class="text-white aui-font-size-16">{{userinfo.UserRealName}}</div>
+                    </div>
+                </div>
+            </div>
+            <ul class="aui-list aui-list-in aui-margin-b-15">
+                <li class="aui-list-item" v-on:click="changepwd()">
+                    <div class="aui-list-item-label-icon">
+                        <i class="icon iconfont iconmima"></i>
+                    </div>
+                    <div class="aui-list-item-inner aui-list-item-arrow">
+                        <div class="aui-list-item-title">修改密码</div>
+                    </div>
+                </li>
+                <li class="aui-list-item" v-on:click="checkupdate()">
+                    <div class="aui-list-item-label-icon">
+                        <i class="icon iconfont icongengxin"></i>
+                    </div>
+                    <div class="aui-list-item-inner aui-list-item-arrow">
+                        <div class="aui-list-item-title">版本更新</div>
+                    </div>
+                </li>
+            </ul>
+            <div v-on:click="do_logout()" class="aui-btn logout">退出登录</div>
+        </section>
+    </div>
+</body>
+
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/aui-toast.js"></script>
+<script type="text/javascript" src="../script/vue.js "></script>
+<script type="text/javascript" src="../script/config.js "></script>
+<script type="text/javascript" src="../script/common.js "></script>
+<script type="text/javascript" src="../script/aui-actionsheet.js"></script>
+<script type="text/javascript" src="js/homeself.js "></script>
+
+</html>

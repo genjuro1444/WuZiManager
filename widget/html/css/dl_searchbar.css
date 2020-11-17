@@ -1,0 +1,42 @@
+ .header {
+     background-color: #fff;
+     border-bottom: solid 1px #F0F0F0;
+     color: #000;
+ }
+ .aui-bar-nav .aui-pull-right {
+     color: #ffc107;
+     font-size: 0.7rem;
+ }
+
+ .iconfont {
+     font-size: 1rem;
+ }
+
+ .aui-searchbar .aui-searchbar-btn {
+     display: block;
+     margin-right: 0px;
+ }
+
+ .aui-list .aui-list-item-inner {
+     color: #808080;
+     font-size: 0.7rem;
+ }
+
+ .clear_btn {
+     margin-top: 2rem;
+     font-size: 0.8rem;
+     color: #808080;
+     text-align: center;
+ }
+
+ .aui-searchbar-input {
+     margin-top: 0.4rem;
+     border: solid 1px #ddd;
+     background-color: #ddd;
+     border-radius: 10px;
+     position: absolute;
+     left: 5px;
+     right: 35px;
+     line-height: 30px;
+     height: 30px;
+ }

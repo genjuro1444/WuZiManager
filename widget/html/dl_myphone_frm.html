@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>修改手机号码</title>
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../css/aui.css" />
+    <link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
+    <link rel="stylesheet" type="text/css" href="css/dl_myphone.css" />
+</head>
+
+<body>
+    <div id="app" v-cloak>
+        <div class="aui-content aui-margin-b-15">
+            <ul class="aui-list aui-form-list">
+                <li class="aui-list-item" style="background-size: 100% 0px;">
+                    <div class="aui-list-item-inner">
+                        <div class="aui-list-item-title">
+                            当前手机号码是 <span class="phonenumber">{{form.currentphoneno}}</span>
+                        </div>
+                    </div>
+                </li>
+                <li style="height: 10px;background-color: #f0f0f0;"></li>
+                <li class="aui-list-item">
+                    <div class="aui-list-item-inner">
+                        <div class="aui-list-item-input">
+                            <input type="text" v-model="form.phonenumber" placeholder="请输入新手机号码">
+                        </div>
+                        <div class="aui-list-item-right" style="margin-right:14px;">
+                            <div v-if="!form.codeissent" class="aui-btn verifycode" v-on:click="do_send()">验证码</div>
+                            <div v-if="form.codeissent" class="aui-btn">{{form.countdown}}</div>
+                        </div>
+                    </div>
+                </li>
+                <template v-if="form.codesentcomplete">
+                    <li class="aui-list-item">
+                        <div class="aui-list-item-inner">
+                            <div class="aui-list-item-input">
+                                <input type="text" v-model="form.verifycode" placeholder="请输入验证码">
+                            </div>
+                        </div>
+                    </li>
+                </template>
+            </ul>
+        </div>
+        <div class="bsbx_btm" v-on:click="do_save()">
+            <div class="bsbx_add">提交</div>
+        </div>
+
+    </div>
+</body>
+<script type="text/javascript " src="../script/api.js "></script>
+<script type="text/javascript " src="../script/vue.js "></script>
+<script type="text/javascript" src="../script/config.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript " src="js/dl_myphone.js "></script>
+
+</html>

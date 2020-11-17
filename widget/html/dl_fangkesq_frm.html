@@ -1,0 +1,138 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>访客授权</title>
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../css/aui.css" />
+    <link rel="stylesheet" type="text/css" href="../css/aui-slide.css" />
+    <link rel="stylesheet" type="text/css" href="../css/aui-pull-refresh.css" />
+    <link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
+    <link rel="stylesheet" type="text/css" href="css/dl_fangkesq.css" />
+</head>
+
+<body>
+    <!-- v-cloak -->
+    <div id="app" v-cloak>
+        <div class="fangkesq">
+            <div class="fksq_shuoming">
+                <span>*</span>填写来访信息，生成访客二维码，将二维码保存至手机后，发送给来访人员。来访人员到达门岗，出示访客二维码，门岗人员扫码后，确认通行。
+            </div>
+            <div class="aui-content">
+                <ul class="aui-list aui-form-list">
+                    <li class="aui-list-item liline item-height">
+                        <div class="aui-list-item-inner item-inner-sty" v-on:click="do_select_room()">
+                            <div class="aui-list-item-label-icon label-title-wid">
+                                请选择房屋
+                            </div>
+                            <div class="aui-list-item-input">
+                                {{FullName}}
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="fksq_main">
+                <div class="fksq_main_title">来访目的</div>
+                <div class="dcwj_con2">
+                    <!-- 答案一 -->
+                    <div class="dcwj_list btn_line" v-for="(item,index) in visitor_purpose">
+                        <div class="dcwj_left fl" v-on:click="do_select_purpose(item)">
+                            <label><input  name="visittype" type="radio" v-bind:checked="item.isdefault" class="aui-radio input_radio" ></label>
+                        </div>
+                        <div class="dcwj_right fl">{{item.title}}-{{item.msg}}</div>
+                        <div class="cl"></div>
+                    </div>
+
+                </div>
+
+            </div>
+            <!-- 通行次数上线 -->
+            <div class="fksq_main">
+                <div class="fksq_main_title">通行次数上线</div>
+                <div class="dcwj_con2">
+                  <!-- <div class="aui-list-item-input aui-bar-list-input" style="padding:0px; margin-right:20px;"> -->
+                      <div class="aui-bar aui-bar-btn" type="count" style=" padding-top:2px;">
+                          <div class="aui-bar-btn-item aui-font-size-20">
+                              <i class="icon iconfont iconjian2" v-on:click="sub_num(validity.num)"></i>
+                          </div>
+                          <div class="aui-bar-btn-item inputbox">
+                              <input type="number" class="aui-input aui-text-center"  v-model="validity.num" readonly="true">
+                          </div>
+                          <div class="aui-bar-btn-item aui-font-size-20">
+                              <i class="icon iconfont iconjia3" v-on:click="add_num(validity.num)"></i>
+                          </div>
+                      </div>
+                  <!-- </div> -->
+            </div>
+
+        </div>
+        <!-- 通行证有效期 -->
+        <div class="fksq_main">
+            <div class="fksq_main_title">通行证有效期</div>
+            <div class="dcwj_con2">
+                <!-- 答案一 -->
+                <div class="dcwj_list btn_line">
+                    <div class="dcwj_left fl" v-on:click="do_select_datetype(1)">
+                        <label><input type="radio" class="aui-radio input_radio"    v-bind:checked="date.datetype==1"  name="visittime"></label>
+                    </div>
+                    <div class="dcwj_right fl">今日有效</div>
+                    <div class="cl"></div>
+                </div>
+                <!-- 答案二 -->
+                <div class="dcwj_list btn_line">
+                    <div class="dcwj_left fl" v-on:click="do_select_datetype(2)">
+                        <label><input v-bind:checked="date.datetype==2" type="radio" name="visittime"  class="aui-radio input_radio" ></label>
+                    </div>
+                    <div class="dcwj_right fl">明日有效</div>
+                    <div class="cl"></div>
+                </div>
+
+
+                <!-- 答案三 -->
+                <div class="dcwj_list">
+                    <div class="dcwj_left fl" v-on:click="do_select_datetype(3)">
+                        <label><input class="aui-radio" v-bind:checked="date.datetype==3" type="radio" name="visittime"></label>
+                    </div>
+                    <div class="dcwj_right fl">自定义时间</div>
+                    <div class="cl">
+                    </div>
+                    <div class="timediv" v-if="date.datetype==3">
+                        <div v-on:click="choiceDate(1)" class="timediv_left timedivbox">
+                            {{date.starttime}}
+                        </div>
+                        <div v-on:click="choiceDate(2)" class="timediv_right timedivbox">
+                            {{date.endtime}}
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+            </div>
+
+        </div>
+
+        <!-- v-on:click="do_save()" -->
+        <div class="bsbx_btm top_line" v-on:click="do_save()">
+            <div class="bsbx_add">生成访客二维码</div>
+        </div>
+
+    </div>
+  </div>
+</body>
+<script type="text/javascript " src="../script/api.js "></script>
+<script type="text/javascript " src="../script/vue.js "></script>
+<script type="text/javascript" src="../script/config.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript" src="../script/aui-slide.js"></script>
+<script type="text/javascript" src="../script/aui-pull-refresh.js"></script>
+<script type="text/javascript" src="../script/aui-scroll.js"></script>
+<script type="text/javascript" src="../script/aui-toast.js"></script>
+<script type="text/javascript " src="js/dl_fangkesq.js "></script>
+
+</html>

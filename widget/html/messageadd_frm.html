@@ -1,0 +1,86 @@
+﻿<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>发布消息</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../css/aui.css" />
+    <link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
+    <link rel="stylesheet" type="text/css" href="./css/formlist.css" />
+    <link rel="stylesheet" type="text/css" href="../css/comm.css" />
+    <style>
+         textarea {
+            direction:ltr;
+            line-height:0.9rem!important;
+            padding:5px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div class="aui-content pb60">
+            <ul class="aui-list">
+                <li class="aui-list-item">
+                    <div class="aui-list-item-inner">
+                        <div class="aui-list-item-label">
+                            <i class="red">*</i>消息标题：
+                        </div>
+                        <div class="aui-list-item-input">
+                            <input type="text" v-model="form.MsgTitle" placeholder="请输入">
+                        </div>
+                    </div>
+                </li>
+                <li class="aui-list-item aui-list-item-arrow">
+                    <div class="aui-list-item-inner">
+                        <div class="aui-list-item-label">
+                            <i class="red">*</i>消息类别：
+                        </div>
+                        <div class="aui-list-item-input">
+                            <select v-model="form.MsgType">
+                              <option value="通知">通知</option>
+                              <option value="公告">公告</option>
+                          </select>
+                        </div>
+                    </div>
+                </li>
+                <li class="aui-list-item aui-list-item-arrow">
+                    <div class="aui-list-item-inner">
+                        <div class="aui-list-item-label">
+                            通知公司：
+                        </div>
+                        <div class="aui-list-item-input" v-on:click="do_select_company()">
+                            <input v-model="form.DeptNames" readonly="readonly" type="text" placeholder="请选择">
+                        </div>
+                    </div>
+                </li>
+                <li class="aui-list-item">
+                    <div class="aui-list-item-inner">
+                        <div class="aui-list-item-label">
+                            消息正文：
+                        </div>
+                        <div class="aui-list-item-input">
+                            <textarea style="height:10rem;" v-model="form.MsgContent"></textarea>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <footer class="aui-bar aui-bar-tab" id="footer">
+                <div class="aui-bar-tab-item" v-on:click="do_save()">
+                    <label class="aui-bar-tab-label">保存</label>
+                </div>
+            </footer>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/aui-toast.js"></script>
+<script type="text/javascript" src="../script/vue.js"></script>
+<script type="text/javascript" src="../script/config.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript" src="js/messageadd.js"></script>
+
+</html>

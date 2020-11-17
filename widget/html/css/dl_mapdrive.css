@@ -1,0 +1,46 @@
+html,body{
+  background: transparent;
+  height: 100%;
+}
+.maskbg {
+    opacity: 0.2;
+    z-index: 10;
+    background-color: #000;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    bottom: 0;
+}
+.contentBox {
+    position: fixed;
+    z-index: 20;
+    left: 0;
+    right: 0;
+    background: transparent;
+    bottom: 0;
+    border-bottom: none;
+    min-height: 150px;
+}
+
+.aui-card-list {
+    margin: 0;
+    border-radius: 5px;
+    border-bottom: none;
+}
+
+.aui-card-list img {
+    width: 100%;
+    max-height: 15rem;
+}
+
+.closeicon {}
+
+.closeicon img {
+    margin: 0 auto;
+    width: 20%;
+}
+.daohang label{
+  display: block;
+  line-height: 50px;
+  text-align: center;
+}

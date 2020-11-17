@@ -1,0 +1,138 @@
+body {
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+
+}
+[v-cloak] {
+    display: none;
+}
+.aui-content .btn_line{
+  border: none;
+  background-size: 100% 1px;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-image: linear-gradient(0, #eee, #eee 50%, transparent 50%);
+  background-image: -webkit-linear-gradient(90deg, #eee, #eee 50%, transparent 50%);
+}
+
+.aui-content {
+    background-color: #fff;
+    padding-bottom: 4.2rem;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.bottombtn {
+    width: 92%;
+    margin:0 auto;
+    border-radius:50rem;
+    position: fixed;
+    bottom: 10px;
+    left: 0.5rem;
+    background-color: #eb7825;
+    color: #fff;
+}
+
+.iconfont {
+    font-size: 1rem;
+    color: #ffc107;
+}
+
+.content_body {
+    margin: 0.5rem 0.75rem;
+    min-height: 10rem;
+    border: solid 1px #ccc;
+}
+
+.medit {
+    min-height: 10rem;
+}
+
+.category_tags {
+    margin-top: 10px;
+    padding-left: 0.75rem;
+    background: #fff;
+    padding-bottom: 1rem;
+}
+
+.category_tags h3 {
+    font-weight: bold;
+    font-size: 0.8rem;
+}
+
+.category_tags label {
+    font-size: 0.65rem;
+    padding: 0 10px;
+    background: #f5f5f5;
+    color: #999;
+    /*border: solid 1px #808080;*/
+    border-radius: 5px;
+    margin-right: 20px;
+    margin-top: 10px;
+    line-height: 30px;
+}
+
+.category_tags label.active {
+    color: #eb7825;
+    background: #fff6ef;
+}
+
+.aui-media-list {
+    margin-bottom: 5px;
+    background-size: 0px;
+}
+
+.aui-media-list .aui-list-item {
+    padding: 0;
+    background-size: 0px;
+}
+
+.aui-list .aui-list-item-inner {
+    padding-left: 10px;
+    padding-bottom: 30px;
+}
+
+.aui-list .aui-list-item-inner img {
+    width: 50%;
+    margin: 0 auto;
+}
+
+.content_bottom {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    text-align: right;
+    background-color: #fff;
+}
+
+.content_bottom label {
+    border: solid 1px #f0f0f0;
+    color: #808080;
+    font-size: 0.6rem;
+    padding: 0 10px;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.content_add {
+    text-align: center;
+    left: 0;
+    right: 0;
+    height: 40%;
+    margin-top: 1rem;
+    padding-top: 30%;
+}
+
+.content_add label {
+    font-size: 0.8rem;
+}
+
+.borderline{
+  margin-top:0.5rem;
+  border-top:2px solid #eee;
+}

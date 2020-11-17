@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>选择多个公司</title>
+    <link rel="stylesheet" type="text/css" href="../css/aui.css" />
+    <link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
+    <link rel="stylesheet" type="text/css" href="../css/comm.css" />
+    <link rel="stylesheet" type="text/css" href="../script/vue/index.css" />
+    <link rel="stylesheet" type="text/css" href="./css/search.css" />
+</head>
+
+<body>
+    <div id="app">
+        <div class="aui-searchbar fixed-top">
+            <div class="aui-searchbar-input aui-border-radius">
+                <i class="aui-iconfont aui-icon-search"></i>
+                <input type="search" placeholder="请输入关键字" id="search-input" v-model="filterText">
+                <div class="aui-searchbar-clear-btn">
+                    <i class="aui-iconfont aui-icon-close"></i>
+                </div>
+            </div>
+        </div>
+        <div class="pt35 pb35" v-if="list.length>0">
+            <el-tree ref="tree1" show-checkbox check-on-click-node highlight-current :props="defaultProps" :expand-on-click-node="false" :filter-node-method="filterNode" :data="list" @check="handle_tree_check" check-strictly default-expand-all node-key="id" @node-click="handleNodeClick">
+            </el-tree>
+            <div class="fixed-bottom">
+                <div class="bottomBtn leftBtn">
+                    <label v-on:click="do_select_all(1)"><input class="aui-radio" type="radio" name="checkall" v-bind:checked="selectalltype==1">全选</label>
+                </div>
+                <div class="bottomBtn rightBtn">
+                    <label v-on:click="do_select_all(2)"><input class="aui-radio" type="radio" name="checkall" v-bind:checked="selectalltype==2">清空</label>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/aui-toast.js"></script>
+<script type="text/javascript" src="../script/config.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript" src="../script/vue.js"></script>
+<script type="text/javascript" src="../script/vue/index.js"></script>
+<script type="text/javascript" src="js/choosemorecompany.js"></script>
+
+</html>

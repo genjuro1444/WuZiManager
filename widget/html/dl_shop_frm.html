@@ -1,0 +1,105 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>商家详情</title>
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../css/aui.css" />
+    <link rel="stylesheet" type="text/css" href="../css/aui-slide.css" />
+    <link rel="stylesheet" type="text/css" href="../css/aui-pull-refresh.css" />
+    <link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
+    <link rel="stylesheet" type="text/css" href="css/dl_shop.css" />
+    <link rel="stylesheet" type="text/css" href="css/dl_productlist.css" />
+</head>
+
+<body>
+    <!-- v-cloak -->
+    <div id="app" v-cloak>
+        <div class="shop_pic" v-bind:style="{backgroundImage:'url(' + businessinfo.coverimage + ')'}">
+            <div class="shop_main">
+                <!-- 店铺信息 -->
+                <div class="sp_main_msg">
+                    <div class="sp_main_name">
+                        {{businessinfo.title}}
+                        <i v-on:click="open_call()" class="icon iconfont icondianhua1" style="font-size:1.1rem; color:#bbb; float:right;"></i>
+                    </div>
+                    <div class="sp_main_adrmsg">
+                    </div>
+                    <div class="sp_main_address" v-on:click="doOpenDriveMap()">
+                        <i class="icon iconfont iconweizhi" style="color:#1680ed; font-size:0.65rem;"></i> {{businessinfo.address}}
+                        <span>立即前往</span>
+                    </div>
+                    <div class="sp_main_comtent">
+                        <div class="comtent_title">商家介绍</div>
+                        <div class="comtent_msg">
+                            {{businessinfo.summary}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 店铺商品 -->
+            <div class="sp_product_main" id="sp_product_main">
+                <div class="sp_pro_lft" id="sp_pro_lft">
+                    <ul id="sp_pro_lft_ul" onscroll="onScrollLeftUl">
+                        <li v-for="(item,index) in categorylist" v-bind:id="'sp_pro_left_ul_li_'+index" class="sp_product_naitem" v-bind:class="{'sp_product_namechk':item.is_active}" v-on:click="get_product_data(item)">
+                            {{item.name}}
+                        </li>
+                    </ul>
+                </div>
+                <div class="sp_pro_right">
+                    <div class="aui-content content">
+                        <ul id="sp_pro_right_ul" class="aui-list aui-media-list" style="background-size:100% 0px;">
+                            <li v-bind:id="'sp_pro_right_ul_li_'+index" class="aui-list-item" v-for="(item,index) in list">
+                                <div class="aui-media-list-item-inner btn_line" v-on:click="open_win(item)">
+                                    <div class="aui-list-item-media">
+                                        <img v-bind:src="item.imageurl" />
+                                    </div>
+                                    <div class="aui-list-item-inner">
+                                        <div class="pro-list-item-title aui-ellipsis-2">
+                                            {{item.title}}
+                                        </div>
+                                        <div class="pro_dis">
+                                            <span class="item_buy aui-ellipsis pr10">已售 {{item.saledesc}}</span>
+                                            <span class="item_pj aui-ellipsis">{{item.OrderCommentCount}} 条评价</span>
+                                        </div>
+                                        <div class="aui-list-item-text pro_price" style="margin: 10px 0 0 0;">
+                                            <div class="item_price">
+                                                ￥<span>{{parseFloat(item.price).toFixed(2)}}</span>
+                                            </div>
+                                            <!-- <span class="item_rate">
+                                             营业时间：08:30-22:30
+                                           </span> -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="cartbtn" v-on:click="doOpenAddCart(item.id)">
+                                    <img src="../image/icon/add_gwc.png" />
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div id="noorder" v-if="!is_searching&&productlist.length==0" style="vertical-align: middle; text-align: center;padding-top:40%;">
+                        <i class="icon iconfont icon-dingdan" style="font-size:70px; color:#99C87D;"></i>
+                        <h5><br />暂无相关商品</h5>
+                    </div>
+                </div>
+                <div class="cl">
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript " src="../script/api.js "></script>
+<script type="text/javascript " src="../script/vue.js "></script>
+<script type="text/javascript" src="../script/config.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript" src="../script/aui-slide.js"></script>
+<script type="text/javascript" src="../script/aui-pull-refresh.js"></script>
+<script type="text/javascript" src="../script/aui-scroll.js"></script>
+<script type="text/javascript" src="../script/aui-toast.js"></script>
+<script type="text/javascript " src="js/dl_shop.js "></script>
+
+</html>

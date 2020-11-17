@@ -1,0 +1,89 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>社区</title>
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../css/aui.css" />
+    <link rel="stylesheet" type="text/css" href="../css/aui-slide.css" />
+    <link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
+    <link rel="stylesheet" type="text/css" href="css/dl_bbs.css" />
+</head>
+
+<body>
+    <div id="app" v-cloak>
+        <section id="main_refresh" class="aui-refresh-content">
+        <div class="aui-content bbs huati">
+            <div id="top_menus" class="menu_box">
+                <label v-bind:class="{'active':CategoryID==0}" v-on:click="do_search_all()">全部</label>
+                <label v-for="item in menus" v-bind:class="{'active':item.id==CategoryID}" v-on:click="do_search_baike(item)">{{item.title}}</label>
+            </div>
+            <ul class="aui-list aui-media-list" v-if="chatlist.length>0">
+                <template v-for="item in chatlist">
+                  <div class="btn_line">
+
+
+                    <li style="border:0; padding-top:5px;" class="aui-list-item" v-on:click="open_win(item.Name,'dl_bbsdetail_frm',item.id)">
+                        <section class="aui-chat">
+                            <div  class="aui-chat-item aui-chat-left">
+                                <div class="aui-chat-media">
+                                    <img v-bind:src="item.headimage" />
+                                </div>
+                                <div class="aui-chat-inner chat_title">
+                                    <div class="aui-chat-name">
+                                        <span class="aui-label lllt_name">{{item.Name}}</span>
+                                        <span class="chat_time">{{item.AddTime}}</span>
+                                    </div>
+                                    <div class="aui-chat-address" >
+                                      <label class="location">{{item.myxiaoquname}}</label>
+                                    </div>
+                                </div>
+                                <div class="aui-chat-inner chat_content">
+                                    <div class="aui-ellipsis-2">
+                                        <!-- <label class="chat_tag">#{{item.GroupName}}#</label> -->
+                                        <div class="item_content" style="display: inline-block;" v-html="item.Content"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="clear: both;"></div>
+                        </section>
+                    </li>
+                    <li style="border:0;" class="aui-list-item comment_bottom">
+                        <div class="aui-row">
+                            <!-- <div class="aui-col-xs-6 chat_location">
+                                <label class="location">{{item.myxiaoquname}}</label>
+                            </div> -->
+                            <div class="chat_rate">
+                                <label v-on:click="do_praise(item)" v-if="item.cancomment">
+                                    <i class="icon iconfont icondianzan"  v-bind:class="{'chk':item.ispraised}"></i> {{item.praisecountdesc}}
+                                </label>
+                                <label v-on:click="open_win(item.Name,'dl_bbsdetail_frm',item.id,true)" v-if="item.cancomment">
+                                    <i class="icon iconfont icon-pinglun1"></i> 评论 {{item.commentcount}}
+                                </label>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- <div class="borderline"></div> -->
+                    </div>
+                </template>
+            </ul>
+            <div id="noorder" v-if="chatlist.length==0&&!is_searching" style="vertical-align: middle; text-align: center;margin-top:10%;margin-bottom:10%;">
+                <i class="icon iconfont icon-dingdan" style="font-size:70px; color:#99C87D;"></i>
+                <h5><br />暂无相关帖子</h5>
+            </div>
+        </div>
+      </section>
+    </div>
+</body>
+<script type="text/javascript " src="../script/api.js "></script>
+<script type="text/javascript " src="../script/vue.js "></script>
+<script type="text/javascript" src="../script/config.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript" src="../script/aui-pull-refresh.js"></script>
+<script type="text/javascript" src="../script/aui-slide.js"></script>
+<script type="text/javascript " src="js/dl_bbs.js "></script>
+
+</html>

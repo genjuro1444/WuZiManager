@@ -1,0 +1,184 @@
+html,body {
+    width: 100%;
+    height: 100%;
+    background-color: #f0f0f0;
+}
+.wyjf_zhangdan{
+  width: 100%;
+  background: #fff;
+  border-radius: 10px 10px 0px 0px;
+  margin-bottom: 3rem;
+  margin-top: 10px;
+  overflow: hidden;
+}
+.zd_main{
+padding: 5px 14px;
+overflow: hidden;
+}
+.zd_list{
+  width: 100%;
+  margin: 15px 0px;
+  overflow: hidden;
+}
+.zd_list_main{
+  width: 100%;
+  padding-bottom: 15px;
+  overflow: hidden;
+}
+.zd_list_name{
+  width: 100%;
+  height: 1.4rem;
+  line-height: 1.4rem;
+  font-size: 0.75rem;
+  overflow: hidden;
+}
+.zd_list_namelft{
+  min-width: 10%;
+  max-width: 80%;
+  float: left;
+  /*background: #f00;*/
+  overflow: hidden;
+}
+.pay_fs{
+  font-size: 0.5rem;
+  width: 2.8rem;
+  height: 1rem;
+  line-height: 1.2rem;
+  margin-left: 5px;
+  color: #fff;
+  float: left;
+  text-align: center;
+  margin-top: 0.2rem;
+  border-radius: 50rem;
+  background: #ffae21;
+  overflow: hidden;
+}
+.pay_xx{
+  font-size: 0.5rem;
+  width: 2.8rem;
+  height: 1rem;
+  line-height: 1.2rem;
+  margin-left: 5px;
+  color: #fff;
+  float: left;
+  text-align: center;
+  margin-top: 0.2rem;
+  border-radius: 50rem;
+  background: #f8d40c;
+  overflow: hidden;
+}
+.btn_line{
+  border: none;
+      background-size: 100% 1px;
+  background-repeat: no-repeat;
+  background-position: bottom;
+      background-image: linear-gradient(0,#f5f5f5,#f5f5f5 50%,transparent 50%);
+      background-image: -webkit-linear-gradient(90deg,#f5f5f5,#f5f5f5 50%,transparent 50%);
+}
+.mx_rgt.btn_line{
+  border: none;
+  background-size: 100% 1px;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-image: linear-gradient(0,#f0f0f0,#f0f0f0 50%,transparent 50%);
+  background-image: -webkit-linear-gradient(90deg,#f0f0f0,#f0f0f0 50%,transparent 50%);
+}
+.wy_btn.top_line{
+  border: none;
+      background-size: 100% 1px;
+  background-repeat: no-repeat;
+  background-position: top;
+      background-image: linear-gradient(0,#f5f5f5,#f5f5f5 50%,transparent 50%);
+      background-image: -webkit-linear-gradient(90deg,#f5f5f5,#f5f5f5 50%,transparent 50%);
+}
+
+.zd_list_money{
+padding-top: 2px;
+line-height: 1.2rem;
+font-size: 0.7rem;
+}
+
+.zd_money{
+  width: 40%;
+  float: right;
+  font-size: 0.5rem;
+  color: #eb7825;
+  text-align: right;
+  overflow: hidden;
+}
+.yz_time{
+  width: 60%;
+  font-size: 0.7rem;
+  float: left;
+  color: #999;
+}
+.zd_money span{
+  font-size: 0.85rem;
+}
+.zd_money span.no_zd{
+  font-size: 0.7rem;
+  color: #999;
+}
+.zd_money i{
+  color: #bbb;
+  font-size: 0.5rem;
+  padding-left: 5px;
+}
+.zd_mingxi{
+  width: 89%;
+  background: #f9f9f9;
+  float: right;
+  overflow: hidden;
+}
+.mx_main{
+  padding: 10px 20px 5px 20px;
+  overflow: hidden;
+}
+.mx_rgt{
+  width: 100%;
+  padding-bottom: 10px;
+  overflow: hidden;
+}
+.mx_name{
+  width: 100%;
+  font-size: 0.6rem;
+  line-height: 1.4rem;
+  overflow: hidden;
+}
+.mx_ziyuan{
+  width: 40%;
+  color: #999;
+  float: left;
+  overflow:hidden;
+}
+.mx_xj{
+  width: 60%;
+  float: right;
+  color: #333;
+  text-align: right;
+  overflow: hidden;
+}
+.mx_month{
+  width: 100%;
+  font-size: 0.6rem;
+  line-height: 1.4rem;
+  overflow: hidden;
+}
+.mx_month_rgt i{
+  color: #ddd;
+  font-size: 1rem;
+  padding: 0px 5px;
+  float: left;
+}
+.mx_date{
+  width: 100%;
+  font-size: 0.6rem;
+  line-height: 1rem;
+  overflow: hidden;
+}
+.mx_date_lft{
+  width: 70%;
+  float:left;
+  color: #999;
+  overflow: hidden;
+}

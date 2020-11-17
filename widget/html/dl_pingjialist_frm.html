@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>评价列表</title>
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../css/aui.css" />
+    <link rel="stylesheet" type="text/css" href="../css/aui-slide.css" />
+    <link rel="stylesheet" type="text/css" href="../css/aui-pull-refresh.css" />
+    <link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
+    <link rel="stylesheet" type="text/css" href="css/dl_pingjialist.css" />
+</head>
+
+<body>
+    <!-- v-cloak -->
+    <div id="app" v-cloak>
+        <!-- 评价item1 -->
+        <div class="pingjia">
+            <div class="pj_item bt_line" v-for="(item,index) in list">
+                <div class="pj_item_self">
+                    <div class="self_touxiang">
+                        <img v-bind:src="item.HeadImg">
+                    </div>
+                    <div class="self_msg">
+                        <div class="self_name_time">
+                            <div class="self_name">{{item.NickName}}</div>
+                            <div class="self_time">{{item.AddTime}}</div>
+                        </div>
+                        <div class="self_dengji">
+
+                          <i v-for="index in 5" class="icon iconfont iconiconfontxingxing" v-bind:style="{'color':index<=item.starcount?'red':'grey'}" style="font-size:0.5rem;"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="pj_item_msg">
+                    <div class="pj_item_msg_wz">{{item.RateComment}}</div>
+                    <div id="imageBox" class="aui-row" style="padding-top:8px;">
+                        <div class="aui-col-xs-3 aui-col-pjpic">
+                            <img src="../image/products.jpg" />
+                        </div>
+                    </div>
+                    <div class="pj_item_msg_type">绿豆馅(25g)</div>
+
+                </div>
+
+            </div>
+
+
+
+
+
+        </div>
+    </div>
+</body>
+<script type="text/javascript " src="../script/api.js "></script>
+<script type="text/javascript " src="../script/vue.js "></script>
+<script type="text/javascript" src="../script/config.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript" src="../script/aui-slide.js"></script>
+<script type="text/javascript" src="../script/aui-pull-refresh.js"></script>
+<script type="text/javascript" src="../script/aui-scroll.js"></script>
+<script type="text/javascript" src="../script/aui-toast.js"></script>
+<script type="text/javascript " src="js/dl_pingjialist.js "></script>
+
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>修改昵称</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../css/aui.css" />
+    <link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
+    <style type="text/css">
+        .aui-list .aui-list-item {
+            padding-top: 0.2rem;
+            padding-bottom: 0.2rem;
+        }
+
+        .bottombtn {
+            width: 100%;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            border-bottom-right-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app" class="aui-content aui-margin-b-15">
+        <ul class="aui-list aui-form-list">
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-label-icon">
+                        <i class="icon iconfont icon-gerenzhongxinxia" style="font-size: 16px;color: #29ab91"></i>
+                    </div>
+                    <div class="aui-list-item-input">
+                        <input type="text" placeholder="请输入新昵称" v-model="form.NickName">
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <div class="aui-btn aui-btn-primary aui-btn-block bottombtn" v-on:click="dosave()">保存</div>
+    </div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/aui-toast.js"></script>
+<script type="text/javascript" src="../script/config.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript" src="../script/vue.js"></script>
+<script type="text/javascript" src="js/nicknameedit_frm.js"></script>
+
+</html>
