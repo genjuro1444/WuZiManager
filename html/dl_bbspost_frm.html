@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>发帖</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../css/aui.css" />
+    <link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
+    <link rel="stylesheet" type="text/css" href="css/dl_bbspost.css" />
+</head>
+
+<body>
+    <div id="app" v-cloak>
+        <div class="aui-content aui-margin-b-15">
+            <div class="category_tags btn_line">
+                <h3>选择标签</h3>
+                <label v-for="item in categorylist" v-bind:class="{'active':item.selected}" v-on:click="do_tag_select(item)"># {{item.title}} #</label>
+            </div>
+            <!-- <div class="borderline"></div> -->
+            <div v-on:click="do_insert(-1)" class="content_add" v-if="list.length==0">
+                <label>点击添加内容</label>
+            </div>
+            <ul class="aui-list aui-media-list" style="margin-top:10px;" v-for="(item,index) in list">
+                <li class="aui-list-item">
+                    <div class="aui-list-item-inner">
+                        <div v-if="item.type=='text'">
+                            <textarea v-model="item.content" style="height: 5rem; padding:0px 0px 0px 5px;" placeholder="请填写内容">
+                            </textarea>
+                        </div>
+                        <div v-if="item.type=='image'">
+                            <img v-bind:src="item.content">
+                        </div>
+                        <div class="content_bottom">
+                            <label v-on:click="do_remove(item,index)">删除</label>
+                            <label v-if="index>0" v-on:click="do_upper(index)">上移</label>
+                            <label v-on:click="do_insert(index)">插入</label>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <div class="aui-btn aui-btn-block bottombtn" v-on:click="do_save()">提交</div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript " src="../script/api.js"></script>
+<script type="text/javascript " src="../script/vue.js"></script>
+<script type="text/javascript" src="../script/config.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript" src="../script/aui-toast.js"></script>
+<script type="text/javascript " src="js/dl_bbspost.js "></script>
+
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>新增家庭成员</title>
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../css/aui.css" />
+    <link rel="stylesheet" type="text/css" href="../css/aui-slide.css" />
+    <link rel="stylesheet" type="text/css" href="../css/aui-pull-refresh.css" />
+    <link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
+    <link rel="stylesheet" type="text/css" href="css/dl_myfamilyadd.css" />
+</head>
+
+<body>
+    <!-- v-cloak -->
+    <div id="app" v-cloak>
+        <div class="bsbx_con">
+            <!-- bsbx_con --->
+            <div class="aui-content aui-margin-b-15">
+                <ul class="aui-list aui-form-list">
+                    <!-- <li class="aui-list-item liline item-height">
+                        <div class="aui-list-item-inner item-inner-sty">
+                            <div class="aui-list-item-label-icon label-title-wid">
+                                资源位置
+                            </div>
+                            <div class="aui-list-item-input">
+                                <input type="text" placeholder="小区名称">
+                            </div>
+                        </div>
+                    </li> -->
+                    <li class="aui-list-item liline item-height">
+                        <div class="aui-list-item-inner item-inner-sty">
+                            <div class="aui-list-item-label-icon label-title-wid">
+                                姓名
+                            </div>
+                            <div class="aui-list-item-input">
+                                <input v-model="form.username" type="text" placeholder="请填写成员姓名">
+                            </div>
+                        </div>
+                    </li>
+                    <li class="aui-list-item liline item-height">
+                        <div class="aui-list-item-inner item-inner-sty">
+                            <div class="aui-list-item-label-icon label-title-wid">
+                                <span style="color:#eb7825; font-size:0.9rem;">*</span>手机号码
+                            </div>
+                            <div class="aui-list-item-input">
+                                <input v-model="form.phonenumber" type="number" placeholder="请填写手机号码">
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <div class="phonemsg">
+                    添加手机号码后，家庭成员注册APP，自动完成家庭成员绑定操作。家庭成员将自动共享物业账单、报事报修、家庭积分等
+                </div>
+            </div>
+            <!-- bsbx_con --->
+        </div>
+        <div>
+            <div class="family_title">选择家庭成员身份</div>
+            <div class="dcwj_con2">
+                <!-- 答案一 -->
+                <div class="dcwj_list btn_line" v-on:click="do_select_type(1)">
+                    <div class="fmly_lft fl">家庭成员</div>
+                    <div class="dcwj_left fr">
+                        <label><input v-bind:checked="form.FamilyType==1" name="familytype" type="radio" class="aui-radio input_radio" ></label>
+                    </div>
+                    <div class="cl"></div>
+                </div>
+                <!-- 答案二 -->
+                <div class="dcwj_list btn_line" v-on:click="do_select_type(2)">
+                    <div class="fmly_lft fl">租户</div>
+                    <div class="dcwj_left fr">
+                        <label><input v-bind:checked="form.FamilyType==2" name="familytype" type="radio" class="aui-radio input_radio" ></label>
+                    </div>
+
+                    <div class="cl"></div>
+                </div>
+                <!-- 答案三 -->
+                <div class="dcwj_list" v-on:click="do_select_type(2)">
+                    <div class="fmly_lft fl">朋友</div>
+                    <div class="dcwj_right fr">
+                        <label><input v-bind:checked="form.FamilyType==3" name="familytype" type="radio" class="aui-radio input_radio" ></label>
+                    </div>
+                    <div class="cl"></div>
+                </div>
+            </div>
+        </div>
+        <!-- v-on:click="do_save()" -->
+        <div class="bsbx_btm" v-on:click="do_save()">
+            <div class="bsbx_add">保存</div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript " src="../script/api.js "></script>
+<script type="text/javascript " src="../script/vue.js "></script>
+<script type="text/javascript" src="../script/config.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript" src="../script/aui-slide.js"></script>
+<script type="text/javascript" src="../script/aui-pull-refresh.js"></script>
+<script type="text/javascript" src="../script/aui-scroll.js"></script>
+<script type="text/javascript" src="../script/aui-toast.js"></script>
+<script type="text/javascript " src="js/dl_myfamilyadd.js "></script>
+
+</html>

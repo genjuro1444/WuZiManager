@@ -1,0 +1,79 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>选择商品</title>
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../css/aui.css" />
+    <link rel="stylesheet" type="text/css" href="../css/aui-pull-refresh.css" />
+    <link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
+    <link rel="stylesheet" type="text/css" href="css/dl_productvariant_buy.css" />
+</head>
+
+<body>
+    <div id="app" v-cloak>
+        <div class="buy_box">
+            <div class="shadow" v-on:click="hide_buybox"></div>
+            <div class="buy_content">
+                <div class="buy_content_img">
+                    <img v-bind:src="cart_form.productinfo.imageurl" />
+                </div>
+                <div class="buy_content_right">
+                    <div class="product_title" style="font-size:14px;" >
+                        <!-- {{cart_form.productinfo.title}} -->
+                    </div>
+                    <div class="product_price">
+                        <label class="product_realprice">￥<span>{{cart_form.productinfo.saleprice.toFixed(2)}}</span></label>
+                        <label v-if="cart_form.productinfo.cost>0" class="product_cost">¥{{cart_form.productinfo.cost.toFixed(2)}}</label>
+                    </div>
+                </div>
+                <div class="buy_content_center top_line">
+                    <div class="buy_content_variant">
+                        <div class="variant_title">{{cart_form.productvariants.title}}</div>
+                        <div class="variant_name">
+                            <label v-on:click="do_variant_select(item)" v-for="item in cart_form.productvariants.list" v-bind:class="{'active':item.selected}">{{item.name}}</label>
+                        </div>
+                    </div>
+                    <div class="buy_content_quantity">
+                        <div class="quantity_title">数量</div>
+                        <div class="aui-bar aui-bar-btn quantity_content" type="count">
+                            <div class="aui-bar-btn-item" v-on:click="reduce_count()">
+                                <i class="icon iconfont iconjian"></i>
+                            </div>
+                            <div class="aui-bar-btn-item">
+                                <input type="number" class="aui-input aui-text-center" v-model="cart_form.productinfo.quantity" v-on:input="do_quantity_change">
+                            </div>
+                            <div class="aui-bar-btn-item" v-on:click="add_count()">
+                                <i class="icon iconfont iconjia"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="aui-bar aui-bar-tab buy_content_bottom top_line">
+                    <div v-if="!cart_form.is_buynow&&!cart_form.is_addtocard" class="aui-bar-tab-item shoppingcart" tapmode v-on:click="do_confirm_addtocart()">
+                        <div class="aui-bar-tab-label">加入购物车</div>
+                    </div>
+                    <div v-if="!cart_form.is_buynow&&!cart_form.is_addtocard" class="aui-bar-tab-item buynow" tapmode v-on:click="do_confirm_buy()">
+                        <div class="aui-bar-tab-label">立即购买</div>
+                    </div>
+                    <div v-if="cart_form.is_buynow||cart_form.is_addtocard" class="aui-bar-tab-item confirmbuy" tapmode v-on:click="do_check_roomstatus()">
+                        <div class="aui-bar-tab-label">确认</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript " src="../script/api.js "></script>
+<script type="text/javascript " src="../script/vue.js "></script>
+<script type="text/javascript" src="../script/config.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript" src="../script/aui-pull-refresh.js"></script>
+<script type="text/javascript" src="../script/aui-scroll.js"></script>
+<script type="text/javascript" src="../script/aui-toast.js"></script>
+<script type="text/javascript " src="js/dl_productvariant_buy.js "></script>
+
+</html>

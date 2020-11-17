@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>选择处置类型</title>
+    <link rel="stylesheet" type="text/css" href="../css/aui.css" />
+    <link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
+    <link rel="stylesheet" type="text/css" href="./css/search.css" />
+    <style type="text/css">
+        .aui-list-header span {
+            margin-left: 1rem;
+            color: #ffc107;
+        }
+
+        .aui-list .aui-list-item-label-icon {
+            padding-right: 0;
+        }
+
+        .aui-list-item-inner.aui-list-item-arrow {
+            font-size: 0.7rem;
+        }
+
+        .aui-radio,
+        .aui-checkbox {
+            width: 1rem;
+            height: 1rem;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div class="aui-content aui-margin-b-15" v-if="list.length>0">
+            <div class="search-cancel">
+                <label v-on:click="do_cancel()">取消当前选择</label>
+            </div>
+            <ul class="aui-list aui-list-in">
+                <li class="aui-list-item aui-list-item-middle" v-for="item in list">
+                    <div class="aui-list-item-label-icon">
+                        <input type="radio" class="aui-radio" v-on:click="do_choose(item)" v-bind:checked="item.checked">
+                    </div>
+                    <div class="aui-list-item-inner aui-list-item-arrow" v-on:click="do_choose(item)">
+                        {{item.name}}
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/aui-toast.js"></script>
+<script type="text/javascript" src="../script/config.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript" src="../script/vue.js"></script>
+<script type="text/javascript" src="js/choosechuzhitype.js"></script>
+
+</html>

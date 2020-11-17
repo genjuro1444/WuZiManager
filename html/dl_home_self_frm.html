@@ -1,0 +1,172 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>我的</title>
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../css/aui-pull-refresh.css" />
+    <link rel="stylesheet" type="text/css" href="../css/aui.css" />
+    <link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
+    <link rel="stylesheet" type="text/css" href="css/dl_home_self.css" />
+</head>
+
+<body>
+    <div id="app" v-cloak>
+        <section id="main_refresh" class="aui-refresh-content">
+            <div class="aui-content">
+                <section class=" grid_geren" style=" position:absolute; top:15px;">
+                    <div class="grid_geren_main ">
+                        <div class="geren_msg gr_line" v-on:click="open_myinfo()" v-if="!not_login">
+                            <div class="geren_cen">
+                                <div class="geren_tx"><img v-bind:src="userinfo.headimg" /></div>
+                                <div class="geren_item">
+                                    <div class="geren_myname">{{userinfo.username}}</div>
+                                    <div class="geren_myphnum">{{userinfo.phonenumber}}</div>
+                                </div>
+                            </div>
+                            <div class="geren_edit">编辑</div>
+                        </div>
+                        <div class="geren_msg gr_line" v-on:click="open_myinfo()" v-if="not_login">
+                            <div class="geren_edit">请登录</div>
+                        </div>
+                        <div class="aui-grid" style="margin-bottom:0px; background:none;">
+                            <div class="aui-row row_zh">
+                                <div v-bind:class="form.css" v-on:click="open_point()">
+                                    <label>{{userinfo.point_balance}}</label>
+                                    <div class="aui-grid-label">家庭积分</div>
+                                </div>
+                                <div v-bind:class="form.css" v-on:click="open_youhuiquan()">
+                                    <label>{{userinfo.fushun_coupon}}</label>
+                                    <div class="aui-grid-label">优惠券</div>
+                                </div>
+
+                                <div v-bind:class="form.css" v-on:click="open_huiyuan()">
+                                    <label>1张</label>
+                                    <div class="aui-grid-label">会员卡</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 发货状态 -->
+                    <div class="aui-row gr_menu">
+                        <div class="aui-grid dd_zhuangtai" style=" margin-bottom:0px;">
+                            <div class="aui-row dd_zt_main">
+                                <div v-on:click="open_orderlist(1)" class="aui-col-xs-3 dd_zt_item">
+                                    <img src="../image/geren/daifukuan.png" />
+                                    <div class="qq_zt_title">待付款</div>
+                                </div>
+                                <div v-on:click="open_orderlist(2)" class="aui-col-xs-3 dd_zt_item">
+                                    <img src="../image/geren/daifahuo.png" />
+                                    <div class="qq_zt_title">待发货</div>
+                                </div>
+                                <div v-on:click="open_orderlist(3)" class="aui-col-xs-3 dd_zt_item">
+                                    <img src="../image/geren/daishouhuo.png" />
+                                    <div class="qq_zt_title">待收货</div>
+                                </div>
+                                <div v-on:click="open_orderlist(4)" class="aui-col-xs-3 dd_zt_item" style="border-right:solid 1px #f9f9f9;">
+                                    <img src="../image/geren/daipingjia.png" />
+                                    <div class="qq_zt_title">待评价</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dd-order">
+                            <div class="dd_zt_item mtb4">
+                                <img v-on:click="open_orderlist(0)" src="../image/geren/alldingdan.png" />
+                                <div class="qq_zt_title">全部订单</div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- 菜单项目 -->
+                    <section class="gr_menu bshadow">
+                        <ul class="aui-list aui-list-in bor_line">
+
+                            <li class="aui-list-item gr_menu_item" v-on:click="open_win('我的购物车','shoppingcart_frm',true)">
+                                <div class="aui-list-item-label-icon gr_icon">
+                                    <img src="../image/geren/gwc.png" />
+                                </div>
+                                <div class="aui-list-item-inner aui-list-item-arrow" v-on:click="open_gouwuche()">
+                                    <span class="gouwuche">购物车
+                                      <div v-if="cartcount>0" class="aui-badge">{{cartcount}}</div>
+                                    </span>
+                                </div>
+                            </li>
+                            <li class="aui-list-item gr_menu_item" v-on:click="open_shouhuodz()">
+                                <div class="aui-list-item-label-icon gr_icon">
+                                    <img src="../image/geren/address.png" />
+                                </div>
+                                <div class="aui-list-item-inner aui-list-item-arrow">
+                                    收货地址
+                                </div>
+                            </li>
+                            <li class="aui-list-item gr_menu_item" v-on:click="open_myorder()">
+                                <div class="aui-list-item-label-icon gr_icon">
+                                    <img src="../image/geren/zhangdan.png" />
+                                </div>
+                                <div class="aui-list-item-inner aui-list-item-arrow">
+                                    我的账单
+                                </div>
+                            </li>
+
+                        </ul>
+                        <ul class="aui-list aui-list-in bor_line" style="background-size:100% 0px;">
+
+                            <li class="aui-list-item gr_menu_item">
+                                <div class="aui-list-item-label-icon gr_icon">
+                                    <img src="../image/geren/tiezi.png" />
+                                </div>
+                                <div class="aui-list-item-inner aui-list-item-arrow">
+                                    我的发帖
+                                </div>
+                            </li>
+                            <li class="aui-list-item gr_menu_item" v-on:click="open_myfamily()">
+                                <div class="aui-list-item-label-icon gr_icon">
+                                    <img src="../image/geren/person.png" />
+                                </div>
+                                <div class="aui-list-item-inner aui-list-item-arrow">
+                                    家庭成员
+                                </div>
+                            </li>
+                            <li class="aui-list-item gr_menu_item" v-on:click="open_xiaoqu()">
+                                <div class="aui-list-item-label-icon gr_icon">
+                                    <img src="../image/geren/xiaoqu.png" />
+                                </div>
+                                <div class="aui-list-item-inner aui-list-item-arrow">
+                                    我的小区
+                                </div>
+                            </li>
+                            <li class="aui-list-item gr_menu_item" v-on:click="open_myseting()">
+                                <div class="aui-list-item-label-icon gr_icon">
+                                    <img src="../image/geren/shezhi.png" />
+                                </div>
+                                <div class="aui-list-item-inner aui-list-item-arrow">
+                                    系统设置
+                                </div>
+                            </li>
+                            <li class="aui-list-item gr_menu_item">
+                                <div class="aui-list-item-label-icon gr_icon">
+                                    <img src="../image/geren/banben.png" />
+                                </div>
+                                <div class="aui-list-item-inner">
+                                    系统版本
+                                    <span>{{appVersion}}</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </section>
+                </section>
+            </div>
+        </section>
+    </div>
+</body>
+<script type="text/javascript" src="../script/api.js "></script>
+<script type="text/javascript" src="../script/aui-pull-refresh.js"></script>
+<script type="text/javascript" src="../script/vue.js "></script>
+<script type="text/javascript" src="../script/config.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript" src="js/dl_home_self.js "></script>
+
+</html>

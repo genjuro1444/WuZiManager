@@ -1,0 +1,120 @@
+html,body {
+    background: #f0f0f0;
+}
+
+.hujiao_postion_img img {
+    width: 28px;
+}
+
+.hujiao_postion_a a {
+    text-align: left;
+    color: #333;
+    font-weight: bold;
+    font-size: 22px;
+}
+
+.hujiao_postion {
+    margin-top: 10px;
+    padding: 10
+}
+
+.hujiao {
+    /*width: 92%;
+margin:0 auto;*/
+    /*padding: 10px;*/
+}
+
+.hujiao_list {
+    width: 92%;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.hujiao p {
+    line-height: 28px;
+    color: #333;
+    text-indent: 10px;
+    font-size: 16px;
+}
+
+.hujiao_tel_phone {
+    color: red;
+    text-indent: 10px;
+}
+
+.hujiao_list .box {
+    /*border:1px solid #eee;*/
+    background-color: #fff;
+    border-radius: 6px;
+    padding: 14px;
+    margin-top: 10px;
+    overflow: hidden;
+}
+
+.box .box_title {
+    width: 75%;
+    float: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /*padding-top: 10px;*/
+    /*background: #ff0;*/
+    /*padding: 10px*/
+    /*height: 70px;*/
+    /*border-bottom: 1px solid #eee;*/
+}
+
+.box .box_title p {
+    height: 1.3rem;
+    line-height: 1.3rem;
+    text-align: left;
+    font-family: "微软雅黑";
+    font-size: 16px;
+    /*text-indent: 20px;*/
+}
+
+.box_con {
+    width: 20%;
+    float: right;
+    /*background: #ff0;*/
+    /*height: 30px;
+line-height: 30px;*/
+    text-align: right;
+    font-family: "微软雅黑";
+    font-size: 12px;
+    /*border-bottom: 1px solid #eee;*/
+    color: #bbb;
+    /*text-indent: 20px;*/
+}
+
+.box_title_name {
+    font-size: 0.75rem;
+    color: #333;
+}
+
+.box_title_phone {
+    font-size: 0.7rem;
+    color: #999;
+}
+
+.aui-searchbar.search_style {
+    /*margin: 0px 14px;*/
+    background: none;
+}
+
+.search_style .aui-border-radius {
+    /*margin: 0px;*/
+    /*width: 92%;
+    margin: 0 auto;*/
+    margin: 0 14px;
+    border-radius: 20px;
+    height: 1.6rem;
+    line-height: 1.6rem;
+}
+
+.aui-icon-search input.sr {
+    height: 1.6rem;
+    line-height: 1.6rem;
+    padding-left: 4px;
+    overflow: hidden;
+}

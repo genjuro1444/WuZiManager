@@ -1,0 +1,147 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>物业缴费</title>
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../css/aui.css" />
+    <link rel="stylesheet" type="text/css" href="../css/aui-slide.css" />
+    <link rel="stylesheet" type="text/css" href="../css/aui-pull-refresh.css" />
+    <link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
+    <link rel="stylesheet" type="text/css" href="css/dl_wyjiaofei.css" />
+</head>
+
+<body>
+    <!-- v-cloak -->
+    <div id="app" v-cloak>
+        <div class="wyjiaofei">
+            <div class="wyjf_top">
+                我的账单
+            </div>
+        </div>
+        <!-- 账单列表 -->
+        <div class="wyjf_zhangdan">
+            <div class="zd_main">
+                <ul>
+                    <li class="zd_list" v-for="roomitem in list">
+                        <div class="zd_list_xz" v-on:click="do_select_room(roomitem)">
+                            <input v-bind:checked="roomitem.Selected" type="checkbox" class="aui-radio fl" style="width:1rem; height:1rem; margin-top:5px;">
+                        </div>
+                        <div class="zd_list_main btn_line">
+                            <div class="zd_list_name">
+                                <div class="zd_list_namelft">
+                                    {{roomitem.FullName}}
+                                </div>
+                                <div class="zd_list_older" v-on:click="open_history(roomitem)">
+                                    历史账单
+                                </div>
+                            </div>
+                            <div class="zd_list_money" v-on:click="do_open_fee(roomitem)">
+                                <div class="yz_name">
+                                    {{roomitem.RealName}}
+                                </div>
+                                <div class="zd_money">
+                                    ￥<span>{{roomitem.TotalFee.toFixed(2)}}</span>
+                                    <i class="icon iconfont iconjiantou8"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div v-if="roomitem.IsOpen&&roomitem.list.length>0" class="zd_mingxi">
+                            <ul>
+                                <li class="mx_main" v-for="item in roomitem.list">
+                                    <div v-if="item.IsCanSelect&&!item.NeedChargeWechatAll" class="mx_lft" v-on:click="choose_fee(item)">
+                                        <input v-bind:checked="item.Selected" v-if="item.IsCanSelect&&!item.NeedChargeWechatAll" type="checkbox" class="aui-radio fl" style="width:0.8rem; height:0.8rem; margin-top:5px;">
+                                    </div>
+                                    <div class="mx_lft" v-if="!item.IsCanSelect">
+                                        {{item.WarningMsg}}
+                                    </div>
+                                    <div class="mx_rgt btn_line">
+                                        <div class="mx_name">
+                                            <div class="mx_ziyuan">
+                                                {{item.Name}}
+                                            </div>
+                                            <div class="mx_xj">
+                                                ￥{{item.TotalCost.toFixed(2)}}
+                                            </div>
+                                        </div>
+                                        <div class="mx_month" v-if="item.CanChangeEndTime">
+                                            <div class="mx_month_lft">
+                                                月数
+                                            </div>
+                                            <div class="aui-list-item-input aui-bar-list-input" style="padding:0px; margin-right:20px;">
+                                                <div class="aui-bar aui-bar-btn" type="count" style=" padding-top:2px;">
+                                                    <div class="aui-bar-btn-item aui-font-size-20" v-on:click="do_reduce_month(item,roomitem)">
+                                                        <i class="icon iconfont iconjian2"></i>
+                                                    </div>
+                                                    <div class="aui-bar-btn-item inputbox">
+                                                        <input v-model="item.CalMonthNumber" type="number" class="aui-input aui-text-center" readonly="true">
+                                                    </div>
+                                                    <div class="aui-bar-btn-item aui-font-size-20" v-on:click="do_add_month(item,roomitem)">
+                                                        <i class="icon iconfont iconjia3"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="mx_date">
+                                            <div class="mx_date_lft">
+                                                起止日期
+                                            </div>
+                                            <div class="mx_date_rgt">
+                                                {{item.StartTime==''?'--':item.StartTime}} 至 {{item.EndTime==''?'--':item.EndTime}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mx_rgt btn_line" v-for="item2 in item.childfee">
+                                        <div class="mx_name">
+                                            <div class="mx_ziyuan">
+                                                {{item2.Name}}
+                                            </div>
+                                            <div class="mx_xj">
+                                                ￥{{item2.TotalCost.toFixed(2)}}
+                                            </div>
+                                        </div>
+                                        <div class="mx_date">
+                                            <div class="mx_date_lft">
+                                                起止日期
+                                            </div>
+                                            <div class="mx_date_rgt">
+                                                {{item2.StartTime==''?'--':item2.StartTime}} 至 {{item2.EndTime==''?'--':item2.EndTime}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="wy_btn top_line">
+            <div class="wy_btn_main">
+                <div class="zd_list_xz" v-on:click="select_all()">
+                    <input v-bind:checked="allchecked" type="checkbox" class="aui-radio fl" style="width:1rem; height:1rem; margin-top:1.1rem;">
+                </div>
+                <div class="wy_btn_heji">
+                    合计：<span>￥</span><span class="font_dc">{{HeJiCost.toFixed(2)}}</span>
+                </div>
+                <div class="wy_btn_pay" v-on:click="do_pay()">
+                    支付
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript " src="../script/api.js "></script>
+<script type="text/javascript " src="../script/vue.js "></script>
+<script type="text/javascript" src="../script/config.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript" src="../script/aui-slide.js"></script>
+<script type="text/javascript" src="../script/aui-pull-refresh.js"></script>
+<script type="text/javascript" src="../script/aui-scroll.js"></script>
+<script type="text/javascript" src="../script/aui-toast.js"></script>
+<script type="text/javascript " src="js/dl_wyjiaofei.js "></script>
+
+</html>

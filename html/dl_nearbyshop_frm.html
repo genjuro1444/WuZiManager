@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>周边商家详情</title>
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../css/aui.css" />
+    <link rel="stylesheet" type="text/css" href="../css/aui-slide.css" />
+    <link rel="stylesheet" type="text/css" href="../css/aui-pull-refresh.css" />
+    <link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
+    <link rel="stylesheet" type="text/css" href="css/dl_nearbyshop.css" />
+</head>
+
+<body>
+    <!-- v-cloak -->
+    <div id="app" v-cloak>
+        <div class="shop_pic">
+            <img v-bind:src="businessinfo.coverimage" />
+        </div>
+        <div class="shop_main">
+            <!-- 店铺信息 -->
+            <div class="sp_main_msg">
+                <div class="sp_main_name">{{businessinfo.title}}</div>
+                <div class="sp_main_adrmsg"></div>
+                <div class="sp_main_address">
+                    <i class="icon iconfont iconweizhi" style="color:#1680ed; font-size:0.65rem;"></i> {{businessinfo.address}}
+                    <span>立即前往</span>
+                </div>
+                <div class="sp_main_comtent bt_line">
+                    <div class="comtent_title">商家介绍</div>
+                    <div class="comtent_msg">{{businessinfo.description}}</div>
+                </div>
+                <div class="sp_main_other">
+                    <div class="other_time">
+                        <span>营业时间</span>{{businessinfo.time}}
+                    </div>
+                    <div class="other_time">
+                        <div class="other_phone" v-on:click="do_call()"><span>商家电话</span>{{businessinfo.phonenumber}}</div>
+                        <div class="phone_pic">
+                            <i class="icon iconfont icondianhua1" style="font-size:1.1rem; color:#bbb;"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 推荐商品 -->
+            <div class="sp_main_product">
+                <div class="sp_main_protitle">推荐商品</div>
+                <div class="aui-row pad_lr">
+                    <div class="aui-col-xs-4 xs_pad_lr" v-for="item in productlist">
+                        <img v-bind:src="item.ImageUrl" />
+                        <div>{{item.title}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript " src="../script/api.js "></script>
+<script type="text/javascript " src="../script/vue.js "></script>
+<script type="text/javascript" src="../script/config.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript" src="../script/aui-slide.js"></script>
+<script type="text/javascript" src="../script/aui-pull-refresh.js"></script>
+<script type="text/javascript" src="../script/aui-scroll.js"></script>
+<script type="text/javascript" src="../script/aui-toast.js"></script>
+<script type="text/javascript " src="js/dl_nearbyshop.js "></script>
+
+</html>

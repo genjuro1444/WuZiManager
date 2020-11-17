@@ -1,0 +1,90 @@
+body {
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+[v-cloak] {
+  display: none;
+}
+.login_title{
+  font-size: 1.2rem;
+  color: #333;
+  margin: 2rem 0rem 0rem 0.75rem;
+  overflow: hidden;
+}
+.aui-list.aui-form-list{
+  border-top: 1px solid #fff;
+  background-size: 100% 0px;
+}
+.aui-list.aui-form-list .aui-list-item{
+  line-height: 3rem;
+  height: 3rem;
+  margin-top: 8px;
+}
+.login_bg {
+    position: relative;
+    height: 8rem;
+    width: 100%;
+    text-align: center;
+    background-color:#9BDBD7;
+}
+.login_bg img{
+    width: 100%;
+    height: 100%;
+}
+.aui-btn{
+	color: #fff;
+	background-color: #ccc;
+	width: 100%;
+	margin: 0 auto;
+}
+.login_right{
+	margin-top: 1.5rem;
+	width: 45%;
+	/*float: right;
+	text-align: right;*/
+	margin-left:14px;
+}
+.aui-btn-block{
+  width: 92%;
+  margin: 0 auto;
+  height: 2.2rem;
+  line-height: 2.2rem;
+  font-size: 0.75rem;
+	background-color: #eb7825;
+  border-radius: 50rem;
+	margin-top: 1.5rem;
+}
+.aui-btn.verifycode{
+    background-color: #eb7825;
+}
+.user_agree{
+  /*text-align: center;*/
+  margin: 10px 14px;
+}
+.user_agree .aui-radio{
+  width: 0.8rem;
+  height: 0.8rem;
+  margin-top: 4px;
+  margin-right: 3px;
+}
+.user_agree label{
+  font-size: 0.65rem;
+  /*color: #999;*/
+}
+.user_agree .aui-radio:checked{
+  background-color: #eb7825;
+  border: solid 1px #eb7825;
+}
+.user_agree label.agree_text{
+  color: #eb7825;
+}
+.aui-list-item-right.ml0{
+  margin-left: 0px;
+  margin-right: 14px;
+}

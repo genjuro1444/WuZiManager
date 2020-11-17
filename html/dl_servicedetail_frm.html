@@ -1,0 +1,155 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>服务详情</title>
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../css/aui.css" />
+    <link rel="stylesheet" type="text/css" href="../css/aui-slide.css" />
+    <link rel="stylesheet" type="text/css" href="../css/aui-pull-refresh.css" />
+    <link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
+    <link rel="stylesheet" type="text/css" href="css/dl_servicedetail.css" />
+</head>
+
+<body>
+    <!-- v-cloak -->
+    <div id="app" v-cloak>
+      <div v-if="loading_success">
+        <div id="aui-slide">
+            <div class="aui-slide-wrap">
+                <div class="aui-slide-node" v-for="item in imglist">
+                    <img v-bind:src="item.imgurl" />
+                </div>
+            </div>
+            <div class="aui-slide-page-wrap">
+                <!--分页容器-->
+            </div>
+        </div>
+        <!-- 服务项目 -->
+        <div class="ser_xiangmu">
+            <div class="ser_xm_main">
+                <div class="ser_xm_name">
+                    服务项目
+                </div>
+                <div class="ser_xm_item">
+                    <table border="1" style=" width:100%;">
+                        <tr v-for="item in typelist">
+                            <td>{{item.TypeName}}</td>
+                            <td>{{item.UnitPrice.toFixed(2)}}</span>/元/{{item.Unit}}</td>
+                        </tr>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- 服务范围 -->
+        <div class="ser_area">
+            <div class="ser_area_main">
+                <div class="ser_xm_name">
+                    服务范围
+                </div>
+                <div class="ser_area_item" v-if="form.ServiceIncude">
+                    <div class="widthAuto" v-html="form.ServiceIncude">
+                    </div>
+
+                </div>
+                <div v-if="!form.ServiceIncude">
+                    内容为空
+                </div>
+                <div class="ser_xm_name">
+                    服务标准
+                </div>
+                <div class="ser_bz_item" v-if="form.ServiceStandard">
+                    <div class="widthAuto" v-html="form.ServiceStandard">
+                    </div>
+                </div>
+                <div v-if="!form.ServiceStandard">
+                    内容为空
+                </div>
+
+            </div>
+        </div>
+        <!-- 预约通知 -->
+        <div class="ser_yuyue">
+            <div class="ser_yuyue_main">
+                <div class="ser_xm_name">
+                    预约须知
+                </div>
+                <div class="ser_area_item" v-if="form.AppointNotify">
+                    <div class="widthAuto" v-html="form.AppointNotify">
+                    </div>
+                </div>
+                <div v-if="!form.AppointNotify">
+                    内容为空
+                </div>
+            </div>
+        </div>
+        <div class="service_btn">
+            <div class="service_btn_main" v-on:click="do_call()">
+                立即预约
+            </div>
+        </div>
+       </div>
+       <div class="buy_box" v-if="show_buynow">
+           <div class="shadow" v-on:click="hide_buybox()"></div>
+           <div class="buy_content">
+               <div class="buy_content_img">
+                   <img v-bind:src="form.imageurl" />
+               </div>
+               <div class="buy_content_right">
+                   <div class="product_price">
+                       <label class="product_realprice">{{form.pricedesc}}</label>
+                   </div>
+                   <div class="product_variantname">
+                       {{form.chosenvariatname}}
+                   </div>
+               </div>
+               <div class="buy_content_center">
+                   <div class="buy_content_variant">
+                       <div class="variant_title">服务项目</div>
+                       <div class="variant_name">
+                           <label v-on:click="do_variant_select(item)" v-for="item in typelist" v-bind:class="{'active':item.selected}">{{item.TypeName}}</label>
+                       </div>
+                   </div>
+                   <div class="buy_content_quantity">
+                       <div class="quantity_title">数量</div>
+                       <div class="aui-bar aui-bar-btn quantity_content" type="count">
+                           <div class="aui-bar-btn-item" v-on:click="reduce_count()">
+                               <i class="icon iconfont icon-jian"></i>
+                           </div>
+                           <div class="aui-bar-btn-item">
+                               <input type="number" class="aui-input aui-text-center" v-model="form.quantity" id="count" v-on:input="do_quantity_change()">
+                           </div>
+                           <div class="aui-bar-btn-item" v-on:click="add_count()">
+                               <i class="icon iconfont icon-jia"></i>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+               <div class="aui-bar aui-bar-tab buy_content_bottom">
+                   <div class="aui-bar-tab-item buynow" tapmode v-on:click="do_place_order()">
+                       <div class="aui-bar-tab-label">立即下单</div>
+                   </div>
+               </div>
+           </div>
+       </div>
+       <div id="noorder" v-if="!loading_success" style="vertical-align: middle; text-align: center;margin-top:40%;">
+           <i class="icon iconfont icon-xinxi" style="font-size:70px; color:#888"></i>
+           <h5><br />{{errormsg}}</h5>
+       </div>
+    </div>
+</body>
+<script type="text/javascript " src="../script/api.js "></script>
+<script type="text/javascript " src="../script/vue.js "></script>
+<script type="text/javascript" src="../script/config.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript" src="../script/aui-slide.js"></script>
+<script type="text/javascript" src="../script/aui-pull-refresh.js"></script>
+<script type="text/javascript" src="../script/aui-scroll.js"></script>
+<script type="text/javascript" src="../script/aui-toast.js"></script>
+<script type="text/javascript " src="js/dl_servicedetail.js "></script>
+
+</html>

@@ -1,0 +1,166 @@
+﻿<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>开始盘点</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../css/aui.css" />
+    <link rel="stylesheet" type="text/css" href="../css/aui-pull-refresh.css" />
+    <link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
+    <link rel="stylesheet" type="text/css" href="./css/formlist.css" />
+    <link rel="stylesheet" type="text/css" href="../css/comm.css" />
+    <link rel="stylesheet" type="text/css" href="./css/pandianedit.css" />
+    <style>
+        .aui-grid.fixed35 {
+            top: 35px;
+            height: 35px;
+            line-height: 35px;
+        }
+
+        .aui-grid.fixed65 {
+            top: 68px;
+        }
+
+        .loctitle {
+            border-top: solid 1px #f1f1f1;
+            padding: 0 10px;
+            height: 35px;
+            line-height: 35px;
+            color: #28c7d0;
+        }
+
+            .loctitle::before {
+                content: "";
+                border-left: solid 4px #28c7d0;
+                width: 2px;
+                margin-right: 8px;
+            }
+
+        #main_refresh.fixed105 {
+            top: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <ul class="aui-tab fixed-top">
+            <li class="aui-tab-item" v-if="item.show" v-for="item in tablist" v-on:click="do_select_tab(item)">
+                <span v-bind:class="{'aui-active':tabtype==item.type}">{{item.title}}（{{item.count}}）</span>
+            </li>
+        </ul>
+        <section class="aui-grid fixed-top fixed35">
+            <div class="aui-left-count">
+                <label>小计：{{form.totalcount}}</label>
+            </div>
+            <div class="aui-right-search" v-on:click="do_search()">
+                <span class="search-btn ft110">
+                    <i class="icon iconfont iconfilter"></i>筛选
+                </span>
+            </div>
+        </section>
+        <section class="aui-grid fixed-top loctitle fixed65">
+            <label>{{form.LocationTitle}}</label>
+        </section>
+        <section id="main_refresh" class="aui-refresh-content fixed105">
+            <div class="aui-content">
+                <div v-for="item in zclist" style="position:relative;">
+                    <div class="checkbtn" v-if="tabtype==2&&canedit" v-on:click="do_remove_zc(item)">
+                        <label class="removebtn">删除</label>
+                    </div>
+                    <ul class="aui-list aui-list-sub aui-form-list">
+                        <li class="aui-list-item" style="position:relative;">
+                            <div class="aui-list-item-inner">
+                                <div class="aui-list-item-label">
+                                    资产编码：
+                                </div>
+                                <div class="aui-list-item-input">
+                                    {{item.Code}}
+                                </div>
+                            </div>
+                        </li>
+                        <li class="aui-list-item">
+                            <div class="aui-list-item-inner">
+                                <div class="aui-list-item-label">
+                                    资产名称-分类：
+                                </div>
+                                <div class="aui-list-item-input">
+                                    {{item.Name}}-{{item.TypeTitle}}
+                                </div>
+                            </div>
+                        </li>
+                        <li v-if="tabtype==1||tabtype==4" class="aui-list-item">
+                            <div class="aui-list-item-inner">
+                                <div class="aui-list-item-label">
+                                    使用人-部门：
+                                </div>
+                                <div class="aui-list-item-input">
+                                    {{item.UserRealName}}-{{item.Abbre}}{{item.UserGW}}
+                                </div>
+                            </div>
+                        </li>
+                        <li v-if="tabtype==1||tabtype==4" class="aui-list-item">
+                            <div class="aui-list-item-inner">
+                                <div class="aui-list-item-label">
+                                    存放地点：
+                                </div>
+                                <div class="aui-list-item-input">
+                                    {{item.LocTitle}}
+                                </div>
+                            </div>
+                        </li>
+                        <li v-if="tabtype==2||tabtype==3" class="aui-list-item">
+                            <div class="aui-list-item-inner">
+                                <div class="aui-list-item-label">
+                                    盘点日期：
+                                </div>
+                                <div class="aui-list-item-input">
+                                    {{item.UpdateDateDesc}}
+                                </div>
+                            </div>
+                        </li>
+                        <li v-if="tabtype==2||tabtype==3" class="aui-list-item">
+                            <div class="aui-list-item-inner">
+                                <div class="aui-list-item-label">
+                                    盘点人：
+                                </div>
+                                <div class="aui-list-item-input">
+                                    {{item.UserRealName}}
+                                </div>
+                            </div>
+                        </li>
+                        <li v-if="tabtype==2||tabtype==3" class="aui-list-item">
+                            <div class="aui-list-item-inner">
+                                <div class="aui-list-item-label">
+                                    盘点地点：
+                                </div>
+                                <div class="aui-list-item-input">
+                                    {{item.PDLocTitle}}
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <footer class="aui-bar aui-bar-tab" id="footer" v-if="canedit">
+            <div class="aui-bar-tab-item" v-on:click="do_open_scan()">
+                <label class="aui-bar-tab-label"><i class="icon iconfont iconAnkerwebicon-"></i>扫码盘点</label>
+            </div>
+        </footer>
+    </div>
+</body>
+
+<script type="text/javascript" src="../script/api.js "></script>
+<script type="text/javascript" src="../script/aui-toast.js"></script>
+<script type="text/javascript" src="../script/aui-pull-refresh.js"></script>
+<script type="text/javascript" src="../script/aui-scroll.js"></script>
+<script type="text/javascript" src="../script/vue.js "></script>
+<script type="text/javascript" src="../script/config.js "></script>
+<script type="text/javascript" src="../script/common.js "></script>
+<script type="text/javascript" src="js/pandianedit.js "></script>
+
+</html>

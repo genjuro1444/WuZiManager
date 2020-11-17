@@ -1,0 +1,96 @@
+html,body {
+    background-color: #f0f0f0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+.myo_detail{
+  background: #fff;
+  overflow: hidden;
+}
+.myo_detail_toux{
+  width: 3.5rem;
+  height: 3.5rem;
+
+  border-radius: 50rem;
+  margin: 0 auto;
+  margin-top: 2rem;
+  /*padding-bottom: 1rem;*/
+  overflow: hidden;
+}
+.myo_detail_toux img{
+  width: 100%;
+  border-radius: 50rem;
+  overflow: hidden;
+}
+.myo_detail_name{
+  width: 100%;
+  padding: 10px 14px;
+  text-align: center;
+  font-size: 0.9rem;
+  text-shadow: 0px 0px 0px #333;
+    line-height: 1.5rem;
+  overflow: hidden;
+  /*background: #f00;*/
+}
+.myo_detail_money{
+  width: 100%;
+  padding: 0px 14px;
+  text-align: center;
+  font-size: 1.4rem;
+  text-shadow: 0px 0px 0px #333;
+  padding-bottom: 1rem;
+    /*line-height: 2rem;*/
+  overflow: hidden;
+}
+.bsbx_con {
+    width: 100%;
+    margin: 10px auto;
+}
+.aui-content {
+    padding-bottom: 2.6rem;
+}
+.aui-list {
+    background: none;
+}
+.aui-list li.aui-list-item.liline {
+
+    background: #fff;
+    padding: 0px;
+    margin-bottom: 5px;
+
+}
+.aui-list-item-inner.item-inner-sty {
+    width: 92%;
+    margin: 0 auto;
+}
+.aui-list-item-label-icon.label-title-wid {
+    font-size: 0.75rem;
+    color: #999;
+    min-width: 22%;
+    max-width: 100%;
+    /*background: #f00;*/
+    float: left;
+}
+.aui-list .aui-list-item-label-icon {
+    padding-right: 0;
+}
+.aui-list .aui-list-item-input {
+    padding-right: 0px!important;
+    width: auto;
+}
+.aui-list-item-input select, .aui-list-item-input input {
+    color: #000;
+    width: 80%;
+    float: right;
+    text-align: right;
+    font-size: 0.75rem;
+    padding-left: 0.75rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /*padding-right: 0px;*/
+    /*background: #ff0;*/
+}

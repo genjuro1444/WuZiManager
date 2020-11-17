@@ -1,0 +1,170 @@
+﻿
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>资产退库</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../css/aui.css" />
+    <link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
+    <link rel="stylesheet" type="text/css" href="./css/formlist.css" />
+    <link rel="stylesheet" type="text/css" href="../css/comm.css" />
+    <link rel="stylesheet" type="text/css" href="./css/formlist.css" />
+</head>
+
+<body>
+    <div id="app">
+        <div v-if="!hideeditbtn" class="btnFloat" v-on:click="do_open_operation()">
+            <i class="icon iconfont iconxiugai1"></i>
+        </div>
+        <div class="aui-content pb60">
+            <ul class="aui-list">
+                <li class="aui-list-item">
+                    <div class="aui-list-item-inner">
+                        <div class="aui-list-item-label auto">
+                            退库单号：
+                        </div>
+                        <div class="aui-list-item-input auto">
+                            <input readonly="readonly" type="text" v-if="canedit" v-model="form.Code" placeholder="系统自动生成">
+                            <span v-else>{{form.Code}}</span>
+                        </div>
+                    </div>
+                </li>
+                <li class="aui-list-item" v-bind:class="{'aui-list-item-arrow':canedit}">
+                    <div class="aui-list-item-inner">
+                        <div class="aui-list-item-label">
+                            <i class="red">*</i>退库后公司：
+                        </div>
+                        <div class="aui-list-item-input">
+                            <input readonly="readonly" v-on:click="do_select_company()" type="text" v-if="canedit" v-model="form.DeptName" placeholder="请选择">
+                            <span v-else>{{form.DeptName}}</span>
+                        </div>
+                    </div>
+                </li>
+                <li class="aui-list-item" v-bind:class="{'aui-list-item-arrow':canedit}">
+                    <div class="aui-list-item-inner">
+                        <div class="aui-list-item-label">
+                            退库后部门：
+                        </div>
+                        <div class="aui-list-item-input">
+                            <input readonly="readonly" v-on:click="do_select_department()" type="text" v-if="canedit" v-model="form.UserGW" placeholder="请选择">
+                            <span v-else>{{form.UserGW}}</span>
+                        </div>
+                    </div>
+                </li>
+                <li class="aui-list-item" v-bind:class="{'aui-list-item-arrow':canedit}">
+                    <div class="aui-list-item-inner">
+                        <div class="aui-list-item-label">
+                            <i class="red">*</i>退库日期：
+                        </div>
+                        <div class="aui-list-item-input">
+                            <input v-on:click="do_select_date()" type="text" v-if="canedit" readonly="readonly" v-model="form.FromDateDesc" placeholder="请选择">
+                            <span v-else>{{form.FromDateDesc}}</span>
+                        </div>
+                    </div>
+                </li>
+                <li class="aui-list-item" v-bind:class="{'aui-list-item-arrow':canedit}">
+                    <div class="aui-list-item-inner">
+                        <div class="aui-list-item-label">
+                            <i class="red">*</i>退库后地点：
+                        </div>
+                        <div class="aui-list-item-input">
+                            <input readonly="readonly" v-on:click="do_select_location()" type="text" v-if="canedit" v-model="form.LocTitle" placeholder="请选择">
+                            <span v-else>{{form.LocTitle}}</span>
+                        </div>
+                    </div>
+                </li>
+                <li class="aui-list-item">
+                    <div class="aui-list-item-inner">
+                        <div class="aui-list-item-label auto">
+                            经办人：
+                        </div>
+                        <div class="aui-list-item-input auto">
+                            <span>{{form.CRUserRealName}}</span>
+                        </div>
+                    </div>
+                </li>
+                <li class="aui-list-item">
+                    <div class="aui-list-item-inner">
+                        <div class="aui-list-item-label">
+                            退库说明：
+                        </div>
+                        <div class="aui-list-item-input">
+                            <input type="text" v-if="canedit" placeholder="请输入" v-model="form.Content" />
+                            <span v-else>{{form.Content}}</span>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <div v-for="item in zclist" class="zc-choose-box">
+                <div class="checkbtn" v-on:click="do_select_zcitem(item)" v-if="canedit">
+                    <label><input class="aui-checkbox" type="checkbox" name="delete" v-bind:checked="item.ischecked"></label>
+                </div>
+                <ul class="aui-list aui-list-sub aui-form-list " v-on:click="do_select_zcitem(item)">
+                    <li class="aui-list-item">
+                        <div class="aui-list-item-inner">
+                            <div class="aui-list-item-label">
+                                资产编码：
+                            </div>
+                            <div class="aui-list-item-input">
+                                {{item.Code}}
+                            </div>
+                        </div>
+                    </li>
+                    <li class="aui-list-item">
+                        <div class="aui-list-item-inner">
+                            <div class="aui-list-item-label">
+                                资产名称-分类：
+                            </div>
+                            <div class="aui-list-item-input overhidden">
+                                {{item.Name}}-{{item.TypeName}}
+                            </div>
+                        </div>
+                    </li>
+                    <li class="aui-list-item">
+                        <div class="aui-list-item-inner">
+                            <div class="aui-list-item-label">
+                                使用人-部门：
+                            </div>
+                            <div class="aui-list-item-input">
+                                {{item.UserDesc}}-{{item.Abbre}}{{item.UserGW}}
+                            </div>
+                        </div>
+                    </li>
+                    <li class="aui-list-item">
+                        <div class="aui-list-item-inner">
+                            <div class="aui-list-item-label">
+                                存放地点：
+                            </div>
+                            <div class="aui-list-item-input">
+                                {{item.LocTitle}}
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <footer class="aui-bar aui-bar-tab" id="footer" v-if="canedit&&zcform.ID<=0">
+                <div class="aui-bar-tab-item" v-on:click="do_add_zc()">
+                    <label class="aui-bar-tab-label"><i class="icon iconfont iconxinzeng1"></i>添加资产</label>
+                </div>
+                <div class="aui-bar-tab-item" v-on:click="do_open_scan()">
+                    <label class="aui-bar-tab-label"><i class="icon iconfont iconAnkerwebicon-"></i>扫码添加</label>
+                </div>
+                <div class="aui-bar-tab-item" v-on:click="do_remove_zc()">
+                    <label class="aui-bar-tab-label"><i class="icon iconfont iconshanchu"></i>删除资产</label>
+                </div>
+            </footer>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="../script/api.js "></script>
+<script type="text/javascript" src="../script/aui-toast.js"></script>
+<script type="text/javascript" src="../script/vue.js "></script>
+<script type="text/javascript" src="../script/config.js "></script>
+<script type="text/javascript" src="../script/common.js "></script>
+<script type="text/javascript" src="js/zctuiku.js "></script>
+
+</html>

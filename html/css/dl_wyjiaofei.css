@@ -1,0 +1,306 @@
+html,body {
+    width: 100%;
+    height: 100%;
+    background-color: #f0f0f0;
+}
+.wyjiaofei{
+  width: 100%;
+  height: 2.2rem;
+  background: #fff;
+  margin-bottom: 10px;
+  border-radius: 0px 0px 10px 10px;
+  overflow: hidden;
+}
+.wyjf_top{
+  height: 1.6rem;
+  line-height: 1.6rem;
+  margin-top: 0.5rem;
+  padding: 0px 14px;
+  font-size: 0.75rem;
+  text-shadow: 0px 0px 0px #333;
+}
+.wyjf_zhangdan{
+  width: 100%;
+  background: #fff;
+  border-radius: 10px 10px 0px 0px;
+  margin-bottom: 3rem;
+  overflow: hidden;
+}
+.zd_main{
+padding: 5px 14px;
+overflow: hidden;
+}
+.zd_list{
+  width: 100%;
+  margin: 15px 0px;
+  overflow: hidden;
+}
+.zd_list_xz{
+  width: 10%;
+  float: left;
+  overflow: hidden;
+}
+.zd_list_main{
+  width: 89%;
+  float: right;
+  padding-bottom: 15px;
+  overflow: hidden;
+}
+.zd_list_name{
+  height: 1.4rem;
+  line-height: 1.4rem;
+  font-size: 0.75rem;
+}
+.zd_list_namelft{
+  width: 80%;
+  float: left;
+  /*background: #f00;*/
+  overflow: hidden;
+}
+.zd_list_older{
+  width: 20%;
+  color: #999;
+  float: right;
+  text-align: right;
+  font-size: 0.65rem;
+  overflow: hidden;
+}
+.btn_line{
+  border: none;
+      background-size: 100% 1px;
+  background-repeat: no-repeat;
+  background-position: bottom;
+      background-image: linear-gradient(0,#f5f5f5,#f5f5f5 50%,transparent 50%);
+      background-image: -webkit-linear-gradient(90deg,#f5f5f5,#f5f5f5 50%,transparent 50%);
+}
+.mx_rgt.btn_line{
+  border: none;
+  background-size: 100% 1px;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-image: linear-gradient(0,#f0f0f0,#f0f0f0 50%,transparent 50%);
+  background-image: -webkit-linear-gradient(90deg,#f0f0f0,#f0f0f0 50%,transparent 50%);
+}
+.wy_btn.top_line{
+  border: none;
+      background-size: 100% 1px;
+  background-repeat: no-repeat;
+  background-position: top;
+      background-image: linear-gradient(0,#f5f5f5,#f5f5f5 50%,transparent 50%);
+      background-image: -webkit-linear-gradient(90deg,#f5f5f5,#f5f5f5 50%,transparent 50%);
+}
+.zd_list_money{
+padding-top: 2px;
+line-height: 1.2rem;
+font-size: 0.7rem;
+}
+
+.zd_money{
+  width: 60%;
+  float: left;
+  font-size: 0.5rem;
+  color: #eb7825;
+  overflow: hidden;
+}
+.yz_name{
+  width: 100%;
+  font-size: 0.7rem;
+  /*float: right;
+  text-align: right;*/
+  color: #999;
+}
+.zd_money span{
+  font-size: 0.85rem;
+}
+.zd_money span.no_zd{
+  font-size: 0.7rem;
+  color: #999;
+}
+.zd_money i{
+  color: #bbb;
+  font-size: 0.5rem;
+  padding-left: 5px;
+}
+.zd_mingxi{
+  width: 89%;
+  background: #f9f9f9;
+  float: right;
+  overflow: hidden;
+}
+.mx_main{
+  padding: 10px 10px 5px 10px;
+  overflow: hidden;
+}
+.mx_lft{
+  width: 10%;
+  font-size: 0.55rem;
+  line-height: 1.4rem;
+  color: #eb7825;
+  float: left;
+}
+.mx_rgt{
+  width: 89%;
+  float: right;
+  padding-bottom: 10px;
+  overflow: hidden;
+}
+.mx_name{
+  width: 100%;
+  font-size: 0.6rem;
+  line-height: 1.4rem;
+  overflow: hidden;
+}
+.mx_ziyuan{
+  width: 40%;
+  color: #999;
+  float: left;
+  overflow:hidden;
+}
+.mx_xj{
+  width: 60%;
+  float: right;
+  color: #eb7825;
+  /*text-align: right;*/
+  overflow: hidden;
+}
+.mx_month{
+  width: 100%;
+  font-size: 0.6rem;
+  line-height: 1.4rem;
+  overflow: hidden;
+}
+.mx_month_lft{
+  width: 30%;
+  float:left;
+  color: #999;
+  overflow: hidden;
+}
+.mx_month_rgt{
+  width: 60%;
+  float: right;
+
+  text-align: right;
+  overflow: hidden;
+}
+.mx_month_rgt i{
+  color: #ddd;
+  font-size: 1rem;
+  padding: 0px 5px;
+  float: left;
+}
+.item_num_sz{
+  width: 1.8rem;
+  border: solid 1px #ddd;
+  border-radius: 3px;
+  height: 1rem;
+  line-height: 1rem;
+  text-align: center;
+  float: left;
+  margin-top: 3px;
+}
+.item_num_sz input{
+  font-size: 0.65rem;
+  height: 1rem;
+  line-height: 1rem;
+  text-align: center;
+}
+.mx_date{
+  width: 100%;
+  font-size: 0.6rem;
+  line-height: 1.4rem;
+  overflow: hidden;
+}
+.mx_date_lft{
+  width: 30%;
+  float:left;
+  color: #999;
+  overflow: hidden;
+}
+.mx_date_rgt{
+  width: 60%;
+  float: right;
+  /*text-align: right;*/
+  overflow: hidden;
+}
+.wy_btn{
+  width: 100%;
+  height: 3rem;
+  position: fixed;
+  background: #fff;
+  bottom: 0px;
+  z-index: 99;
+  overflow: hidden;
+}
+.wy_btn_main{
+  width: 92%;
+  margin: 0 auto;
+  overflow: hidden;
+}
+.wy_btn_heji{
+  width: 60%;
+  float: left;
+  line-height: 2rem;
+  padding-top: 0.6rem;
+  font-size: 0.65rem;
+  overflow: hidden;
+}
+.wy_btn_heji span{
+color: #eb7825;
+}
+.wy_btn_heji span.font_dc{
+  font-size: 0.9rem;
+  text-shadow: 0px 0px 0px #eb7825;
+}
+.wy_btn_pay{
+  width: 30%;
+  background:linear-gradient(to right bottom,#ff9a16,#eb4a25);
+  float: right;
+  font-size: 0.7rem;
+  text-shadow: 0px 0px 0px #fff;
+  line-height: 1.9rem;
+  border-radius: 50rem;
+  text-align: center;
+  margin-top: 0.55rem;
+  color: #fff;
+}
+
+/*月数增减框*/
+.aui-list .aui-list-item-input.aui-bar-list-input, .aui-bar-btn {
+    width: 100px;
+}
+.aui-bar-btn, .aui-bar-btn-item, .aui-bar-btn .aui-input, .aui-bar-btn input, .aui-bar-btn select {
+    height: 19px;
+    line-height: 19px;
+    min-height: 19px;
+}
+
+.aui-bar-btn-item {
+    width: 30px;
+}
+
+.aui-bar-btn-item.inputbox {
+    width: 40px;
+    /*border-radius: 5px;*/
+    border-left-width: 0px;
+    border-right-width: 0px;
+    border-color: #ddd;
+}
+
+.aui-bar-btn-item .aui-iconfont {
+    color: #bbb;
+    /*font-weight: bold;*/
+}
+
+.aui-bar-btn-item:first-child {
+    border-width: 0px;
+    border:solid 1px #ddd;
+}
+
+.aui-bar-btn-item:last-child {
+    border-width: 0px;
+    border:solid 1px #ddd;
+}
+.aui-font-size-20 i{
+  font-size: 14px;
+  color: #999;
+}

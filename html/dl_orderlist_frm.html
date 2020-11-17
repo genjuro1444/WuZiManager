@@ -1,0 +1,92 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>订单中心</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../css/aui.css" />
+    <link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
+    <link rel="stylesheet" type="text/css" href="css/dl_orderlist.css" />
+</head>
+
+<body>
+    <div id="app" v-cloak>
+        <div class="orderlist">
+            <div class="order_list_item" v-for="item in list">
+                <div class="gwc_item_name">
+                    <!-- <div class="xuanze"> <img src="../image/business.jpg"/> </div> -->
+                    <div class="gwc_item_title">{{item.ordersummary.businessname}}
+                        <span class="item_title_type" style="color:#999;">{{item.ordersummary.statusdesc}}</span></div>
+                </div>
+                <div class="order_product">
+                    <ul class="aui-list aui-media-list" style="background-size:100% 0px;">
+                        <li class="aui-list-item " v-for="item2 in item.productlist">
+                            <!-- <div class="xuanze"><input id="checkbox" type="checkbox"></div> -->
+                            <div class="aui-media-list-item-inner btn_line">
+                                <div class="aui-list-item-media">
+                                    <img v-bind:src="item2.imageurl">
+                                </div>
+                                <div class="aui-list-item-inner">
+                                    <div class="pro-list-item-title aui-ellipsis-2">
+                                        {{item2.title}}
+                                    </div>
+                                    <div class="pro_dis">
+                                        {{item2.desc}}
+                                    </div>
+                                </div>
+                                <!-- aui-list-item-text -->
+                                <div class=" pro_price" style="margin: 12px 0 0 0;">
+                                    <div class="item_price">
+                                        ￥<span>{{item2.price.toFixed(2)}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <!-- 店铺服务 -->
+                    <div class="order_pro_fw">
+                        <div class="order_pro_send" v-if="item.show_shiprate">
+                            <div class="or_pro_rgt">
+                                运费<span class="yf">￥{{item.productsummary.shiprateamount.toFixed(2)}}</span>
+                            </div>
+                        </div>
+                        <!-- 小计 -->
+                        <div class="xiaoji">
+                            共{{item.productlist.length}}件<span class="xj_title">小计：</span><span class="xj_fh">￥</span><span class="xj_price">
+                            {{item.productsummary.totalprice.toFixed(2)}}
+                            </span>
+                        </div>
+                        <div class="order_pro_fk">
+                            <div class="or_pro_rgt">
+                                <div v-on:click="do_pay(item)" v-if="item.ordersummary.canpay" class="or_pro_fk">付款</div>
+                                <div v-on:click="do_confirmship(item)" v-if="item.ordersummary.canconfirmship" class="or_pro_delete">确认收货</div>
+                                <div v-on:click="do_close(item)" v-if="item.ordersummary.canclose" class="or_pro_delete">关闭</div>
+                                <div v-on:click="do_refundview(item)" v-if="isrefunding(item)" class="or_pro_delete">退款详情</div>
+                                <div v-on:click="do_unrefund(item)" v-if="item.ordersummary.status == 6" class="or_pro_delete">取消退款</div>
+                                <div v-on:click="do_view(item)" class="or_pro_delete">详情</div>
+                                <div v-on:click="do_remove(item)" v-if="item.ordersummary.candelete" class="or_pro_delete">删除</div>
+                                <div v-on:click="do_refund(item)" v-if="item.ordersummary.canrefund" class="or_pro_delete">退款</div>
+                                <div v-on:click="open_pingjia(item)" v-if="item.ordersummary.status == 3" class="or_pro_delete">评价</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/config.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript " src="../script/vue.js "></script>
+<script type="text/javascript" src="../script/aui-toast.js"></script>
+<script type="text/javascript" src="../script/aui-scroll.js"></script>
+<script type="text/javascript" src="../script/aui-tab.js"></script>
+<script type="text/javascript " src="js/dl_orderlist.js "></script>
+<script type="text/javascript">
+</script>
+
+</html>

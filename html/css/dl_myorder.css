@@ -1,0 +1,124 @@
+html,body {
+    background-color: #f0f0f0;
+  }
+body {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+.myorder_top{
+  padding: 8px 14px 5px 14px;
+  overflow: hidden;
+}
+.myorder_all{
+  width: 2.6rem;
+  background: #fff;
+  float: left;
+  font-size: 0.6rem;
+  text-align: center;
+  border-radius: 4px;
+  line-height: 1.4rem;
+  margin-right: 8px;
+  color: #999;
+}
+.myorder_all.child{
+  width: 1.8rem;
+}
+.myorder_time{
+  width: 55%;
+  height: 1.4rem;
+  float: right;
+  /*background: #f00;*/
+  border-radius: 4px;
+  border:solid 1px #ccc;
+  overflow: hidden;
+}
+.myorder_time input{
+  width: 80%;
+  float: left;
+  height: 1.3rem;
+  line-height: 1.3rem;
+  font-size: 0.6rem;
+  padding-left: 10px;
+}
+.myorder_time i{
+  width: 18%;
+  float: right;
+  text-align: right;
+  height: 1rem;
+  line-height: 1rem;
+  margin-top: 0.2rem;
+  padding-right: 4px;
+  border-left: solid 1px #ddd;
+  color: #999;
+  font-size: 1rem;
+}
+.myorder_main{
+  width: 100%;
+  border-radius: 10px;
+  margin-top: 10px;
+  background: #fff;
+  overflow: hidden;
+}
+.myorder_main ul li.myo_item{
+  margin: 20px 14px;
+  overflow: hidden;
+}
+.myo_item_lft{
+  width: 15%;
+  float: left;
+  overflow: hidden;
+}
+.myo_item_toux{
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 50rem;
+}
+.myo_item_toux img{
+  width: 100%;
+  border-radius: 50rem;
+}
+.myo_item_rgt{
+  width: 84%;
+  float: right;
+  overflow: hidden;
+}
+.btn_line{
+  border: none;
+      background-size: 100% 1px;
+  background-repeat: no-repeat;
+  background-position: bottom;
+      background-image: linear-gradient(0,#f0f0f0,#f0f0f0 50%,transparent 50%);
+      background-image: -webkit-linear-gradient(90deg,#f0f0f0,#f0f0f0 50%,transparent 50%);
+}
+.myo_rgt_title{
+  line-height: 1.2rem;
+}
+.myo_title_lft{
+  width: 70%;
+  float: left;
+  font-size: 0.75rem;
+  color: #333;
+}
+.myo_title_rgt{
+  width: 30%;
+  float: right;
+  font-size: 0.9rem;
+  text-align: right;
+}
+.myo_title_rgt.add{
+  color: #eb7825;
+}
+.myo_title_rgt.pay{
+  color: #333;
+}
+.myo_rgt_time{
+  width: 100%;
+  line-height: 1.4rem;
+  font-size: 0.6rem;
+  color: #999;
+  overflow: hidden;
+  padding-bottom: 15px;
+}

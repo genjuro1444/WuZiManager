@@ -1,0 +1,243 @@
+body {
+    background-color: #f0f0f0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+#app {
+    background-color: #f0f0f0;
+}
+
+.aui-list .aui-media-list-item-inner.btn_line {
+    border: none;
+    background-size: 100% 1px;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-image: linear-gradient(0, #f0f0f0, #f0f0f0 50%, transparent 50%);
+    background-image: -webkit-linear-gradient(90deg, #f0f0f0, #f0f0f0 50%, transparent 50%);
+}
+
+.gouwuche {
+    margin-top: 10px;
+    margin-bottom: 4rem;
+}
+
+.gwc_item {
+    width: 100%;
+    border-radius: 10px;
+    background: #fff;
+    margin-top: 10px;
+}
+
+.gwc_item_name {
+    padding: 20px 14px 0px 14px;
+    overflow: hidden;
+}
+
+.gwc_shangpin {
+    padding-bottom: 10px;
+    overflow: hidden;
+}
+
+.xuanze {
+    width: 10%;
+    float: left;
+    position: relative;
+    padding-top: 20px;
+}
+
+.aui-checkbox {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 50%;
+    margin-top: -10px;
+}
+
+#checkbox {
+    width: 20px;
+    height: 20px;
+}
+
+.gwc_item_title {
+    width: 90%;
+    line-height: 1rem;
+    /*background: #f00;*/
+    float: right;
+    font-size: 0.8rem;
+    color: #333;
+    text-shadow: 0px 0px 0px #333;
+}
+
+.aui-media-list .aui-list-item {
+    padding: 0 14px;
+    /*margin-bottom: 10px;*/
+    background-size: 100% 0px;
+}
+
+.aui-list .aui-list-item-media {
+    width: 5rem;
+    height: 5rem;
+    margin: 18px 0px;
+    padding: 0px;
+    overflow: hidden;
+    border-radius: 6px;
+    /*background: #f00;*/
+}
+
+.aui-list .aui-list-item-media img {
+    /*width: 100%;*/
+    border-radius: 6px;
+}
+
+.aui-list .aui-list-item-inner {
+    padding-left: 14px;
+    padding-right: 0px;
+}
+
+.aui-list .pro-list-item-title {
+    font-size: 0.7rem;
+    line-height: 1rem;
+    padding-top: 0.4rem;
+    color: #333;
+    text-shadow: 0px 0px 0px #333;
+    /*margin-bottom: 1.3rem;*/
+}
+
+.pro_dis {
+    background-color: #f5f5f5;
+    font-size: 0.6rem;
+    border-radius: 4px;
+    color: #999;
+    line-height: 0.8rem;
+    margin-top: 5px;
+    padding: 4px 8px;
+}
+
+.aui-list-item-text.pro_price {
+    width: 100%;
+    /*margin: 10px 0 0 0;*/
+    /*position: absolute;
+  bottom: 16px;*/
+}
+
+.aui-list-item-text.pro_price .item_price {
+    width: 40%;
+    float: left;
+}
+
+.pro_price img {
+    width: 1.5rem;
+}
+
+.aui-list .item_price {
+    color: red;
+    font-size: 0.5rem;
+}
+
+.item_price span {
+    font-size: 0.9rem;
+    text-shadow: 0px 0px 0px red;
+    font-family: "Arial";
+}
+
+.aui-list-item-text .item_rate {
+    font-size: 0.6rem;
+}
+
+.aui-list-item .xuanze {
+    margin-top: 20px;
+}
+
+.item_num i {
+    color: #ddd;
+    font-size: 1rem;
+    padding: 0px 5px;
+    float: left;
+}
+
+.item_num_sz {
+    width: 1.8rem;
+    border: solid 1px #ddd;
+    border-radius: 3px;
+    height: 1rem;
+    line-height: 1rem;
+    text-align: center;
+    float: left;
+    margin-top: 5px;
+}
+
+.item_num_sz input {
+    font-size: 0.65rem;
+    height: 1rem;
+    line-height: 1rem;
+    text-align: center;
+}
+
+.gwc_btn {
+    width: 100%;
+    height: 3rem;
+    position: fixed;
+    bottom: 0px;
+    background-color: #fff;
+    border-top: solid 1px #f0f0f0;
+}
+
+.gwc_btn_main {
+    padding: 0px 14px;
+    overflow: hidden;
+}
+
+.gwc_btn_main .xuanze {
+    width: 18%;
+    line-height: 3rem;
+    font-size: 0.7rem;
+    float: left;
+}
+
+.gwc_btn_main .xuanze input[type="checkbox"] {
+    position: relative;
+    top: 5px;
+    margin-right: 10px;
+    padding-right: 5px;
+}
+
+.gwc_btn_price {
+    width: 50%;
+    float: left;
+    color: #eb7825;
+    font-size: 0.6rem;
+}
+
+.gwc_btn_price span {
+    font-size: 0.9rem;
+    text-shadow: 0px 0px 0px #eb7825;
+    font-family: "Arial";
+    line-height: 3rem;
+}
+
+.gwc_btn_jiesuan {
+    width: 30%;
+    float: right;
+    border-radius: 50rem;
+    line-height: 1.9rem;
+    text-align: center;
+    background: linear-gradient(to right bottom, #ff9a16, #eb4a25);
+    /*background: #eb7825;*/
+    font-size: 0.7rem;
+    text-shadow: 0px 0px 0px #fff;
+    margin-top: 0.55rem;
+    color: #fff;
+}
+
+.top_line {
+    border: none;
+    background-size: 100% 1px;
+    background-repeat: no-repeat;
+    background-position: top;
+    background-image: linear-gradient(0, #f0f0f0, #f0f0f0 50%, transparent 50%);
+    background-image: -webkit-linear-gradient(90deg, #f0f0f0, #f0f0f0 50%, transparent 50%);
+}

@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>呼叫物业</title>
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../css/aui.css" />
+    <link rel="stylesheet" type="text/css" href="../css/aui-slide.css" />
+    <link rel="stylesheet" type="text/css" href="../css/aui-pull-refresh.css" />
+    <link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
+    <link rel="stylesheet" type="text/css" href="css/dl_hujiaowy.css" />
+</head>
+
+<body>
+  <!-- v-cloak -->
+    <div id="app"  >
+      <div class="aui-content">
+          <div>
+              <!-- <div class="aui-searchbar search_style" id="search">
+                  <div class="aui-searchbar-input aui-border-radius">
+                      <i class="icon iconfont iconsousuo"></i>
+                      <input class="sr" type="search" placeholder="请输入名称" id="search-input"  onclick="do_search()" style="padding-left: 4px;height:1.6rem; line-height:1.6rem;">
+                      <div class="aui-searchbar-clear-btn" style="background:#fff">
+                          <i class="icon iconfont iconguanbi1" style="position:absolute; top:7px; right:4px; color:#bbb;"></i>
+                      </div>
+                  </div>
+                  <div class="aui-searchbar-btn" tapmode></div>
+              </div> -->
+              <div class="hujiao" v-for="item in hujiao_info">
+                  <div class="hujiao_info" >
+                      <!-- loop -->
+                      <div class="hujiao_list" v-for="item2 in item.list">
+                          <div  class="box">
+                              <div class="box_title">
+                                  <div class="box_title_name">{{item2.name}}</div>
+                                  <div class="box_title_phone">电话：{{item2.phonenumber}}</div>
+                              </div>
+                              <div  class="box_con" v-on:click="tel_phone(item2)">
+                                  <i class="icon iconfont icondianhua1" style="font-size:1.4rem; color:#01B2F5;"></i>
+                              </div>
+                          </div>
+                      </div>
+                      <!-- loop -->
+
+                  </div>
+
+              </div>
+          </div>
+      </div>
+
+    </div>
+</body>
+<script type="text/javascript " src="../script/api.js "></script>
+<script type="text/javascript " src="../script/vue.js "></script>
+<script type="text/javascript" src="../script/config.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript" src="../script/aui-slide.js"></script>
+<script type="text/javascript" src="../script/aui-pull-refresh.js"></script>
+<script type="text/javascript" src="../script/aui-scroll.js"></script>
+<script type="text/javascript" src="../script/aui-toast.js"></script>
+<script type="text/javascript " src="js/dl_hujiaowy.js "></script>
+</html>

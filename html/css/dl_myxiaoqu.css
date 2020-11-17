@@ -1,0 +1,58 @@
+html,body {
+    background-color: #f0f0f0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+.xiaoqu{
+  width: 92%;
+  margin: 10px auto;
+  background: #fff;
+  border-radius: 8px;
+}
+.xiaoqu_main{
+  padding: 10px 14px;
+}
+.xiaoqu_item{
+  line-height: 1.8rem;
+  height: 1.8rem;
+  font-size: 0.7rem;
+  overflow: hidden;
+}
+.xq_itemlft{
+  width: 25%;
+  color: #999;
+  float: left;
+}
+.xq_itemrgt{
+  width: 74%;
+  float: right;
+}
+.xq_btn{
+  width: 45%;
+  margin: 0 auto;
+  height: 2rem;
+  line-height: 2rem;
+  margin-top: 30px;
+  font-size: 0.7rem;
+  text-align: center;
+  background: #f9f9f9;
+  /*border: solid 1px #eb7825;*/
+  color: #eb7825;
+  border-radius: 4px;
+}
+.xq_erweima_btn{
+  width: 45%;
+  margin: 0 auto;
+  height: 2rem;
+  font-size: 0.7rem;
+  line-height: 2rem;
+  margin-top: 15px;
+  text-align: center;
+  background: #f9f9f9;
+  /*border: solid 1px #f8d40c;*/
+  color: #999;
+  border-radius: 4px;
+}
