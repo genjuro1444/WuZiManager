@@ -96,7 +96,7 @@ var app = new Vue({
         do_save: function() {
             var that = this;
             var options = {
-                action: 'APP_ADDPDLOCATIONZCLISL',
+                action: 'APP_ADDPDLOCATIONZCLIST',
                 P1: that.form.LocationID,
                 P2: that.form.TaskID,
                 items: JSON.stringify(that.zclist)
@@ -147,7 +147,7 @@ var app = new Vue({
             var options = {
                 action: 'APP_GETZCLISTBYIDS',
                 ids: JSON.stringify(idlist),
-                status: -1,
+                status: '[]',
                 exceptids: JSON.stringify(that.get_exists_zcids()),
                 ispandian: 1,
                 LocationID: that.form.LocationID

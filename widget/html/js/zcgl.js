@@ -21,6 +21,7 @@ var app = new Vue({
             Status: '',
             DeptName: '',
             BranchCode: '',
+            DepartmentId: 0,
             UserGW: '',
             UserRealName: '',
             UserName: '',
@@ -34,7 +35,7 @@ var app = new Vue({
         addmore: false,
     },
     methods: {
-        get_data: function() {
+        get_data: function () {
             var that = this;
             if (!ns.AllowAuth('ZCGLADD') || !ns.AllowAuth('ZCGLORDER')) {
                 that.hideeditbtn = true;
@@ -54,12 +55,12 @@ var app = new Vue({
                 typeid: that.searchform.TypeID,
                 status: that.searchform.Status,
                 branchcode: that.searchform.BranchCode,
-                usergw: that.searchform.UserGW,
+                usergw: that.searchform.DepartmentId,
                 uname: that.searchform.UserName,
                 locationid: that.searchform.LocationID,
                 repairstatus: that.searchform.RepairStatus,
                 shared: shared
-            }, function(succeed, data, err) {
+            }, function (succeed, data, err) {
                 if (succeed) {
                     if (that.form.pageindex == 1) {
                         that.list = data.list;
@@ -78,7 +79,7 @@ var app = new Vue({
                 toast: true
             });
         },
-        do_add_zc: function(id) {
+        do_add_zc: function (id) {
             var that = this;
             if (id > 0) {
                 that.addmore = false;
@@ -100,7 +101,7 @@ var app = new Vue({
                 addmore: that.addmore
             });
         },
-        do_search: function() {
+        do_search: function () {
             var that = this;
             var name = 'zcsearchbar_frm';
             var url = 'zcsearchbar_frm.html';
@@ -123,6 +124,7 @@ var app = new Vue({
                 Status: that.searchform.Status,
                 DeptName: that.searchform.DeptName,
                 BranchCode: that.searchform.BranchCode,
+                DepartmentId: that.searchform.DepartmentId,
                 UserGW: that.searchform.UserGW,
                 UserRealName: that.searchform.UserRealName,
                 UserName: that.searchform.UserName,
@@ -131,14 +133,14 @@ var app = new Vue({
                 IsPublic: that.searchform.IsPublic
             });
         },
-        pull_refresh_init: function() {
+        pull_refresh_init: function () {
             var that = this;
             var pullRefresh = new auiPullToRefresh({
                 container: document.querySelector('.aui-refresh-content'),
                 triggerDistance: 100
-            }, function(ret) {
+            }, function (ret) {
                 if (ret.status == "success") {
-                    setTimeout(function() {
+                    setTimeout(function () {
                         that.form.pageindex = 1;
                         app.form.keywords = '';
                         that.get_data();
@@ -149,7 +151,7 @@ var app = new Vue({
             var scroll = new auiScroll({
                 listen: true,
                 distance: 0 //判断到达底部的距离，isToBottom为true
-            }, function(ret) {
+            }, function (ret) {
                 if (ret.isToBottom && that.form.can_scroll) {
                     if (that.form.scroll_top > ret.scrollTop) {
                         that.form.scroll_top = ret.scrollTop;
@@ -161,7 +163,7 @@ var app = new Vue({
                 }
             });
         },
-        do_open_operation: function() {
+        do_open_operation: function () {
             var that = this;
             var name = 'zcglbtn_frm';
             var url = 'zcglbtn_frm.html';
@@ -169,7 +171,7 @@ var app = new Vue({
                 type: 'push'
             });
         },
-        open_lingyong: function() {
+        open_lingyong: function () {
             var that = this;
             var title = '资产领用';
             var name = 'zclingyong_frm';
@@ -182,7 +184,7 @@ var app = new Vue({
                 hideeditbtn: hideeditbtn
             });
         },
-        open_tuiku: function() {
+        open_tuiku: function () {
             var that = this;
             var title = '资产退库';
             var name = 'zctuiku_frm';
@@ -195,7 +197,7 @@ var app = new Vue({
                 hideeditbtn: hideeditbtn
             });
         },
-        open_borrow: function() {
+        open_borrow: function () {
             var that = this;
             var title = '资产借用';
             var name = 'zcborrow_frm';
@@ -208,7 +210,7 @@ var app = new Vue({
                 hideeditbtn: hideeditbtn
             });
         },
-        open_borrowback: function() {
+        open_borrowback: function () {
             var that = this;
             var title = '资产归还';
             var name = 'zcborrowback_frm';
@@ -221,7 +223,7 @@ var app = new Vue({
                 hideeditbtn: hideeditbtn
             });
         },
-        open_change: function() {
+        open_change: function () {
             var that = this;
             var title = '变更使用人';
             var name = 'zcchangelingyong_frm';
@@ -234,7 +236,7 @@ var app = new Vue({
                 hideeditbtn: hideeditbtn
             });
         },
-        open_changelingyong: function() {
+        open_changelingyong: function () {
             var that = this;
             var title = '变更领用人';
             var name = 'zcchangelingyong_frm';
@@ -244,7 +246,7 @@ var app = new Vue({
                 hideeditbtn: true
             });
         },
-        do_search_keywords: function() {
+        do_search_keywords: function () {
             var that = this;
             var title = '搜索';
             var name = 'zcsearch_frm';
@@ -252,7 +254,7 @@ var app = new Vue({
                 source: that.form.source
             });
         },
-        convertcss: function(status) {
+        convertcss: function (status) {
             switch (status) {
                 case 10:
                     return "free";
@@ -272,7 +274,7 @@ var app = new Vue({
             }
             return "dispose";
         },
-        getStatusDesc: function() {
+        getStatusDesc: function () {
             var that = this;
             switch (that.searchform.Status) {
                 case 10:
@@ -294,7 +296,7 @@ var app = new Vue({
         }
     }
 });
-apiready = function() {
+apiready = function () {
     api.parseTapmode();
     ns = window.Foresight.Util;
     app.form.keywords = ns.getPageParam('keywords') || '';
@@ -303,13 +305,13 @@ apiready = function() {
     app.getStatusDesc();
     app.hideeditbtn = ns.getPageParam('hideeditbtn') || false;
     app.pull_refresh_init();
-    setTimeout(function() {
+    setTimeout(function () {
         app.form.pageindex = 1;
         app.get_data();
     }, 500);
     api.addEventListener({
         name: 'do_open_add'
-    }, function(ret) {
+    }, function (ret) {
         app.addmore = false;
         if (ret.value && ret.value.addmore) {
             app.addmore = true;
@@ -318,12 +320,12 @@ apiready = function() {
     });
     api.addEventListener({
         name: 'do_open_searchzc'
-    }, function() {
+    }, function () {
         app.do_search_keywords();
     });
     api.addEventListener({
         name: 'do_search_complete'
-    }, function(ret) {
+    }, function (ret) {
         if (ret.value.source == app.form.source) {
             if (ret.value && ret.value.keywords) {
                 app.form.keywords = ret.value.keywords;
@@ -334,7 +336,7 @@ apiready = function() {
     });
     api.addEventListener({
         name: 'do_searchbar_complete'
-    }, function(ret) {
+    }, function (ret) {
         if (ret.value.source == app.form.source) {
             if (ret.value) {
                 app.searchform.TypeID = ret.value.TypeID;
@@ -345,6 +347,8 @@ apiready = function() {
                 app.searchform.RepairStatusDesc = ret.value.RepairStatusDesc;
                 app.searchform.DeptName = ret.value.DeptName;
                 app.searchform.BranchCode = ret.value.BranchCode;
+                
+                app.searchform.DepartmentId = ret.value.DepartmentId;
                 app.searchform.UserGW = ret.value.UserGW;
                 app.searchform.UserRealName = ret.value.UserRealName;
                 app.searchform.UserName = ret.value.UserName;
@@ -358,37 +362,37 @@ apiready = function() {
     });
     api.addEventListener({
         name: 'do_start_lingyong'
-    }, function(ret) {
+    }, function (ret) {
         app.open_lingyong();
     });
     api.addEventListener({
         name: 'do_start_tuiku'
-    }, function(ret) {
+    }, function (ret) {
         app.open_tuiku();
     });
     api.addEventListener({
         name: 'do_start_borrow'
-    }, function(ret) {
+    }, function (ret) {
         app.open_borrow();
     });
     api.addEventListener({
         name: 'do_start_borrowback'
-    }, function(ret) {
+    }, function (ret) {
         app.open_borrowback();
     });
     api.addEventListener({
         name: 'do_start_changelingyong'
-    }, function(ret) {
+    }, function (ret) {
         app.open_changelingyong();
     });
     api.addEventListener({
         name: 'do_reload_zc_list'
-    }, function(ret) {
+    }, function (ret) {
         app.get_data();
     });
     api.addEventListener({
         name: 'do_start_change'
-    }, function(ret) {
+    }, function (ret) {
         app.open_change();
     });
 }

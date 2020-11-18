@@ -10,6 +10,7 @@ var app = new Vue({
             Status: '',
             BranchCode: '',
             DeptName: '',
+            DepartmentId: 0,
             UserGW: '',
             UserName: '',
             UserRealName: '',
@@ -41,6 +42,7 @@ var app = new Vue({
                     RepairStatusDesc: that.form.RepairStatusDesc,
                     DeptName: that.form.DeptName,
                     BranchCode: that.form.BranchCode,
+                    DepartmentId: that.form.DepartmentId,
                     UserGW: that.form.UserGW,
                     UserRealName: that.form.UserRealName,
                     UserName: that.form.UserName,
@@ -68,6 +70,7 @@ var app = new Vue({
             that.form.RepairStatusDesc = '';
             that.form.BranchCode = '';
             that.form.DeptName = '';
+            that.form.DepartmentId = 0;
             that.form.UserGW = '';
             that.form.UserName = '';
             that.form.UserRealName = '';
@@ -137,7 +140,7 @@ var app = new Vue({
             var name = 'chooseuserstaff_frm';
             ns.openWin(name, title, {
                 id: that.form.BranchCode,
-                userGW: that.form.UserGW,
+                userGW: that.form.DepartmentId,
                 source: that.source
             });
         },
@@ -200,6 +203,7 @@ apiready = function() {
     app.form.RepairStatus = api.pageParam.RepairStatus;
     app.form.DeptName = ns.getPageParam('DeptName') || '';
     app.form.BranchCode = ns.getPageParam('BranchCode') || '';
+    app.form.DepartmentId = ns.getPageParam('DepartmentId') || '';
     app.form.UserGW = ns.getPageParam('UserGW') || '';
     app.form.UserRealName = ns.getPageParam('UserRealName') || '';
     app.form.UserName = ns.getPageParam('UserName') || '';
@@ -265,6 +269,7 @@ apiready = function() {
         if (ret.value.source == app.source) {
             if (ret.value) {
                 if (app.form.UserGW != ret.value.name) {
+                    app.form.DepartmentId = ret.value.id;
                     app.form.UserGW = ret.value.name;
                     app.form.UserName = '';
                     app.form.UserRealName = '';

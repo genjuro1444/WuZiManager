@@ -1,4 +1,4 @@
-<!DOCTYPE HTML>
+﻿<!DOCTYPE HTML>
 <html>
 
 <head>
@@ -43,8 +43,8 @@
                             所属部门：
                         </div>
                         <div class="aui-list-item-input" v-bind:class="{'auto':form.ID>0}">
-                            <input readonly="readonly" v-on:click="do_select_department()" type="text" v-if="form.ID<=0" v-model="form.UserGW" placeholder="请选择">
-                            <span v-else>{{form.UserGW}}</span>
+                            <input readonly="readonly" v-on:click="do_select_department()" type="text" v-if="form.ID<=0" v-model="form.DepartmentName" placeholder="请选择">
+                            <span v-else>{{form.DepartmentName}}</span>
                         </div>
                     </div>
                 </li>
