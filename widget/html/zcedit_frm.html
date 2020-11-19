@@ -29,7 +29,7 @@
                 <li class="aui-list-item" v-bind:class="{'aui-list-item-arrow':form.ID<=0}">
                     <div class="aui-list-item-inner">
                         <div class="aui-list-item-label" v-bind:class="{'auto':form.ID>0}">
-                            所属公司：
+                            所在公司：
                         </div>
                         <div class="aui-list-item-input" v-bind:class="{'auto':form.ID>0}">
                             <input readonly="readonly" v-on:click="do_select_company()" type="text" v-if="form.ID<=0" v-model="form.DeptName" placeholder="请选择">
@@ -40,7 +40,7 @@
                 <li class="aui-list-item" v-bind:class="{'aui-list-item-arrow':form.ID<=0}">
                     <div class="aui-list-item-inner">
                         <div class="aui-list-item-label" v-bind:class="{'auto':form.ID>0}">
-                            所属部门：
+                            所在部门：
                         </div>
                         <div class="aui-list-item-input" v-bind:class="{'auto':form.ID>0}">
                             <input readonly="readonly" v-on:click="do_select_department()" type="text" v-if="form.ID<=0" v-model="form.DepartmentName" placeholder="请选择">
@@ -73,7 +73,7 @@
                 <li class="aui-list-item" v-bind:class="{'aui-list-item-arrow':form.ID<=0}">
                     <div class="aui-list-item-inner">
                         <div class="aui-list-item-label" v-bind:class="{'auto':form.ID>0}">
-                            领用日期：
+                            开始使用日期：
                         </div>
                         <div class="aui-list-item-input" v-bind:class="{'auto':form.ID>0}">
                             <input v-on:click="do_select_date()" type="text" v-if="form.ID<=0" readonly="readonly" v-model="form.RegistDateDesc" placeholder="请选择">
@@ -140,7 +140,7 @@
                 <li class="aui-list-item">
                     <div class="aui-list-item-inner">
                         <div class="aui-list-item-label">
-                            <i class="red">*</i>品牌：
+                            品牌：
                         </div>
                         <div class="aui-list-item-input">
                             <input type="text" v-if="canedit" v-model="form.BrandName" placeholder="请输入">
@@ -203,7 +203,7 @@
                         </div>
                     </div>
                 </li>
-                <li class="aui-list-item">
+                <!--<li class="aui-list-item">
                     <div class="aui-list-item-inner">
                         <div class="aui-list-item-label">
                             原值(元)：
@@ -213,7 +213,7 @@
                             <span v-else>{{form.OrginalPrice}}</span>
                         </div>
                     </div>
-                </li>
+                </li>-->
                 <li class="aui-list-item">
                     <div class="aui-list-item-inner">
                         <div class="aui-list-item-label">
@@ -271,8 +271,9 @@
                                 <div class="crm-dt-cont">
                                     <div class="m5">
                                         <div class="dt-title">{{item.UserRealName}} - 处理方式：{{item.Title}}</div>
+                                        <div v-if="item.Code!=null&&item.Code!=''">[单据编号] - {{item.Code}}</div>
                                         <div>[处理内容] - {{item.Content}}</div>
-                                        <div>[备注] - {{item.Remarks}}</div>
+                                        <div v-if="item.Remarks!=null&&item.Remarks!=''">[备注] - {{item.Remarks}}</div>
                                     </div>
                                 </div>
                             </div>

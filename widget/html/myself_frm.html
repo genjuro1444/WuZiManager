@@ -54,10 +54,10 @@
                         </div>
                         <div class="aui-list-item-input">
                             <label v-on:click="do_select_sex('男')">
-                              <input class="aui-radio" type="radio" name="sex" v-bind:checked="form.Sex=='男'">男</input>
+                              <input class="aui-radio" type="radio" name="sex" v-bind:checked="form.Sex=='男'"/>男
                           </label>
                             <label v-on:click="do_select_sex('女')">
-                              <input class="aui-radio" type="radio" name="sex" v-bind:checked="form.Sex=='女'">女</input>
+                              <input class="aui-radio" type="radio" name="sex" v-bind:checked="form.Sex=='女'"/>女
                           </label>
                         </div>
                     </div>
@@ -98,7 +98,7 @@
                            部门：
                         </div>
                         <div class="aui-list-item-input">
-                            <input type="text" v-model="form.UserGW" placeholder="请输入">
+                            <input type="text" v-model="department.Title" disabled>
                         </div>
                     </div>
                 </li>

@@ -182,6 +182,9 @@ var app = new Vue({
                 case 10:
                     that.searchform.StatusDesc = "闲置";
                     break;
+                case 15:
+                    that.searchform.StatusDesc = "已领用";
+                    break;
                 case 20:
                     that.searchform.StatusDesc = "使用中";
                     break;

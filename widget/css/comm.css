@@ -138,7 +138,7 @@ body {
 }
 
 /*  资产状态的背景色 */
-.free, .using, .lend, .return, .pendispose, .dispose, .repair {
+.free, .receive, .using, .lend, .return, .pendispose, .dispose, .repair {
     padding: 3px 5px 1px 5px;
     border-radius: 2px;
     color: #fff;
@@ -149,7 +149,9 @@ body {
 .free {
     background: #ffc547;
 }
-
+.receive {
+    background: #ff6600;
+}
 .using {
     background: #29ab91;
 }

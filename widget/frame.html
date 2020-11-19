@@ -76,6 +76,9 @@
         <a class="aui-btn aui-pull-right hidden" id="right_lingyong" tapmode onclick="do_save_lingyong()">
             保存
         </a>
+        <a class="aui-btn aui-pull-right hidden" id="right_fenpei" tapmode onclick="do_save_fenpei()">
+            保存
+        </a>
         <a class="aui-btn aui-pull-right hidden" id="right_tuiku" tapmode onclick="do_save_tuiku()">
             保存
         </a>
@@ -202,6 +205,11 @@
         window.do_save_lingyong = function() {
             api.sendEvent({
                 name: 'do_save_lingyong'
+            });
+        }
+        window.do_save_fenpei = function () {
+            api.sendEvent({
+                name: 'do_save_fenpei'
             });
         }
         window.do_save_tuiku = function() {
@@ -342,6 +350,9 @@
             }
             if (pageParam.canlingyong) {
                 $api.toggleCls($api.byId('right_lingyong'), 'hidden');
+            }
+            if (pageParam.canfenpei) {
+                $api.toggleCls($api.byId('right_fenpei'), 'hidden');
             }
             if (pageParam.cantuiku) {
                 $api.toggleCls($api.byId('right_tuiku'), 'hidden');

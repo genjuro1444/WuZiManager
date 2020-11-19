@@ -23,7 +23,7 @@
                 <li class="aui-list-item" v-bind:class="{'aui-list-item-arrow':canedit}">
                     <div class="aui-list-item-inner">
                         <div class="aui-list-item-label">
-                            <i class="red">*</i>使用人公司：
+                            <i class="red">*</i>变更后公司：
                         </div>
                         <div class="aui-list-item-input">
                             <input readonly="true" v-on:click="do_select_company()" type="text" v-if="canedit" v-model="form.DeptName" placeholder="请选择">
@@ -34,7 +34,7 @@
                 <li class="aui-list-item" v-bind:class="{'aui-list-item-arrow':canedit}">
                     <div class="aui-list-item-inner">
                         <div class="aui-list-item-label">
-                            使用人部门：
+                            <i class="red">*</i>变更后部门：
                         </div>
                         <div class="aui-list-item-input">
                             <input readonly="true" v-on:click="do_select_department()" type="text" v-if="canedit" v-model="form.UserGW" placeholder="请选择">
@@ -78,7 +78,7 @@
                 <li class="aui-list-item" v-bind:class="{'aui-list-item-arrow':canedit}">
                     <div class="aui-list-item-inner">
                         <div class="aui-list-item-label">
-                            <i class="red">*</i>存放地点：
+                            变更后地点：
                         </div>
                         <div class="aui-list-item-input">
                             <input readonly="true" v-on:click="do_select_location()" type="text" v-if="canedit" v-model="form.LocTitle" placeholder="请输入">

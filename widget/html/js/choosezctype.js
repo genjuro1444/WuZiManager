@@ -44,26 +44,27 @@ var app = new Vue({
         do_check_click: function(data, ischecked) {
             var that = this;
             if (ischecked) {
-                that.do_choose(data.ID, data.label);
+                that.do_choose(data.ID, data.label, data.MonthAge);
                 return;
             }
         },
         handleNodeClick: function(data) {
             var that = this;
-            that.do_choose(data.ID, data.label);
+            that.do_choose(data.ID, data.label, data.MonthAge);
         },
         do_cancel: function() {
             var that = this;
-            that.do_choose(0, '');
+            that.do_choose(0, '',0);
         },
-        do_choose: function(ID, Title) {
+        do_choose: function (ID, Title, MonthAge) {
             var that = this;
             //item.checked = true;
             api.sendEvent({
                 name: 'do_choose_zctype_complete',
                 extra: {
                     name: Title,
-                    id: ID
+                    id: ID,
+                    monthage: MonthAge
                 }
             });
             setTimeout(function() {

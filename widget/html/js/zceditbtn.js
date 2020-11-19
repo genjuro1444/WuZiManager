@@ -7,6 +7,7 @@ var app = new Vue({
             status: 0,
             canedit: true,
             canlingyong: false,
+            canfenpei: false,
             cantuiku: false,
             canborrow: false,
             canborrowback: false,
@@ -18,10 +19,15 @@ var app = new Vue({
             var that = this;
             if (that.form.status == 10) { //空闲
                 that.form.canlingyong = true;
+                that.form.canfenpei = true;
                 that.form.canborrow = true;
                 that.form.candelete = true;
             }
-            if (that.form.status == 20) { //领用中
+            if (that.form.status == 15) { //已领用
+                that.form.canfenpei = true;
+                that.form.cantuiku = true;
+            }
+            if (that.form.status == 20) { //使用中
                 that.form.cantuiku = true;
             }
             if (that.form.status == 30) { //借出中
@@ -42,6 +48,16 @@ var app = new Vue({
             var that = this;
             api.sendEvent({
                 name: 'do_start_lingyong_add',
+                extra: {
+                    id: that.form.id
+                }
+            });
+            that.do_close();
+        },
+        do_fenpei: function () {
+            var that = this;
+            api.sendEvent({
+                name: 'do_start_fenpei_add',
                 extra: {
                     id: that.form.id
                 }

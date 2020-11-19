@@ -16,7 +16,7 @@ var app = new Vue({
         do_cancel: function() {
             var that = this;
             that.do_choose({
-                id: 0,
+                id: -1,
                 name: ''
             });
         },

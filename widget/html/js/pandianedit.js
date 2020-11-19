@@ -202,14 +202,14 @@ var app = new Vue({
             var options = {
                 action: 'APP_GETZCLISTBYIDS',
                 ids: JSON.stringify(idlist),
-                status: -1,
+                status: '[]',
                 exceptids: JSON.stringify(that.get_exists_zcids()),
                 ispandian: 1,
                 LocationID: that.form.LocationID
             }
             ns.post(options, function(succeed, data, err) {
                 if (succeed) {
-                    that.zclist = that.zclist.concat(data.list);
+                    that.zclist = data.list;
                 } else if (err) {
                     ns.toast(err);
                 }

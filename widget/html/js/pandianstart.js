@@ -10,10 +10,10 @@ var app = new Vue({
             FloorID: 0,
             LocationID: 0,
             Code: '',
-            UserRealName: '管理员',
-            FromDateDesc: '2019-04-25',
+            UserRealName: '',
+            FromDateDesc: '',
             Content: '',
-            LocationTitle: '123',
+            LocationTitle: '',
             TaskStatus: 0,
             TabStatus: 0,
             TabIndex: 0,
@@ -95,6 +95,7 @@ var app = new Vue({
         },
         do_save: function() {
             var that = this;
+            //alert(JSON.stringify(that.zclist));
             var options = {
                 action: 'APP_ADDPDLOCATIONZCLIST',
                 P1: that.form.LocationID,
@@ -153,7 +154,7 @@ var app = new Vue({
                 LocationID: that.form.LocationID
             }
             ns.post(options, function(succeed, data, err) {
-                if (succeed) {
+                if (succeed) {                    
                     that.zclist = that.zclist.concat(data.list);
                     that.reset_zcnopdlist(data.list, true, false);
                 } else if (err) {

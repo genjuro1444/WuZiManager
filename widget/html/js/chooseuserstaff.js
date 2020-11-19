@@ -11,7 +11,7 @@ var app = new Vue({
         }
     },
     methods: {
-        get_data: function() {
+        get_data: function () {
             var that = this;
             var options = {
                 action: 'APP_GETUSERLISTBYBRANCHANDGW',
@@ -19,7 +19,7 @@ var app = new Vue({
                 userGW: that.form.userGW,
                 keywords: that.form.keywords
             };
-            ns.post(options, function(succeed, data, err) {
+            ns.post(options, function (succeed, data, err) {
                 if (succeed) {
                     that.list = data.list;
                 } else if (err) {
@@ -27,17 +27,18 @@ var app = new Vue({
                     ns.toast(err);
                 }
             }, {
-                toast: true
-            });
+                    toast: true
+                });
         },
-        do_cancel: function() {
+        do_cancel: function () {
             var that = this;
             that.do_choose({
-                id: 0,
-                name: ''
+                id: '',
+                name: '',
+                source : ''
             });
         },
-        do_choose: function(item) {
+        do_choose: function (item) {
             var that = this;
             item.checked = true;
             api.sendEvent({
@@ -48,23 +49,23 @@ var app = new Vue({
                     source: that.form.source
                 }
             });
-            setTimeout(function() {
+            setTimeout(function () {
                 api.closeWin({});
             }, 100)
         },
-        search_init: function() {
+        search_init: function () {
             var that = this;
             searchBar = document.querySelector(".aui-searchbar");
             searchBarInput = document.querySelector(".aui-searchbar input");
             searchBarBtn = document.querySelector(".aui-searchbar .aui-searchbar-btn");
             searchBarClearBtn = document.querySelector(".aui-searchbar .aui-searchbar-clear-btn");
             if (searchBar) {
-                searchBarInput.onclick = function() {
+                searchBarInput.onclick = function () {
                     searchBarBtn.style.marginRight = 0;
                     searchBarBtn.classList.add("aui-text-info");
                     searchBarBtn.textContent = "搜索";
                 }
-                searchBarInput.oninput = function() {
+                searchBarInput.oninput = function () {
                     if (this.value.length) {
                         searchBarBtn.style.marginRight = 0;
                         searchBarClearBtn.style.display = 'block';
@@ -77,14 +78,14 @@ var app = new Vue({
                     }
                 }
             }
-            searchBarClearBtn.onclick = function() {
+            searchBarClearBtn.onclick = function () {
                 searchBarBtn.style.marginRight = "-" + searchBarBtn.offsetWidth + "px";
                 this.style.display = 'none';
                 searchBarInput.value = '';
                 searchBarBtn.classList.remove("aui-text-info");
                 searchBarBtn.textContent = "";
             }
-            searchBarBtn.onclick = function() {
+            searchBarBtn.onclick = function () {
                 var keywords = searchBarInput.value;
                 app.form.keywords = keywords;
                 if (keywords.length) {
@@ -100,7 +101,7 @@ var app = new Vue({
         }
     }
 });
-apiready = function() {
+apiready = function () {
     api.parseTapmode();
     ns = window.Foresight.Util;
     app.form.branchcode = ns.getPageParam('id') || 0;

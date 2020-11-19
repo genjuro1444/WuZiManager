@@ -59,10 +59,11 @@ body {
     }
 
 .aui-list .list-header .date {
-    float: right;
+    position:absolute;
     font-size: 0.65rem;
     color: #ccc;
-    margin-top:-5px;
+    top:3px;
+    right:5px;
 }
 
 .aui-tab .aui-tab-item {

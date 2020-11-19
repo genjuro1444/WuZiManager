@@ -142,26 +142,43 @@ var app = new Vue({
                 msg: '确认删除?'
             }, function () {
                 var newlist = [];
+                var chosenarr = [];
                 for (var i = 0; i < that.zclist.length; i++) {
                     var item = that.zclist[i];
                     if (!item.ischecked) {
                         newlist.push(item);
+                        chosenarr.push(item.ID);
                     }
                 }
                 that.zclist = newlist;
+                that.chosenids = '[' + chosenarr.join() + ']';
                 ns.toast('删除成功');
             })
         },
-        get_zc_byids: function () {
+        get_zc_byids: function (retids) {
             var that = this;
+            var selectresult = retids;
+            var selectarr = [];
+            if (selectresult != '') {
+                selectresult = selectresult.substring(1, selectresult.length - 1);
+                selectarr = selectresult.split(",");
+            }
+            var chosenresult = that.chosenids;
+            var chosenarr = [];
+            if (chosenresult != '') {
+                chosenresult = chosenresult.substring(1, chosenresult.length - 1);
+                chosenarr = chosenresult.split(",");
+            }
+            that.chosenids = '[' + selectarr.concat(chosenarr) + ']';
+
             var options = {
                 action: 'APP_GETZCLISTBYIDS',
                 ids: that.chosenids,
-                status: 10
+                status: '[10,15,20,30,100]'
             }
             ns.post(options, function (succeed, data, err) {
                 if (succeed) {
-                    that.zclist = that.zclist.concat(data.list);
+                    that.zclist = data.list;
                 } else if (err) {
                     ns.toast(err);
                 }
@@ -279,8 +296,7 @@ apiready = function () {
         name: 'do_choose_zc_complete'
     }, function (ret) {
         if (ret.value && ret.value.ids) {
-            app.chosenids = ret.value.ids;
-            app.get_zc_byids();
+            app.get_zc_byids(ret.value.ids);
         }
         setTimeout(function() {
             api.sendEvent({
@@ -295,8 +311,8 @@ apiready = function () {
         name: 'do_getids_complete'
     }, function (ret) {
         if (ret.value && ret.value.id) {
-            app.chosenids = '[' + ret.value.id + ']'
-            app.get_zc_byids();
+            var retids = '[' + ret.value.id + ']'
+            app.get_zc_byids(retids);
         }
     });
     api.addEventListener({

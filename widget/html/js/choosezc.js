@@ -97,6 +97,7 @@ var app = new Vue({
                 DeptName: that.searchform.DeptName,
                 BranchCode: that.searchform.BranchCode,
                 UserGW: that.searchform.UserGW,
+                DepartmentName: that.searchform.DepartmentName,
                 UserRealName: that.searchform.UserRealName,
                 UserName: that.searchform.UserName,
                 LocTitle: that.searchform.LocTitle,
@@ -118,6 +119,10 @@ var app = new Vue({
                 if (item.ischecked) {
                     idlist.push(item.ID);
                 }
+            }
+            if (idlist.length == 0) {
+                ns.toast('请选择资产');
+                return;
             }
             api.sendEvent({
                 name: 'do_choose_zc_complete',
@@ -171,6 +176,9 @@ var app = new Vue({
             switch (status) {
                 case 10:
                     return "free";
+                    break;
+                case 15:
+                    return "receive";
                     break;
                 case 20:
                     return "using";

@@ -21,8 +21,8 @@ var app = new Vue({
             Status: '',
             DeptName: '',
             BranchCode: '',
-            DepartmentId: 0,
             UserGW: '',
+            DepartmentID: 0,
             UserRealName: '',
             UserName: '',
             LocTitle: '',
@@ -55,7 +55,7 @@ var app = new Vue({
                 typeid: that.searchform.TypeID,
                 status: that.searchform.Status,
                 branchcode: that.searchform.BranchCode,
-                usergw: that.searchform.DepartmentId,
+                usergw: that.searchform.DepartmentID,
                 uname: that.searchform.UserName,
                 locationid: that.searchform.LocationID,
                 repairstatus: that.searchform.RepairStatus,
@@ -76,8 +76,8 @@ var app = new Vue({
                     ns.toast(err);
                 }
             }, {
-                toast: true
-            });
+                    toast: true
+                });
         },
         do_add_zc: function (id) {
             var that = this;
@@ -117,21 +117,23 @@ var app = new Vue({
                 h: h,
                 w: w
             }, {
-                source: that.form.source,
-                TypeName: that.searchform.TypeName,
-                TypeID: that.searchform.TypeID,
-                StatusDesc: that.searchform.StatusDesc,
-                Status: that.searchform.Status,
-                DeptName: that.searchform.DeptName,
-                BranchCode: that.searchform.BranchCode,
-                DepartmentId: that.searchform.DepartmentId,
-                UserGW: that.searchform.UserGW,
-                UserRealName: that.searchform.UserRealName,
-                UserName: that.searchform.UserName,
-                LocTitle: that.searchform.LocTitle,
-                LocationID: that.searchform.LocationID,
-                IsPublic: that.searchform.IsPublic
-            });
+                    source: that.form.source,
+                    TypeName: that.searchform.TypeName,
+                    TypeID: that.searchform.TypeID,
+                    StatusDesc: that.searchform.StatusDesc,
+                    Status: that.searchform.Status,
+                    RepairStatusDesc: that.searchform.RepairStatusDesc,
+                    RepairStatus: that.searchform.RepairStatus,
+                    DeptName: that.searchform.DeptName,
+                    BranchCode: that.searchform.BranchCode,
+                    UserGW: that.searchform.UserGW,
+                    DepartmentID: that.searchform.DepartmentID,
+                    UserRealName: that.searchform.UserRealName,
+                    UserName: that.searchform.UserName,
+                    LocTitle: that.searchform.LocTitle,
+                    LocationID: that.searchform.LocationID,
+                    IsPublic: that.searchform.IsPublic
+                });
         },
         pull_refresh_init: function () {
             var that = this;
@@ -181,6 +183,19 @@ var app = new Vue({
             ns.openWin(name, title, {
                 canedit: canedit,
                 canlingyong: cansave,
+                hideeditbtn: hideeditbtn
+            });
+        },
+        open_fenpei: function () {
+            var that = this;
+            var title = '资产分配';
+            var name = 'zcfenpei_frm';
+            var cansave = true;
+            var canedit = true;
+            var hideeditbtn = true;
+            ns.openWin(name, title, {
+                canedit: canedit,
+                canfenpei: cansave,
                 hideeditbtn: hideeditbtn
             });
         },
@@ -259,6 +274,9 @@ var app = new Vue({
                 case 10:
                     return "free";
                     break;
+                case 15:
+                    return "receive";
+                    break;
                 case 20:
                     return "using";
                     break;
@@ -280,6 +298,9 @@ var app = new Vue({
                 case 10:
                     that.searchform.StatusDesc = "闲置";
                     break;
+                case 15:
+                    that.searchform.StatusDesc = "已领用";
+                    break;
                 case 20:
                     that.searchform.StatusDesc = "使用中";
                     break;
@@ -293,7 +314,7 @@ var app = new Vue({
                     that.searchform.StatusDesc = "已处置";
                     break;
             }
-        }
+        },
     }
 });
 apiready = function () {
@@ -347,9 +368,8 @@ apiready = function () {
                 app.searchform.RepairStatusDesc = ret.value.RepairStatusDesc;
                 app.searchform.DeptName = ret.value.DeptName;
                 app.searchform.BranchCode = ret.value.BranchCode;
-                
-                app.searchform.DepartmentId = ret.value.DepartmentId;
                 app.searchform.UserGW = ret.value.UserGW;
+                app.searchform.DepartmentID = ret.value.DepartmentID;
                 app.searchform.UserRealName = ret.value.UserRealName;
                 app.searchform.UserName = ret.value.UserName;
                 app.searchform.LocTitle = ret.value.LocTitle;
@@ -364,6 +384,11 @@ apiready = function () {
         name: 'do_start_lingyong'
     }, function (ret) {
         app.open_lingyong();
+    });
+    api.addEventListener({
+        name: 'do_start_fenpei'
+    }, function (ret) {
+        app.open_fenpei();
     });
     api.addEventListener({
         name: 'do_start_tuiku'

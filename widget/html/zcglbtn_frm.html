@@ -43,19 +43,18 @@
         i.iconlingyong {
             background: #71d074;
         }
-
+        i.iconfenpei {
+            background: #ff6600;
+        }
         i.iconjieyong {
             background: #6aabfe;
         }
-
         i.icontuiku {
             background: #33c9e4;
         }
-
-        i.iconguihuan {
+        i.iconguihuan1 {
             background: #f0797b;
         }
-
         i.iconchange {
             background: #fda42b;
         }
@@ -79,6 +78,10 @@
                         <i class="icon iconfont iconlingyong"></i>
                         <div class="aui-grid-label">领用</div>
                     </div>
+                    <div class="aui-col-xs-4" v-if="form.canfenpei" v-on:click="do_fenpei()">
+                        <i class="icon iconfont iconfenpei"></i>
+                        <div class="aui-grid-label">分配</div>
+                    </div>
                     <div class="aui-col-xs-4" v-if="form.canborrow" v-on:click="do_borrow()">
                         <i class="icon iconfont iconjieyong"></i>
                         <div class="aui-grid-label">借用</div>
@@ -88,7 +91,7 @@
                         <div class="aui-grid-label">退库</div>
                     </div>
                     <div class="aui-col-xs-4" v-if="form.canborrowback" v-on:click="do_guihuan()">
-                        <i class="icon iconfont iconguihuan"></i>
+                        <i class="icon iconfont iconguihuan1"></i>
                         <div class="aui-grid-label">借用归还</div>
                     </div>
                     <div class="aui-col-xs-4" v-if="form.canchange" v-on:click="do_biangeng()">

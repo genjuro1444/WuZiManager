@@ -10,25 +10,25 @@ var app = new Vue({
         zcform: {
             ID: 0,
         },
-        source: 'zcchangelingyong',
+        source: 'zcfenpei',
         chosenids: '',
         hideeditbtn: false
     },
     methods: {
-        get_data: function() {
+        get_data: function () {
             var that = this;
             var options = {
                 action: 'APP_GETORDERMODEL',
                 ID: that.form.ID,
                 ZCID: that.zcform.ID
             };
-            ns.post(options, function(succeed, data, err) {
+            ns.post(options, function (succeed, data, err) {
                 if (succeed) {
                     that.form = data.data;
                     if (that.form.BranchCode <= 0) {
                         that.form.BranchCode = ns.Get_Branch_Code();
                     }
-                    if (that.form.DeptName == null || that.form.DeptName=='') {
+                    if (that.form.DeptName == null || that.form.DeptName == '') {
                         that.form.DeptName = ns.Get_Branch_Name();
                     }
                     that.zclist = data.zclist;
@@ -36,29 +36,21 @@ var app = new Vue({
                     ns.toast(err);
                 }
             }, {
-                toast: true
-            });
+                    toast: true
+                });
         },
-        do_save: function() {
+        do_save: function () {
             var that = this;
             if (that.form.BranchCode <= 0) {
-                ns.toast('领用公司不能为空');
-                return;
-            }
-            if (that.form.UserGW == '' || that.form.UserGW == null) {
-                ns.toast('领用部门不能为空');
-                return;
-            }
-            if ((that.form.UserName == '' || that.form.UserName == null) && that.form.Shared != 1) {
-                ns.toast('请选择领用人或者设置为公用');
-                return;
-            }
-            if (that.form.FromDateDesc == '' || that.form.FromDateDesc == null) {
-                ns.toast('领用日期不能为空');
+                ns.toast('分配后公司不能为空');
                 return;
             }
             if (that.zclist.length == 0) {
-                ns.toast('领用资产不能为空');
+                ns.toast('分配资产不能为空');
+                return;
+            }
+            if (that.form.UserGW == '') {
+                ns.toast('分配后部门不能为空');
                 return;
             }
             that.form.OrderStatus = 0;
@@ -66,38 +58,35 @@ var app = new Vue({
             that.form.FromDate = that.form.FromDateDesc;
             that.form['Items'] = that.zclist;
             var options = {
-                action: 'APP_BATCHORDER_BG',
+                action: 'APP_BATCHORDER_FP',
                 data: JSON.stringify(that.form)
             }
-            ns.post(options, function(succeed, data, err) {
+            ns.post(options, function (succeed, data, err) {
                 if (succeed) {
-                    ns.toast('变更成功');
+                    ns.toast('分配成功');
                     that.reload_list();
-                    setTimeout(function() {
+                    setTimeout(function () {
                         api.closeWin();
-                    }, 1000);
+                    }, 500);
                 } else if (err) {
                     ns.toast(err);
                 }
             }, {
-                toast: true
-            });
+                    toast: true
+                });
         },
-        reload_list: function() {
-            api.sendEvent({
-                name: 'do_reload_lingyong_list'
-            });
+        reload_list: function () {
             api.sendEvent({
                 name: 'do_reload_zc_list'
             });
         },
-        do_select_date: function() {
+        do_select_date: function () {
             var that = this;
             api.openPicker({
                 type: 'date',
                 date: that.form.FromDateDesc,
                 title: '选择日期'
-            }, function(ret, err) {
+            }, function (ret, err) {
                 if (ret) {
                     var year = ret.year;
                     var month = (ret.month >= 10 ? ret.month : '0' + ret.month);
@@ -106,43 +95,47 @@ var app = new Vue({
                 }
             });
         },
-        do_select_status: function(status) {
+        do_select_status: function () {
             var that = this;
-            that.form.Shared = status;
+            if (that.form.Shared == 1) {
+                that.form.Shared = 0;
+            } else {
+                that.form.Shared = 1;
+            }
         },
-        do_select_company: function() {
+        do_select_company: function () {
             var that = this;
-            var title = '选择领用公司';
+            var title = '选择分配后所在公司';
             var name = 'choosecompany_frm';
             ns.openWin(name, title, {
                 source: that.source,
                 BranchCode: that.form.BranchCode
             });
         },
-        do_select_department: function() {
+        do_select_department: function () {
             var that = this;
             if (that.form.BranchCode <= 0) {
-                ns.toast('请选择领用公司');
+                ns.toast('请选择分配后所在公司');
                 return;
             }
-            var title = '选择领用部门';
+            var title = '选择分配后所在部门';
             var name = 'choosedepartment_frm';
             ns.openWin(name, title, {
                 id: that.form.BranchCode,
                 source: that.source
             });
         },
-        do_select_userstaff: function() {
+        do_select_userstaff: function () {
             var that = this;
             if (that.form.BranchCode <= 0) {
-                ns.toast('请选择领用公司');
+                ns.toast('请选择分配后所在公司');
                 return;
             }
             if (that.form.UserGW == '') {
-                ns.toast('请选择领用部门');
+                ns.toast('请选择分配后所在部门');
                 return;
             }
-            var title = '选择领用人';
+            var title = '选择使用人';
             var name = 'chooseuserstaff_frm';
             ns.openWin(name, title, {
                 id: that.form.BranchCode,
@@ -150,20 +143,20 @@ var app = new Vue({
                 source: that.source
             });
         },
-        do_select_location: function() {
+        do_select_location: function () {
             var that = this;
-            var title = '选择存放地址';
+            var title = '选择分配后存放地点';
             var name = 'chooselocation_frm';
             ns.openWin(name, title, {
                 canchooselocation: true,
                 source: that.source
             });
         },
-        do_select_zcitem: function(item) {
+        do_select_zcitem: function (item) {
             var that = this;
             item.ischecked = !item.ischecked;
         },
-        do_add_zc: function() {
+        do_add_zc: function () {
             var that = this;
             var name = 'choosezc_frm';
             var title = '选择资产';
@@ -176,18 +169,18 @@ var app = new Vue({
             }
             ns.openWin(name, title, {
                 canchoosezc: true,
-                status: 20,
+                status: 19,
                 exceptids: exceptids,
                 disablechoosestatus: true
             });
         },
-        do_open_scan: function() {
+        do_open_scan: function () {
             var that = this;
             ns.openDirectWin('scanner_frm', '../html/scanner_frm.html', {
                 getids: true
             })
         },
-        do_remove_zc: function() {
+        do_remove_zc: function () {
             var that = this;
             var isselected = false;
             for (var i = 0; i < that.zclist.length; i++) {
@@ -202,7 +195,7 @@ var app = new Vue({
             }
             ns.confirm({
                 msg: '确认删除?'
-            }, function() {
+            }, function () {
                 var newlist = [];
                 var chosenarr = [];
                 for (var i = 0; i < that.zclist.length; i++) {
@@ -236,72 +229,38 @@ var app = new Vue({
             var options = {
                 action: 'APP_GETZCLISTBYIDS',
                 ids: that.chosenids,
-                status: '[20]'
+                status: '[10,15]'
             }
-            ns.post(options, function(succeed, data, err) {
+            ns.post(options, function (succeed, data, err) {
                 if (succeed) {
                     that.zclist = data.list;
                 } else if (err) {
                     ns.toast(err);
                 }
             }, {
-                toast: true
-            });
-        },
-        do_open_operation: function() {
-            var that = this;
-            var name = 'zclingyongbtn_frm';
-            var url = 'zclingyongbtn_frm.html';
-            ns.openFrame(name, url, {
-                type: 'push'
-            });
-        },
-        do_remove: function() {
-            var that = this;
-            ns.confirm({
-                msg: '确认删除?'
-            }, function() {
-                var options = {
-                    action: 'APP_DELORDER',
-                    ID: that.form.ID
-                }
-                ns.post(options, function(succeed, data, err) {
-                    if (succeed) {
-                        ns.toast('删除成功');
-                        that.reload_list();
-                        setTimeout(function() {
-                            api.closeWin();
-                        }, 500);
-                    } else if (err) {
-                        ns.toast(err);
-                    }
-                }, {
                     toast: true
                 });
-            })
-        }
+        },
     }
 });
-apiready = function() {
+apiready = function () {
     api.parseTapmode();
     ns = window.Foresight.Util;
     app.form.ID = ns.getPageParam('id') || 0;
     app.zcform.ID = ns.getPageParam('zcid') || 0;
     app.canedit = ns.getPageParam('canedit') || false;
     app.hideeditbtn = ns.getPageParam('hideeditbtn') || false;
-    app.form.BranchCode = ns.Get_Branch_Code();
-    app.form.DeptName = ns.Get_Branch_Name();
-    setTimeout(function() {
+    setTimeout(function () {
         app.get_data();
     }, 500);
     api.addEventListener({
-        name: 'do_save_changelingyong'
-    }, function() {
+        name: 'do_save_fenpei'
+    }, function () {
         app.do_save();
     });
     api.addEventListener({
         name: 'do_choose_zccompany_complete'
-    }, function(ret) {
+    }, function (ret) {
         if (ret.value.source == app.source) {
             if (ret.value) {
                 app.form.BranchCode = ret.value.id;
@@ -311,21 +270,21 @@ apiready = function() {
     });
     api.addEventListener({
         name: 'do_choose_zcdepartment_complete'
-    }, function(ret) {
+    }, function (ret) {
         if (ret.value.source == app.source) {
             if (ret.value) {
-              if (app.form.UserGW != ret.value.name) {
-                  app.form.UserGW = ret.value.id;
-                  app.form.DepartmentName = ret.value.name;
-                  app.form.UserName = '';
-                  app.form.UserRealName = '';
-              }
+                if (app.form.UserGW != ret.value.name) {
+                    app.form.UserGW = ret.value.id;
+                    app.form.DepartmentName = ret.value.name;
+                    app.form.UserName = '';
+                    app.form.UserRealName = '';
+                }
             }
         }
     });
     api.addEventListener({
         name: 'do_choose_zcuseuser_complete'
-    }, function(ret) {
+    }, function (ret) {
         if (ret.value.source == app.source) {
             if (ret.value) {
                 app.form.UserName = ret.value.id;
@@ -335,7 +294,7 @@ apiready = function() {
     });
     api.addEventListener({
         name: 'do_choose_location_complete'
-    }, function(ret) {
+    }, function (ret) {
         if (ret.value.source == app.source) {
             if (ret.value && ret.value.id) {
                 app.form.LocationID = ret.value.id;
@@ -347,19 +306,19 @@ apiready = function() {
     });
     api.addEventListener({
         name: 'do_choose_zc_complete'
-    }, function(ret) {
+    }, function (ret) {
         if (ret.value && ret.value.ids) {
-            app.get_zc_byids(ret.value.id);
+            app.get_zc_byids(ret.value.ids);
         }
     });
     api.addEventListener({
         name: 'do_getids_complete'
-    }, function(ret) {
+    }, function (ret) {
         if (ret.value && ret.value.id) {
             var retids = '[' + ret.value.id + ']'
             app.get_zc_byids(retids);
         }
-        setTimeout(function() {
+        setTimeout(function () {
             api.sendEvent({
                 name: 'do_close_scan',
                 extra: {
@@ -369,8 +328,14 @@ apiready = function() {
         }, 500);
     });
     api.addEventListener({
-        name: 'do_start_remove_lingyong'
-    }, function(ret) {
-        app.do_remove();
+        name: 'do_search_complete'
+    }, function (ret) {
+        if (ret.value.source == app.form.source) {
+            if (ret.value && ret.value.keywords) {
+                app.form.keywords = ret.value.keywords;
+                app.form.pageindex = 1;
+                app.get_data();
+            }
+        }
     });
 }

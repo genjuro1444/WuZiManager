@@ -35,7 +35,7 @@
                 <li class="aui-list-item" v-bind:class="{'aui-list-item-arrow':canedit}">
                     <div class="aui-list-item-inner">
                         <div class="aui-list-item-label">
-                            <i class="red">*</i>领用人公司：
+                            <i class="red">*</i>领用后公司：
                         </div>
                         <div class="aui-list-item-input">
                             <input readonly="readonly" v-on:click="do_select_company()" type="text" v-if="canedit" v-model="form.DeptName" placeholder="请选择">
@@ -46,40 +46,7 @@
                 <li class="aui-list-item" v-bind:class="{'aui-list-item-arrow':canedit}">
                     <div class="aui-list-item-inner">
                         <div class="aui-list-item-label">
-                            领用人部门：
-                        </div>
-                        <div class="aui-list-item-input">
-                            <input readonly="readonly" v-on:click="do_select_department()" type="text" v-if="canedit" v-model="form.UserGW" placeholder="请选择">
-                            <span v-else>{{form.UserGW}}</span>
-                        </div>
-                    </div>
-                </li>
-                <li class="aui-list-item" v-bind:class="{'aui-list-item-arrow':canedit&&form.Shared==0}">
-                    <div class="aui-list-item-inner">
-                        <div class="aui-list-item-label" v-bind:class="{'auto':form.Shared==1}">
-                            领用人：
-                        </div>
-                        <div class="aui-list-item-input">
-                            <input v-if="canedit&&form.Shared==0" readonly="readonly" v-on:click="do_select_userstaff()" type="text" v-model="form.UserRealName" placeholder="请选择">
-                            <span v-if="!canedit&&form.Shared==0">{{form.UserRealName}}</span>
-                        </div>
-                    </div>
-                </li>
-                <li class="aui-list-item">
-                    <div class="aui-list-item-inner">
-                        <div class="aui-list-item-label">
-                            是否公用：
-                        </div>
-                        <div class="aui-list-item-input">
-                            <input v-if="canedit" v-on:click="do_select_status()" type="checkbox" class="aui-switch" v-bind:checked="form.Shared==1">
-                            <span v-else>{{form.SharedDesc}}</span>
-                        </div>
-                    </div>
-                </li>
-                <li class="aui-list-item" v-bind:class="{'aui-list-item-arrow':canedit}">
-                    <div class="aui-list-item-inner">
-                        <div class="aui-list-item-label">
-                            领用日期：
+                            <i class="red">*</i>领用日期：
                         </div>
                         <div class="aui-list-item-input">
                             <input v-on:click="do_select_date()" type="text" v-if="canedit" readonly="readonly" v-model="form.FromDateDesc" placeholder="请选择">
@@ -87,18 +54,18 @@
                         </div>
                     </div>
                 </li>
-                <li class="aui-list-item" v-bind:class="{'aui-list-item-arrow':canedit}">
+                <li class="aui-list-item">
                     <div class="aui-list-item-inner">
-                        <div class="aui-list-item-label">
-                            <i class="red">*</i>领用后地点：
+                        <div class="aui-list-item-label" v-bind:class="{'auto':form.Shared==1}">
+                            领用人：
                         </div>
                         <div class="aui-list-item-input">
-                            <input readonly="readonly" v-on:click="do_select_location()" type="text" v-if="canedit" v-model="form.LocTitle" placeholder="请选择">
-                            <span v-else>{{form.LocTitle}}</span>
+                            <input type="text" v-if="canedit" placeholder="请输入" v-model="form.OtherUserName" />
+                            <span v-else>{{form.OtherUserName}}</span>
                         </div>
                     </div>
                 </li>
-                <li class="aui-list-item">
+                <!--<li class="aui-list-item">
                     <div class="aui-list-item-inner">
                         <div class="aui-list-item-label auto">
                             经办人：
@@ -107,7 +74,7 @@
                             <span>{{form.CRUserRealName}}</span>
                         </div>
                     </div>
-                </li>
+                </li>-->
                 <li class="aui-list-item">
                     <div class="aui-list-item-inner">
                         <div class="aui-list-item-label">
@@ -141,7 +108,7 @@
                                 资产名称-分类：
                             </div>
                             <div class="aui-list-item-input">
-                                {{item.Name}}-{{item.TypeName}}
+                                {{item.Name}}-{{item.Title}}
                             </div>
                         </div>
                     </li>
@@ -151,7 +118,7 @@
                                 使用人-部门：
                             </div>
                             <div class="aui-list-item-input">
-                                {{item.UserDesc}}-{{item.Abbre}}{{item.UserGW}}
+                                {{item.UserDesc}}-{{item.Abbre}}{{item.DepartmentName}}
                             </div>
                         </div>
                     </li>

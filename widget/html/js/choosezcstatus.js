@@ -7,6 +7,10 @@ var app = new Vue({
             name: '闲置',
             checked: false
         }, {
+            id: 15,
+            name: '已领用',
+            checked: false
+        },{
             id: 20,
             name: '使用中',
             checked: false
@@ -22,17 +26,17 @@ var app = new Vue({
             id: 200,
             name: '已处置',
             checked: false
-        }, ],
+        },],
     },
     methods: {
-        do_cancel: function() {
+        do_cancel: function () {
             var that = this;
             that.do_choose({
                 id: 0,
                 name: ''
             });
         },
-        do_choose: function(item) {
+        do_choose: function (item) {
             var that = this;
             item.checked = true;
             api.sendEvent({
@@ -42,13 +46,13 @@ var app = new Vue({
                     id: item.id
                 }
             });
-            setTimeout(function() {
+            setTimeout(function () {
                 api.closeWin({});
             }, 100)
         }
     }
 });
-apiready = function() {
+apiready = function () {
     api.parseTapmode();
     ns = window.Foresight.Util;
 }
