@@ -4,6 +4,7 @@ var app = new Vue({
     data: {
         form: {
             id: 0,
+            canshenqing: false,
             canruku: false,
             canlingyong: false,
             canfenpei: false,
@@ -14,8 +15,11 @@ var app = new Vue({
         }
     },
     methods: {
-        get_data: function() {
+        get_data: function () {
             var that = this;
+            if (ns.AllowAuth('ZCGLSHENQING')) {
+                that.form.canshenqing = true;
+            }
             if (ns.AllowAuth('ZCGLADD')) {
                 that.form.canruku = true;
             }
@@ -28,7 +32,17 @@ var app = new Vue({
                 that.form.canchange = true;
             }
         },
-        do_ruku: function() {
+        do_shenqing: function () {
+            var that = this;
+            api.sendEvent({
+                name: 'do_start_shenqing',
+                extra: {
+                    id: that.form.id
+                }
+            });
+            that.do_close();
+        },
+        do_ruku: function () {
             var that = this;
             api.sendEvent({
                 name: 'do_open_add',
@@ -38,7 +52,7 @@ var app = new Vue({
             });
             that.do_close();
         },
-        do_more_ruku: function() {
+        do_more_ruku: function () {
             var that = this;
             api.sendEvent({
                 name: 'do_open_add',
@@ -49,7 +63,7 @@ var app = new Vue({
             });
             that.do_close();
         },
-        do_lingyong: function() {
+        do_lingyong: function () {
             var that = this;
             api.sendEvent({
                 name: 'do_start_lingyong',
@@ -69,7 +83,7 @@ var app = new Vue({
             });
             that.do_close();
         },
-        do_tuiku: function() {
+        do_tuiku: function () {
             var that = this;
             api.sendEvent({
                 name: 'do_start_tuiku',
@@ -79,7 +93,7 @@ var app = new Vue({
             });
             that.do_close();
         },
-        do_borrow: function() {
+        do_borrow: function () {
             var that = this;
             api.sendEvent({
                 name: 'do_start_borrow',
@@ -89,7 +103,7 @@ var app = new Vue({
             });
             that.do_close();
         },
-        do_guihuan: function() {
+        do_guihuan: function () {
             var that = this;
             api.sendEvent({
                 name: 'do_start_borrowback',
@@ -99,7 +113,7 @@ var app = new Vue({
             });
             that.do_close();
         },
-        do_biangeng: function() {
+        do_biangeng: function () {
             var that = this;
             api.sendEvent({
                 name: 'do_start_change',
@@ -109,7 +123,7 @@ var app = new Vue({
             });
             that.do_close();
         },
-        do_borrowback: function() {
+        do_borrowback: function () {
             var that = this;
             api.sendEvent({
                 name: 'do_start_borrowback',
@@ -119,7 +133,7 @@ var app = new Vue({
             });
             that.do_close();
         },
-        do_changelingyong: function() {
+        do_changelingyong: function () {
             var that = this;
             api.sendEvent({
                 name: 'do_start_changelingyong',
@@ -129,14 +143,14 @@ var app = new Vue({
             });
             that.do_close();
         },
-        do_close: function() {
-            setTimeout(function() {
+        do_close: function () {
+            setTimeout(function () {
                 api.closeFrame();
             }, 200);
         }
     }
 });
-apiready = function() {
+apiready = function () {
     api.parseTapmode();
     ns = window.Foresight.Util;
     app.form.id = ns.getPageParam('id') || 0;

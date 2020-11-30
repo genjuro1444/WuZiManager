@@ -66,6 +66,10 @@
         <div class="aui-content">
             <section class="aui-grid">
                 <div class="aui-row">
+                    <div class="aui-col-xs-4" v-if="form.canshenqing" v-on:click="do_shenqing()">
+                        <i class="icon iconfont iconcaigoushenqingdan"></i>
+                        <div class="aui-grid-label">申请</div>
+                    </div>
                     <div class="aui-col-xs-4" v-if="form.canruku" v-on:click="do_ruku()">
                         <i class="icon iconfont iconruku"></i>
                         <div class="aui-grid-label">入库</div>

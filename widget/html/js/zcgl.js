@@ -12,7 +12,7 @@ var app = new Vue({
             is_searching: false,
             scroll_top: 0,
             can_scroll: false,
-            source: 'zcgl'
+            source: 'zcgl',
         },
         searchform: {
             TypeName: '',
@@ -76,8 +76,8 @@ var app = new Vue({
                     ns.toast(err);
                 }
             }, {
-                    toast: true
-                });
+                toast: true
+            });
         },
         do_add_zc: function (id) {
             var that = this;
@@ -117,23 +117,23 @@ var app = new Vue({
                 h: h,
                 w: w
             }, {
-                    source: that.form.source,
-                    TypeName: that.searchform.TypeName,
-                    TypeID: that.searchform.TypeID,
-                    StatusDesc: that.searchform.StatusDesc,
-                    Status: that.searchform.Status,
-                    RepairStatusDesc: that.searchform.RepairStatusDesc,
-                    RepairStatus: that.searchform.RepairStatus,
-                    DeptName: that.searchform.DeptName,
-                    BranchCode: that.searchform.BranchCode,
-                    UserGW: that.searchform.UserGW,
-                    DepartmentID: that.searchform.DepartmentID,
-                    UserRealName: that.searchform.UserRealName,
-                    UserName: that.searchform.UserName,
-                    LocTitle: that.searchform.LocTitle,
-                    LocationID: that.searchform.LocationID,
-                    IsPublic: that.searchform.IsPublic
-                });
+                source: that.form.source,
+                TypeName: that.searchform.TypeName,
+                TypeID: that.searchform.TypeID,
+                StatusDesc: that.searchform.StatusDesc,
+                Status: that.searchform.Status,
+                RepairStatusDesc: that.searchform.RepairStatusDesc,
+                RepairStatus: that.searchform.RepairStatus,
+                DeptName: that.searchform.DeptName,
+                BranchCode: that.searchform.BranchCode,
+                UserGW: that.searchform.UserGW,
+                DepartmentID: that.searchform.DepartmentID,
+                UserRealName: that.searchform.UserRealName,
+                UserName: that.searchform.UserName,
+                LocTitle: that.searchform.LocTitle,
+                LocationID: that.searchform.LocationID,
+                IsPublic: that.searchform.IsPublic
+            });
         },
         pull_refresh_init: function () {
             var that = this;
@@ -154,7 +154,7 @@ var app = new Vue({
                 listen: true,
                 distance: 0 //判断到达底部的距离，isToBottom为true
             }, function (ret) {
-                if (ret.isToBottom && that.form.can_scroll) {
+                    if (ret.isToBottom && that.form.can_scroll) {
                     if (that.form.scroll_top > ret.scrollTop) {
                         that.form.scroll_top = ret.scrollTop;
                         return;
@@ -330,6 +330,11 @@ apiready = function () {
         app.form.pageindex = 1;
         app.get_data();
     }, 500);
+    api.addEventListener({
+        name: 'do_start_shenqing'
+    }, function (ret) {
+        app.open_shenqing();
+    });
     api.addEventListener({
         name: 'do_open_add'
     }, function (ret) {
