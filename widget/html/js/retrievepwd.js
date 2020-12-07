@@ -140,9 +140,6 @@ var app = new Vue({
         },
         do_save: function() {
             var that = this;
-            if (!that.do_check()) {
-                return;
-            }
             if (that.form.password == '') {
                 api.toast({
                     msg: '请输入密码',
