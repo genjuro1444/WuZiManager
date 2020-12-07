@@ -1,0 +1,98 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>资产申请单详情操作</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../css/aui.css" />
+    <link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
+    <link rel="stylesheet" type="text/css" href="../css/comm.css" />
+    <style>
+        #app,
+        .aui-content {
+            height: 100%;
+        }
+
+        .aui-grid {
+            background-color: #f0f0f0;
+            margin-top: 45%;
+        }
+
+        .aui-grid .aui-grid-label {
+            margin: 12px 0 0 0;
+            font-size: 0.8rem;
+        }
+
+        i.iconfont {
+            font-size: 1.2rem;
+            padding: 12px;
+            border-radius: 32px;
+            background: #fda42b;
+            color: #fff;
+        }
+
+        i.iconruku {
+            background: #fda42b;
+        }
+
+        i.iconlingyong {
+            background: #71d074;
+        }
+
+        i.iconfenpei {
+            background: #ff6600;
+        }
+
+        i.iconjieyong {
+            background: #6aabfe;
+        }
+
+        i.icontuiku {
+            background: #33c9e4;
+        }
+
+        i.iconguihuan1 {
+            background: #f0797b;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div class="aui-content">
+            <section class="aui-grid">
+                <div class="aui-row">
+                    <div class="aui-col-xs-4" v-if="form.canedit" v-on:click="do_edit()">
+                        <i class="icon iconfont iconbianji"></i>
+                        <div class="aui-grid-label">编辑</div>
+                    </div>
+                    <div class="aui-col-xs-4" v-if="form.cancancel" v-on:click="do_cancel()">
+                        <i class="icon iconfont iconguanbi"></i>
+                        <div class="aui-grid-label">作废</div>
+                    </div>
+                    <div class="aui-col-xs-4" v-if="form.canruku" v-on:click="do_ruku()">
+                        <i class="icon iconfont iconruku"></i>
+                        <div class="aui-grid-label">入库</div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <footer class="aui-bar aui-bar-tab" id="aui-footer">
+            <div class="aui-bar-tab-item" v-on:click="do_close()">
+                <span class="icon iconfont iconclose"></span>
+            </div>
+        </footer>
+    </div>
+</body>
+
+<script type="text/javascript" src="../script/api.js "></script>
+<script type="text/javascript" src="../script/aui-toast.js"></script>
+<script type="text/javascript" src="../script/vue.js "></script>
+<script type="text/javascript" src="../script/config.js "></script>
+<script type="text/javascript" src="../script/common.js "></script>
+<script type="text/javascript" src="js/zcsqeditbtn.js "></script>
+
+</html>

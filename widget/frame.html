@@ -1,4 +1,5 @@
-﻿<!doctype html>
+
+<!doctype html>
 <html>
 
 <head>
@@ -22,6 +23,7 @@
         .hidden {
             display: none;
         }
+
         .aui-pull-right .iconAnkerwebicon- {
             font-size: 0.8rem;
         }
@@ -38,6 +40,9 @@
             <i class="icon iconfont iconxiazai17"></i>
         </a>
         <a class="aui-btn aui-pull-right hidden" id="right_searchzc" tapmode onclick="do_open_searchzc()">
+            <i class="icon iconfont iconxiazai17"></i>
+        </a>
+        <a class="aui-btn aui-pull-right hidden" id="right_searchzcsq" tapmode onclick="do_open_searchzcsq()">
             <i class="icon iconfont iconxiazai17"></i>
         </a>
         <a class="aui-btn aui-pull-right hidden" id="right_searchchoosezc" tapmode onclick="do_open_searchchoosezc()">
@@ -71,6 +76,9 @@
             <i class="icon iconfont iconxinzeng"></i>
         </a>
         <a class="aui-btn aui-pull-right hidden" id="right_save_zc" tapmode onclick="do_save_zc()">
+            保存
+        </a>
+        <a class="aui-btn aui-pull-right hidden" id="right_save_zcsq" tapmode onclick="do_save_zcsq()">
             保存
         </a>
         <a class="aui-btn aui-pull-right hidden" id="right_lingyong" tapmode onclick="do_save_lingyong()">
@@ -167,6 +175,11 @@
                 name: 'do_open_searchzc'
             });
         }
+        window.do_open_searchzcsq = function() {
+            api.sendEvent({
+                name: 'do_open_searchzcsq'
+            });
+        }
         window.do_open_searchchoosezc = function() {
             api.sendEvent({
                 name: 'do_open_searchchoosezc'
@@ -202,12 +215,17 @@
                 name: 'do_save_zc'
             });
         }
+        window.do_save_zcsq = function() {
+            api.sendEvent({
+                name: 'do_save_zcsq'
+            });
+        }
         window.do_save_lingyong = function() {
             api.sendEvent({
                 name: 'do_save_lingyong'
             });
         }
-        window.do_save_fenpei = function () {
+        window.do_save_fenpei = function() {
             api.sendEvent({
                 name: 'do_save_fenpei'
             });
@@ -318,6 +336,9 @@
             if (pageParam.cansearchzc) {
                 $api.toggleCls($api.byId('right_searchzc'), 'hidden');
             }
+            if (pageParam.cansearchzcsq) {
+                $api.toggleCls($api.byId('right_searchzcsq'), 'hidden');
+            }
             if (pageParam.cansearchchoosezc) {
                 $api.toggleCls($api.byId('right_searchchoosezc'), 'hidden');
             }
@@ -347,6 +368,9 @@
             }
             if (pageParam.cansave) {
                 $api.toggleCls($api.byId('right_save_zc'), 'hidden');
+            }
+            if (pageParam.cansavezcsq) {
+                $api.toggleCls($api.byId('right_save_zcsq'), 'hidden');
             }
             if (pageParam.canlingyong) {
                 $api.toggleCls($api.byId('right_lingyong'), 'hidden');

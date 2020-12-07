@@ -1,0 +1,176 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>资产申请新增</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../css/aui.css" />
+    <link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
+    <link rel="stylesheet" type="text/css" href="./css/formlist.css" />
+    <link rel="stylesheet" type="text/css" href="../css/comm.css" />
+    <link rel="stylesheet" type="text/css" href="../css/szhlextend.css" />
+</head>
+
+<body>
+    <div id="app">
+        <ul class="aui-tab fixed-top" v-if="form.ID>0&&!canedit&&!canruku">
+            <li class="aui-tab-item" v-on:click="do_select_tab(1)"><span v-bind:class="{'aui-active':tabtype==1}">申请信息</span></li>
+            <li class="aui-tab-item" v-on:click="do_select_tab(2)"><span v-bind:class="{'aui-active':tabtype==2}">操作记录</span></li>
+        </ul>
+        <div v-if="!hideeditbtn&&tabtype==1" class="btnFloat" v-on:click="do_open_operation()">
+            <i class="icon iconfont iconfont2 iconxiugai1"></i>
+        </div>
+        <div v-if="tabtype==1" class="aui-content pb35" v-bind:class="{'pt35':form.ID>0&&!canedit&&!canruku}">
+            <ul class="aui-list ">
+                <li class="aui-list-header">申请信息</li>
+                <li class="aui-list-item" v-if="form.ID>0&&!canedit">
+                    <div class="aui-list-item-inner">
+                        <div class="aui-list-item-label" v-bind:class="{'auto':form.ID>0}">
+                            申请编号：
+                        </div>
+                        <div class="aui-list-item-input" v-bind:class="{'auto':form.ID>0}">
+                            <span>{{form.Code}}</span>
+                        </div>
+                    </div>
+                </li>
+                <li class="aui-list-item" v-bind:class="{'aui-list-item-arrow':form.ID<=0}">
+                    <div class="aui-list-item-inner">
+                        <div class="aui-list-item-label" v-bind:class="{'auto':form.ID>0}">
+                            申请公司：
+                        </div>
+                        <div class="aui-list-item-input" v-bind:class="{'auto':form.ID>0}">
+                            <input readonly="readonly" v-on:click="do_select_company()" type="text" v-if="form.ID<=0" v-model="form.DeptName" placeholder="请选择">
+                            <span v-else>{{form.DeptName}}</span>
+                        </div>
+                    </div>
+                </li>
+                <li class="aui-list-item" v-bind:class="{'aui-list-item-arrow':form.ID<=0}">
+                    <div class="aui-list-item-inner">
+                        <div class="aui-list-item-label" v-bind:class="{'auto':form.ID>0}">
+                            申请部门：
+                        </div>
+                        <div class="aui-list-item-input" v-bind:class="{'auto':form.ID>0}">
+                            <input readonly="readonly" v-on:click="do_select_department()" type="text" v-if="form.ID<=0" v-model="form.DepartmentName" placeholder="请选择">
+                            <span v-else>{{form.DepartmentName}}</span>
+                        </div>
+                    </div>
+                </li>
+                <li class="aui-list-item" v-bind:class="{'aui-list-item-arrow':form.ID<=0&&form.Shared==0}">
+                    <div class="aui-list-item-inner">
+                        <div class="aui-list-item-label" v-bind:class="{'auto':form.ID>0||form.Shared==1}">
+                            申请人：
+                        </div>
+                        <div class="aui-list-item-input" v-bind:class="{'auto':form.ID>0||form.Shared==1}">
+                            <input v-if="form.ID<=0&&form.Shared==0" readonly="readonly" v-on:click="do_select_userstaff()" type="text" v-model="form.UserRealName" placeholder="请选择">
+                            <span v-if="form.ID>0&&form.Shared==0">{{form.UserRealName}}</span>
+                        </div>
+                    </div>
+                </li>
+                <li class="aui-list-item">
+                    <div class="aui-list-item-inner">
+                        <div class="aui-list-item-label" v-bind:class="{'auto':form.ID>0}">
+                            是否公用：
+                        </div>
+                        <div class="aui-list-item-input" v-bind:class="{'auto':form.ID>0}">
+                            <input v-if="form.ID<=0" v-on:click="do_select_status()" type="checkbox" class="aui-switch" v-bind:checked="form.Shared==1">
+                            <span v-else>{{form.SharedDesc}}</span>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <div class="aui-list" style="margin-top:10px;">
+                <div class="aui-list-header">资产信息</div>
+                <div v-if="canedit" class="aui-btn-right" v-on:click="do_add_sq_item()">
+                    新增
+                </div>
+            </div>
+            <ul class="aui-list mt10" v-for="item in sqlist">
+                <li class="aui-list-item">
+                    <div class="aui-list-item-inner">
+                        <div class="aui-list-item-label">
+                            资产名称：
+                        </div>
+                        <div class="aui-list-item-input">
+                            <input type="text" v-if="canedit" v-model="item.Name" placeholder="请输入">
+                            <span v-else>{{item.Name}}</span>
+                        </div>
+                    </div>
+                </li>
+                <li class="aui-list-item">
+                    <div class="aui-list-item-inner">
+                        <div class="aui-list-item-label">
+                            申请数量：
+                        </div>
+                        <div class="aui-list-item-input">
+                            <input type="number" v-if="canedit" v-model="item.Qty" placeholder="请输入">
+                            <span v-else>{{item.Qty}}</span>
+                        </div>
+                    </div>
+                </li>
+                <li class="aui-list-item" v-if="form.ID>0&&!canedit">
+                    <div class="aui-list-item-inner">
+                        <div class="aui-list-item-label">
+                            入库数量：
+                        </div>
+                        <div class="aui-list-item-input">
+                            <span>{{item.RuKuCount}}</span>
+                        </div>
+                    </div>
+                </li>
+                <li class="aui-list-item aui-item-btn" v-if="(canedit&&form.Status==10)||(canruku&&(item.RuKuCount<item.Qty))">
+                    <label v-on:click="remove_sq(item.ID,item.index)" v-if="canedit&&form.Status==10">删除</label>
+                    <label v-on:click="do_ruku(item)" v-if="canruku&&(item.RuKuCount<item.Qty)">申请入库</label>
+                </li>
+            </ul>
+            <div class="aui-list" style="margin-top:10px;">
+                <div class="aui-list-header">上传附件</div>
+                <div v-if="canedit" class="aui-btn-right" v-on:click="do_add_sq_file()">
+                    新增
+                </div>
+            </div>
+            <div class="image-box">
+                <div class="image-item" v-for="(item,index) in imglist">
+                    <img v-on:click="do_viewimages(index)" v-bind:src="item.url" alt="">
+                    <div v-if="canedit" class="icon-close" v-on:click="remove_img(item)">
+                        <i class="icon iconfont iconfont2 iconguanbi"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div v-if="tabtype==2" class="aui-content pt25">
+            <div class="card infinite-scroll infinite-scroll-bottom">
+                <div class="card infinite-scroll infinite-scroll-bottom">
+                    <div class="gridlist">
+                        <div class="crm-wrap" v-for="item in loglist">
+                            <div class="crm-head c666" v-html="covertdate(item.ActionDateDesc)"></div>
+                            <div class="crm-dt">
+                                <span class="crm-yuan"></span>
+                                <div class="crm-dt-cont">
+                                    <div class="m5">
+                                        <div class="dt-title">{{item.UserRealName}} - 处理方式：{{item.Title}}</div>
+                                        <div v-if="item.Code!=null&&item.Code!=''">[单据编号] - {{item.Code}}</div>
+                                        <div>[处理内容] - {{item.Content}}</div>
+                                        <div v-if="item.Remarks!=null&&item.Remarks!=''">[备注] - {{item.Remarks}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/aui-toast.js"></script>
+<script type="text/javascript" src="../script/vue.js"></script>
+<script type="text/javascript" src="../script/config.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript" src="../script/aui-actionsheet.js"></script>
+<script type="text/javascript" src="js/zcsqedit.js"></script>
+
+</html>

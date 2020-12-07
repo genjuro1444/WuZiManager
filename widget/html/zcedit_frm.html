@@ -97,6 +97,20 @@
                 </li>
                 <li class="aui-list-item">
                     <div class="aui-list-item-inner">
+                        <div class="aui-list-item-label auto">
+                            省公司编码：
+                        </div>
+                        <div class="aui-list-item-input aui-list-item-btn-scan auto">
+                            <input type="text" v-if="canedit" v-model="form.EPCode" placeholder="请扫码">
+                            <span v-else>{{form.EPCode}}</span>
+                            <label v-on:click="do_scan_epcode()" v-if="canedit" class="btn-scan">
+                              <i class="icon iconfont iconfont2 iconAnkerwebicon-"></i>
+                            </label>
+                        </div>
+                    </div>
+                </li>
+                <li class="aui-list-item">
+                    <div class="aui-list-item-inner">
                         <div class="aui-list-item-label">
                             <i class="red">*</i>资产名称：
                         </div>
@@ -165,7 +179,7 @@
                             <i class="red">*</i>数量：
                         </div>
                         <div class="aui-list-item-input">
-                            <input type="number" v-if="canedit" v-model="form.Qty" placeholder="请输入">
+                            <input @change="do_change_qty()" type="number" v-if="canedit" v-model="form.Qty" placeholder="请输入">
                             <span v-else>{{form.Qty}}</span>
                         </div>
                     </div>

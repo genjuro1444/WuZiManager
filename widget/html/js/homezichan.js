@@ -3,6 +3,10 @@ var app = new Vue({
     el: '#app',
     data: {
         list: [{
+            name: '资产申请',
+            url: 'zcsqgl_frm',
+            css: 'iconshenqing'
+        },{
             name: '资产管理',
             url: 'zcgl_frm',
             css: 'iconapplication'
@@ -84,6 +88,7 @@ var app = new Vue({
             var title = item.name;
             var name = item.url;
             var cansearchzc = item.url == 'zcgl_frm';
+            var cansearchzcsq = item.url == 'zcsqgl_frm';
             var canaddweiuxiu = item.url == 'weixiulist_frm';
             var canaddchuzhi = item.url == 'chuzhilist_frm';
             var canaddpandian = item.url == 'pandiantasklist_frm';
@@ -96,6 +101,7 @@ var app = new Vue({
                 cansearchwx: canaddweiuxiu,
                 cansearchcz: canaddchuzhi,
                 cansearchpandian: canaddpandian,
+                cansearchzcsq: cansearchzcsq
             }, {
                 needlogin: true
             });

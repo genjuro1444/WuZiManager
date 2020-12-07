@@ -13,6 +13,7 @@ var app = new Vue({
             id: 0,
             content: '',
             getlocationzclist: false,
+            getepcode: false
         },
         zchtml: 'zc_detail.html',
         locationhtml: 'loczc_list.html',
@@ -29,6 +30,16 @@ var app = new Vue({
         scanSuccess: function(content) {
             var that = this;
             that.form.content = content.toLowerCase();
+            if (that.form.getepcode) {
+                api.sendEvent({
+                    name: 'getepcodedone',
+                    extra: {
+                        epcode: that.form.content
+                    }
+                });
+                that.closeScanner();
+                return;
+            }
             if (that.form.content.indexOf(that.zchtml) > -1) {
                 that.form.id = ns.getQueryString('id', that.form.content);
             } else if (that.form.content.indexOf(that.locationhtml) > -1) {
@@ -191,6 +202,7 @@ apiready = function() {
     app.form.getzcdetail = ns.getPageParam('getzcdetail') || false;
     app.form.pandianroom = ns.getPageParam('pandianroom') || false;
     app.form.pandianzc = ns.getPageParam('pandianzc') || false;
+    app.form.getepcode = ns.getPageParam('getepcode') || false;
     FNScanner = api.require('easyQRCodeScan');
     app.openScanView();
     api.addEventListener({
