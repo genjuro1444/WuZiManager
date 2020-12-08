@@ -88,7 +88,7 @@ var app = new Vue({
             if (item.url == 'scanner_frm') {
                 ns.openDirectWin('scanner_frm', '../html/scanner_frm.html', {
                     getzcdetail: true
-                })
+                }) 
                 return;
             }
             var title = item.name;
