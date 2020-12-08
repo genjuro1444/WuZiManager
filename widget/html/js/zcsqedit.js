@@ -9,6 +9,8 @@ var app = new Vue({
         form: {
             ID: 0,
             Code: '',
+            Status: 0,
+            StatusDesc: '',
             DeptName: '',
             DepartmentName: '',
             UserRealName: '',
