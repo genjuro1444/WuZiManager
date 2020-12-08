@@ -3,10 +3,6 @@ var app = new Vue({
     el: '#app',
     data: {
         list: [{
-            name: '资产申请',
-            url: 'zcsqgl_frm',
-            css: 'iconshenqing'
-        },{
             name: '资产管理',
             url: 'zcgl_frm',
             css: 'iconapplication'
@@ -14,6 +10,10 @@ var app = new Vue({
             name: '扫码',
             url: 'scanner_frm',
             css: 'iconAnkerwebicon-'
+        }, {
+            name: '资产申请',
+            url: 'zcsqgl_frm',
+            css: 'iconshenqing'
         }, {
             name: '领用&退库',
             url: 'zclytklist_frm',
@@ -39,7 +39,12 @@ var app = new Vue({
             totalcount: '',
             usecount: '',
             freecount: '',
-            monthaddcount: ''
+            monthaddcount: '',
+            yearaddcount: '',
+            monthreducecount: '',
+            yearreducecount: '',
+            yearreducecount: '',
+            list: []
         },
         form: {
             pageindex: 1,
@@ -56,6 +61,7 @@ var app = new Vue({
             }, function(succeed, data, err) {
                 if (succeed) {
                     that.countform = data;
+                    that.load_pie_chart(data.list);
                 } else if (err) {
                     ns.toast(err);
                 }
@@ -143,6 +149,48 @@ var app = new Vue({
                     that.get_data();
                 }
             });
+        },
+        load_pie_chart: function(data) {
+            console.log(JSON.stringify(data));
+            const chart = new F2.Chart({
+                id: 'myChart',
+                pixelRatio: window.devicePixelRatio
+            });
+            chart.source(data);
+            chart.coord('polar', {
+                transposed: true,
+                radius: 0.75
+            });
+            chart.axis(false);
+            chart.legend({
+                position: 'bottom',
+                align: 'center'
+            });
+            chart.tooltip(false);
+
+            // 添加饼图文本
+            chart.pieLabel({
+                sidePadding: 40,
+                label1: function label1(data, color) {
+                    return {
+                        text: data.name,
+                        fill: color
+                    };
+                },
+                label2: function label2(data) {
+                    return {
+                        text: data.y + '(' + data.percent + ')',
+                        fill: '#808080',
+                        fontWeight: 'bold'
+                    };
+                }
+            });
+
+            chart.interval()
+                .position('const*y')
+                .color('name', ['#1890FF', '#13C2C2', '#2FC25B', '#FACC14', '#F04864'])
+                .adjust('stack');
+            chart.render();
         }
     }
 });

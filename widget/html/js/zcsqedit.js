@@ -25,7 +25,8 @@ var app = new Vue({
         img_count: 0,
         select_imglist: [],
         select_imgindex: 0,
-        maxuploadcount: 9
+        maxuploadcount: 9,
+        currentItem: null
     },
     methods: {
         get_data: function() {
@@ -64,14 +65,12 @@ var app = new Vue({
                 ns.toast('请选择申请部门');
                 return;
             }
-            if (that.form.UserName == '' || that.form.UserName == null) {
-                ns.toast('请选择申请人');
-                return;
-            }
             var sqlist = [];
             for (var i = 0; i < that.sqlist.length; i++) {
                 var item = that.sqlist[i];
                 if (item.Name && Number(item.Qty) > 0) {
+                    item.PresentPrice = Number(item.PresentPrice);
+                    item.Depreciation = Number(item.Depreciation);
                     item.Qty = Number(item.Qty);
                     sqlist.push(item)
                 }
@@ -221,9 +220,13 @@ var app = new Vue({
             that.sqItemIndex++;
             that.sqlist.push({
                 ID: 0,
+                ZCSQId: 0,
                 Name: '',
                 Qty: '',
-                index: that.sqItemIndex
+                index: that.sqItemIndex,
+                TypeID: 0,
+                PresentPrice: '',
+                Depreciation: ''
             });
         },
         remove_sq: function(ID, index) {
@@ -293,6 +296,7 @@ var app = new Vue({
             ns.openWin(name, title, {
                 canedit: false,
                 cansavezcsq: false,
+                cansavezcsqruku: true,
                 id: that.form.ID,
                 hideeditbtn: true,
                 canruku: true,
@@ -415,6 +419,36 @@ var app = new Vue({
                 activeIndex: activeIndex,
                 imageUrls: imageUrls
             });
+        },
+        do_select_type: function(item) {
+            var that = this;
+            var title = '选择资产分类';
+            var name = 'choosezctype_frm';
+            that.currentItem = item;
+            ns.openWin(name, title, {
+                source: that.source
+            });
+        },
+        do_save_ruku: function() {
+            var that = this;
+            var options = {
+                action: 'APP_ADDZCSQRUKU',
+                ID: that.form.ID,
+                sqlist: JSON.stringify(that.sqlist)
+            }
+            ns.post(options, function(succeed, data, err) {
+                if (succeed) {
+                    ns.toast('入库申请成功');
+                    app.reload_list();
+                    setTimeout(function() {
+                        api.closeWin();
+                    }, 500);
+                } else if (err) {
+                    ns.toast(err);
+                }
+            }, {
+                toast: true,
+            });
         }
     }
 });
@@ -430,9 +464,23 @@ apiready = function() {
         app.get_data();
     }, 500);
     api.addEventListener({
+        name: 'do_choose_zctype_complete'
+    }, function(ret) {
+        if (ret.value && ret.value.source == app.source && app.currentItem != null) {
+            app.currentItem.Title = ret.value.name;
+            app.currentItem.TypeID = ret.value.id;
+            app.currentItem.Depreciation = ret.value.monthage;
+        }
+    });
+    api.addEventListener({
         name: 'do_save_zcsq'
     }, function() {
         app.do_save();
+    });
+    api.addEventListener({
+        name: 'do_save_zcsq_ruku'
+    }, function() {
+        app.do_save_ruku();
     });
     api.addEventListener({
         name: 'do_close_zcsqedit'

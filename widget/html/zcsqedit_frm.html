@@ -69,17 +69,6 @@
                         </div>
                     </div>
                 </li>
-                <li class="aui-list-item">
-                    <div class="aui-list-item-inner">
-                        <div class="aui-list-item-label" v-bind:class="{'auto':form.ID>0}">
-                            是否公用：
-                        </div>
-                        <div class="aui-list-item-input" v-bind:class="{'auto':form.ID>0}">
-                            <input v-if="form.ID<=0" v-on:click="do_select_status()" type="checkbox" class="aui-switch" v-bind:checked="form.Shared==1">
-                            <span v-else>{{form.SharedDesc}}</span>
-                        </div>
-                    </div>
-                </li>
             </ul>
             <div class="aui-list" style="margin-top:10px;">
                 <div class="aui-list-header">资产信息</div>
@@ -110,19 +99,41 @@
                         </div>
                     </div>
                 </li>
-                <li class="aui-list-item" v-if="form.ID>0&&!canedit">
+                <li class="aui-list-item">
                     <div class="aui-list-item-inner">
                         <div class="aui-list-item-label">
-                            入库数量：
+                            资产分类：
                         </div>
                         <div class="aui-list-item-input">
-                            <span>{{item.RuKuCount}}</span>
+                            <input v-on:click="do_select_type(item)" type="text" v-if="canedit||canruku" readonly="readonly" v-model="item.Title" placeholder="请选择">
+                            <span v-else>{{item.Title}}</span>
                         </div>
                     </div>
                 </li>
-                <li class="aui-list-item aui-item-btn" v-if="(canedit&&form.Status==10)||(canruku&&(item.RuKuCount<item.Qty))">
-                    <label v-on:click="remove_sq(item.ID,item.index)" v-if="canedit&&form.Status==10">删除</label>
-                    <label v-on:click="do_ruku(item)" v-if="canruku&&(item.RuKuCount<item.Qty)">申请入库</label>
+                <li class="aui-list-item">
+                    <div class="aui-list-item-inner">
+                        <div class="aui-list-item-label">
+                            折旧年限：
+                        </div>
+                        <div class="aui-list-item-input ">
+                            <input type="number" v-if="canedit||canruku" v-model="item.Depreciation" placeholder="请输入">
+                            <span v-else>{{item.Depreciation}}</span>
+                        </div>
+                    </div>
+                </li>
+                <li class="aui-list-item" v-if="canruku">
+                    <div class="aui-list-item-inner">
+                        <div class="aui-list-item-label">
+                            现值(元)：
+                        </div>
+                        <div class="aui-list-item-input ">
+                            <input type="number" v-model="item.PresentPrice" placeholder="请输入">
+                        </div>
+                    </div>
+                </li>
+                <li class="aui-list-item aui-item-btn" v-if="(canedit&&form.Status==10)||(canruku&&(item.RuKuCount<item.Qty))||form.ID<=0">
+                    <label v-on:click="remove_sq(item.ID,item.index)" v-if="(canedit&&form.Status==10)||form.ID<=0">删除</label>
+                    <!-- <label v-on:click="do_ruku(item)" v-if="canruku&&(item.RuKuCount<item.Qty)">申请入库</label> -->
                 </li>
             </ul>
             <div class="aui-list" style="margin-top:10px;">

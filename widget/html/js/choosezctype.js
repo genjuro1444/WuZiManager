@@ -11,7 +11,8 @@ var app = new Vue({
         defaultProps: {
             children: 'children',
             label: 'label'
-        }
+        },
+        source: ''
     },
     watch: {
         filterText(val) {
@@ -54,9 +55,9 @@ var app = new Vue({
         },
         do_cancel: function() {
             var that = this;
-            that.do_choose(0, '',0);
+            that.do_choose(0, '', 0);
         },
-        do_choose: function (ID, Title, MonthAge) {
+        do_choose: function(ID, Title, MonthAge) {
             var that = this;
             //item.checked = true;
             api.sendEvent({
@@ -64,7 +65,8 @@ var app = new Vue({
                 extra: {
                     name: Title,
                     id: ID,
-                    monthage: MonthAge
+                    monthage: MonthAge,
+                    source: that.source
                 }
             });
             setTimeout(function() {
@@ -76,5 +78,6 @@ var app = new Vue({
 apiready = function() {
     api.parseTapmode();
     ns = window.Foresight.Util;
+    app.source = ns.getPageParam('source') || '';
     app.get_data();
 }

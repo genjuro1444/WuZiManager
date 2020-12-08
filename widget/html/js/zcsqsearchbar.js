@@ -12,7 +12,8 @@ var app = new Vue({
             DepartmentID: 0,
             UserName: '',
             UserRealName: '',
-            IsPublic: 0
+            IsPublic: 0,
+            IsHasEPCode: 0
         },
         list: [],
         showbg: false,
@@ -33,7 +34,8 @@ var app = new Vue({
                     DepartmentID: that.form.DepartmentID,
                     UserRealName: that.form.UserRealName,
                     UserName: that.form.UserName,
-                    IsPublic: that.form.IsPublic
+                    IsPublic: that.form.IsPublic,
+                    IsHasEPCode: that.form.IsHasEPCode
                 }
             });
             setTimeout(function () {
@@ -56,6 +58,7 @@ var app = new Vue({
             that.form.UserName = '';
             that.form.UserRealName = '';
             that.form.IsPublic = 0;
+            that.form.IsHasEPCode = 0;
         },
         do_select_status: function (status) {
             var that = this;
@@ -138,6 +141,7 @@ apiready = function () {
     app.form.UserRealName = ns.getPageParam('UserRealName') || '';
     app.form.UserName = ns.getPageParam('UserName') || '';
     app.form.IsPublic = ns.getPageParam('IsPublic') || 0;
+    app.form.IsHasEPCode = ns.getPageParam('IsHasEPCode') || 0;
     app.getStatusDesc();
     if (app.form.BranchCode == '') {
         app.form.BranchCode = ns.Get_Branch_Code();

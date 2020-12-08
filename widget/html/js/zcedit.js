@@ -119,7 +119,9 @@ var app = new Vue({
             var that = this;
             var title = '选择资产分类';
             var name = 'choosezctype_frm';
-            ns.openWin(name, title);
+            ns.openWin(name, title, {
+                source: that.source
+            });
         },
         do_select_company: function() {
             var that = this;
@@ -350,7 +352,7 @@ apiready = function() {
     api.addEventListener({
         name: 'do_choose_zctype_complete'
     }, function(ret) {
-        if (ret.value) {
+        if (ret.value && ret.value.source == app.source) {
             app.form.Title = ret.value.name;
             app.form.TypeID = ret.value.id;
             app.form.Depreciation = ret.value.monthage;
