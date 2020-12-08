@@ -29,7 +29,8 @@ var app = new Vue({
             LocationID: '',
             RepairStatus: -1,
             RepairStatusDesc: '',
-            IsPublic: 0
+            IsPublic: 0,
+            IsHasEPCode: 0
         },
         hideeditbtn: false,
         addmore: false,
@@ -59,7 +60,8 @@ var app = new Vue({
                 uname: that.searchform.UserName,
                 locationid: that.searchform.LocationID,
                 repairstatus: that.searchform.RepairStatus,
-                shared: shared
+                shared: shared,
+                IsHasEPCode: that.searchform.IsHasEPCode
             }, function(succeed, data, err) {
                 if (succeed) {
                     if (that.form.pageindex == 1) {
@@ -140,7 +142,8 @@ var app = new Vue({
                 UserName: that.searchform.UserName,
                 LocTitle: that.searchform.LocTitle,
                 LocationID: that.searchform.LocationID,
-                IsPublic: that.searchform.IsPublic
+                IsPublic: that.searchform.IsPublic,
+                IsHasEPCode: that.searchform.IsHasEPCode
             });
         },
         pull_refresh_init: function() {
@@ -160,7 +163,7 @@ var app = new Vue({
             })
             var scroll = new auiScroll({
                 listen: true,
-                distance: 0 //判断到达底部的距离，isToBottom为true
+                distance: 5 //判断到达底部的距离，isToBottom为true
             }, function(ret) {
                 if (ret.isToBottom && that.form.can_scroll) {
                     if (that.form.scroll_top > ret.scrollTop) {
@@ -331,6 +334,7 @@ apiready = function() {
     app.form.keywords = ns.getPageParam('keywords') || '';
     app.searchform.Status = ns.getPageParam('status') || 0;
     app.searchform.LocationID = ns.getPageParam('LocationID') || '';
+    app.searchform.IsHasEPCode = ns.getPageParam('IsHasEPCode') || 0;
     app.getStatusDesc();
     app.hideeditbtn = ns.getPageParam('hideeditbtn') || false;
     app.pull_refresh_init();
@@ -383,6 +387,7 @@ apiready = function() {
                 app.searchform.LocTitle = ret.value.LocTitle;
                 app.searchform.LocationID = ret.value.LocationID;
                 app.searchform.IsPublic = ret.value.IsPublic;
+                app.searchform.IsHasEPCode = ret.value.IsHasEPCode;
             }
             app.form.pageindex = 1;
             app.get_data();

@@ -81,6 +81,9 @@
         <a class="aui-btn aui-pull-right hidden" id="right_save_zcsq" tapmode onclick="do_save_zcsq()">
             保存
         </a>
+        <a class="aui-btn aui-pull-right hidden" id="right_save_zcsq_ruku" tapmode onclick="do_save_zcsq_ruku()">
+            保存
+        </a>
         <a class="aui-btn aui-pull-right hidden" id="right_lingyong" tapmode onclick="do_save_lingyong()">
             保存
         </a>
@@ -218,6 +221,11 @@
         window.do_save_zcsq = function() {
             api.sendEvent({
                 name: 'do_save_zcsq'
+            });
+        }
+        window.do_save_zcsq_ruku = function() {
+            api.sendEvent({
+                name: 'do_save_zcsq_ruku'
             });
         }
         window.do_save_lingyong = function() {
@@ -371,6 +379,9 @@
             }
             if (pageParam.cansavezcsq) {
                 $api.toggleCls($api.byId('right_save_zcsq'), 'hidden');
+            }
+            if (pageParam.cansavezcsqruku) {
+                $api.toggleCls($api.byId('right_save_zcsq_ruku'), 'hidden');
             }
             if (pageParam.canlingyong) {
                 $api.toggleCls($api.byId('right_lingyong'), 'hidden');

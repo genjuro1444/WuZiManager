@@ -385,17 +385,26 @@ window.Foresight = window.Foresight || {};
         var value = api.pageParam[key] || 0;
         return value;
     }
-    ns.Util.confirm = function(options, callback) {
+    ns.Util.confirm = function(options, callback, callback2) {
         var title = options.title || '提示';
         var msg = options.msg || '';
+        var buttons = ['确定', '取消'];
+        if (options && options.buttons) {
+            buttons = options.buttons;
+        }
         api.confirm({
             title: title,
             msg: msg,
-            buttons: ['确定', '取消']
+            buttons: buttons
         }, function(ret, err) {
             if (ret.buttonIndex == 1) {
                 if (typeof callback == "function") {
                     callback();
+                }
+            }
+            if (ret.buttonIndex == 2) {
+                if (typeof callback2 == "function") {
+                    callback2();
                 }
             }
         });

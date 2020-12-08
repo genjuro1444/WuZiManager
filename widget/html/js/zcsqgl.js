@@ -50,7 +50,8 @@ var app = new Vue({
                 branchcode: that.searchform.BranchCode,
                 usergw: that.searchform.DepartmentID,
                 uname: that.searchform.UserName,
-                shared: shared
+                shared: shared,
+                canruku: that.canruku ? 1 : 0
             }, function(succeed, data, err) {
                 if (succeed) {
                     if (that.form.pageindex == 1) {
@@ -81,13 +82,16 @@ var app = new Vue({
             if (that.hideeditbtn) {
                 hideeditbtn = true;
             }
+            var cansavezcsqruku = false;
             if (that.canruku) {
                 title = '选择资产';
                 hideeditbtn = true;
+                cansavezcsqruku = true;
             }
             ns.openWin(name, title, {
                 canedit: canedit,
                 cansavezcsq: cansave,
+                cansavezcsqruku: cansavezcsqruku,
                 id: id,
                 hideeditbtn: hideeditbtn,
                 canruku: that.canruku

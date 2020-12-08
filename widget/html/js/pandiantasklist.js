@@ -33,11 +33,11 @@ var app = new Vue({
         }],
     },
     methods: {
-      do_select_tab: function(item) {
-          var that = this;
-          that.form.showtype = item.type;
-          that.get_data();
-      },
+        do_select_tab: function(item) {
+            var that = this;
+            that.form.showtype = item.type;
+            that.get_data();
+        },
         get_data: function() {
             var that = this;
             that.form.can_scroll = false;
@@ -70,6 +70,33 @@ var app = new Vue({
             });
         },
         do_add_task: function(id, status, pdname) {
+            var that = this;
+            ns.post({
+                action: 'APP_CHECKZCEPCODESTATUS',
+            }, function(succeed, data, err) {
+                if (succeed) {
+                    that.do_open_add_task(id, status, pdname);
+                } else if (err) {
+                    ns.confirm({
+                        msg: err,
+                        buttons: ['开始录入', '继续盘点']
+                    }, function() {
+                        var name = 'zcgl_frm';
+                        var title = '资产管理';
+                        ns.openWin(name, title, {
+                            title: title,
+                            cansearchzc: true,
+                            IsHasEPCode: 2
+                        });
+                    }, function() {
+                        that.do_open_add_task(id, status, pdname);
+                    })
+                }
+            }, {
+                toast: true
+            });
+        },
+        do_open_add_task: function(id, status, pdname) {
             var that = this;
             var title = id > 0 ? (pdname) : '新增盘点单';
             var name = 'pandiantaskedit_frm';
