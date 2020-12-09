@@ -54,7 +54,6 @@ var app = new Vue({
                 canruku: that.canruku ? 1 : 0
             }, function(succeed, data, err) {
                 if (succeed) {
-                    
                     if (that.form.pageindex == 1) {
                         that.list = data.list;
                     } else {
