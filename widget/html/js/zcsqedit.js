@@ -20,7 +20,7 @@ var app = new Vue({
         sqlist: [],
         source: 'zcsqedit',
         tabtype: 1,
-        sqItemIndex: 0, 
+        sqItemIndex: 0,
         loglist: [],
         imglist: [],
         imgindex: 0,
@@ -70,11 +70,27 @@ var app = new Vue({
             var sqlist = [];
             for (var i = 0; i < that.sqlist.length; i++) {
                 var item = that.sqlist[i];
-                if (item.Name && Number(item.Qty) > 0) {
+                var error = '';
+                if (item.Name == '' || item.Name == null) {
+                    error += '资产名称不能为空 ';
+                }
+                if (Number(item.Qty) <= 0) {
+                    error += '资产数量不能小于0 ';
+                }
+                if (item.TypeID <= 0) {
+                    error += '资产分类不能为空 ';
+                }
+                if (error == '') {
                     item.PresentPrice = Number(item.PresentPrice);
                     item.Depreciation = Number(item.Depreciation);
                     item.Qty = Number(item.Qty);
                     sqlist.push(item)
+                    continue;
+                }
+                if (error != '') {
+                    error = '第' + (i + 1) + '行' + error;
+                    ns.toast(error);
+                    return;
                 }
             }
             if (sqlist.length == 0) {
@@ -316,6 +332,12 @@ var app = new Vue({
         },
         do_add_sq_file: function() {
             var that = this;
+            ns.confirmPer('camera', function() {
+                that.do_add_sq_file_process();
+            })
+        },
+        do_add_sq_file_process: function() {
+            var that = this;
             actionsheet.init({
                 frameBounces: true, //当前页面是否弹动，（主要针对安卓端）
                 cancelTitle: '关闭',
@@ -330,6 +352,7 @@ var app = new Vue({
                 }
             })
         },
+
         take_picture: function() {
             var that = this;
             api.getPicture({
@@ -374,14 +397,9 @@ var app = new Vue({
         },
         remove_img: function(index) {
             var that = this;
-            for (var i = 0; i < that.imglist.length; i++) {
-                var item = that.imglist[i];
-                if (item.index == index) {
-                    that.imglist.splice(i, 1);
-                }
-            }
+            that.imglist.splice(index, 1);
         },
-        do_remove_image: function(item) {
+        do_remove_image: function(item,index) {
             var that = this;
             api.confirm({
                 title: '提示',
@@ -390,7 +408,7 @@ var app = new Vue({
             }, function(ret, err) {
                 if (ret.buttonIndex == 1) {
                     if (item.ID <= 0) {
-                        that.remove_img(item.index);
+                        that.remove_img(index);
                     }
                     var options = {
                         action: 'APP_REMOVEZCSQFILE',
@@ -399,7 +417,7 @@ var app = new Vue({
                     }
                     ns.post(options, function(succeed, data, err) {
                         if (succeed) {
-                            that.remove_img(item.index);
+                            that.remove_img(index);
                         } else if (err) {
                             ns.toast(err);
                         }
@@ -461,6 +479,9 @@ apiready = function() {
     app.canedit = ns.getPageParam('canedit') || false;
     app.hideeditbtn = ns.getPageParam('hideeditbtn') || false;
     app.canruku = ns.getPageParam('canruku') || false;
+    if (app.canruku) {
+        app.source = 'zcsqedit_new';
+    }
     actionsheet = new auiActionsheet();
     setTimeout(function() {
         app.get_data();
@@ -477,11 +498,17 @@ apiready = function() {
     api.addEventListener({
         name: 'do_save_zcsq'
     }, function() {
+        if (!app.canedit) {
+            return;
+        }
         app.do_save();
     });
     api.addEventListener({
         name: 'do_save_zcsq_ruku'
     }, function() {
+        if (!app.canruku) {
+            return;
+        }
         app.do_save_ruku();
     });
     api.addEventListener({

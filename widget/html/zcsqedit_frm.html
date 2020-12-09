@@ -1,4 +1,5 @@
-﻿<!DOCTYPE HTML>
+
+<!DOCTYPE HTML>
 <html>
 
 <head>
@@ -14,7 +15,7 @@
     <link rel="stylesheet" type="text/css" href="../css/szhlextend.css" />
     <style>
         .aui-list .aui-list-item.aui-item-btn label {
-            padding: 8px 30px 5px 30px; 
+            padding: 8px 30px 5px 30px;
         }
     </style>
 </head>
@@ -91,7 +92,8 @@
                     新增
                 </div>
             </div>
-            <ul class="aui-list mt10" v-for="item in sqlist">
+            <ul class="aui-list mt10" v-for="item in sqlist" style="position:relative;">
+                <label class="aui-label-btn" v-on:click="remove_sq(item.ID,item.index)" v-if="(canedit&&form.Status==10)||form.ID<=0">删除</label>
                 <li class="aui-list-item">
                     <div class="aui-list-item-inner">
                         <div class="aui-list-item-label">
@@ -146,10 +148,10 @@
                         </div>
                     </div>
                 </li>
-                <li class="aui-list-item aui-item-btn" v-if="(canedit&&form.Status==10)||(canruku&&(item.RuKuCount<item.Qty))||form.ID<=0">
-                    <label v-on:click="remove_sq(item.ID,item.index)" v-if="(canedit&&form.Status==10)||form.ID<=0">删除</label>
-                    <!-- <label v-on:click="do_ruku(item)" v-if="canruku&&(item.RuKuCount<item.Qty)">申请入库</label> -->
-                </li>
+                <!-- <li class="aui-list-item aui-item-btn" v-if="(canedit&&form.Status==10)||(canruku&&(item.RuKuCount<item.Qty))||form.ID<=0"> -->
+                <!-- <label v-on:click="remove_sq(item.ID,item.index)" v-if="(canedit&&form.Status==10)||form.ID<=0">删除</label> -->
+                <!-- <label v-on:click="do_ruku(item)" v-if="canruku&&(item.RuKuCount<item.Qty)">申请入库</label> -->
+                <!-- </li> -->
             </ul>
             <div class="aui-list" style="margin-top:10px;">
                 <div class="aui-list-header">上传附件</div>
@@ -160,7 +162,7 @@
             <div class="image-box">
                 <div class="image-item" v-for="(item,index) in imglist">
                     <img v-on:click="do_viewimages(index)" v-bind:src="item.url" alt="">
-                    <div v-if="canedit" class="icon-close" v-on:click="remove_img(item)">
+                    <div v-if="canedit" class="icon-close" v-on:click="do_remove_image(item,index)">
                         <i class="icon iconfont iconfont2 iconguanbi"></i>
                     </div>
                 </div>

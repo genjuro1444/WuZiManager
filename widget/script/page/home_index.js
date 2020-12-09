@@ -1,4 +1,4 @@
-var header_h, NVTabBar, ajpush, ns, app;
+var header_h, NVTabBar, ajpush, ns, app, UIActionProgress;
 var trycount = 0;
 app = new Vue({
     el: '#app',
@@ -90,6 +90,7 @@ apiready = function() {
     app.set_status_bar();
     api.parseTapmode();
     ns = window.Foresight.Util;
+    UIActionProgress = api.require('UIActionProgress');
     app.frameH = api.winHeight;
     var header = $api.byId('aui-header');
     // $api.fixStatusBar(header);
@@ -113,6 +114,9 @@ apiready = function() {
     }, function(ret, err) {
         app.get_data();
     });
+    setTimeout(function() {
+        appupgrade.check_upgrade(false);
+    }, 5000)
     app.get_data();
     var last_out_time;
     api.addEventListener({

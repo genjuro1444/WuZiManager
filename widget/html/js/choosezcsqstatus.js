@@ -6,10 +6,6 @@ var app = new Vue({
             id: 10,
             name: '申请中',
             checked: false
-        }, {
-            id: 15,
-            name: '部分入库',
-            checked: false
         },{
             id: 20,
             name: '已入库',

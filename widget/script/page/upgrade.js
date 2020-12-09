@@ -6,64 +6,57 @@ var appupgrade = new Vue({
         check_upgrade: function(showerr) {
             var that = this;
             ns.post({
-                action: 'getappversion',
-                version: api.appVersion,
-                versiontype: api.systemType,
-                APPType: 1
+                action: 'APP_GETAPPUPGRADEVERSION',
+                Version: api.appVersion,
+                VersionType: api.systemType
             }, function(succeed, data, err) {
                 if (succeed) {
                     var result = data;
-                    if (result && result.update == true && result.closed == false) {
-                        var str = '';
-                        if (result.version) {
-                            str += '新版本型号:' + result.version + ';';
-                        }
-                        if (result.versionDes) {
-                            str += '更新描述:' + result.versionDes + ';';
-                        }
-                        if (result.time) {
-                            str += '发布时间:' + result.time + ';';
-                        }
-                        if (result.isforceupdate) {
-                            api.alert({
-                                title: '有新的版本,是否下载并安装',
-                                msg: str,
-                            }, function(ret, err) {
-                                if (api.systemType == "android") {
-                                    that.downloadapp(result.source);
-                                }
-                                if (api.systemType == "ios") {
-                                    api.installApp({
-                                        appUri: result.source
-                                    });
-                                }
-                            });
-                            return;
-                        }
-                        api.confirm({
-                            title: '有新的版本,是否下载并安装 ',
-                            msg: str,
-                            buttons: ['确定', '取消']
+                    var str = '';
+                    if (result.version) {
+                        str += '新版本型号:' + result.version + ';';
+                    }
+                    if (result.versionDes) {
+                        str += '更新描述:' + result.versionDes + ';';
+                    }
+                    if (result.time) {
+                        str += '发布时间:' + result.time + ';';
+                    }
+                    if (result.isforceupdate) {
+                        api.alert({
+                            title: '有新的版本,请下载并安装',
+                            msg: str
                         }, function(ret, err) {
-                            if (ret.buttonIndex == 1) {
-                                if (api.systemType == "android") {
-                                    that.downloadapp(result.source);
-                                }
-                                if (api.systemType == "ios") {
-                                    api.installApp({
-                                        appUri: result.source
-                                    });
-                                }
+                            if (api.systemType == 'android') {
+                                that.downloadapp(result.source);
+                            } else if (api.systemType == 'ios') {
+                                api.installApp({
+                                    appUri: result.source
+                                });
                             }
                         });
+                        return;
                     }
-                } else if (err) {
-                    if (showerr) {
-                        ns.toast(err);
-                    }
+                    api.confirm({
+                        title: '有新的版本,是否下载并安装 ',
+                        msg: str,
+                        buttons: ['确定', '取消']
+                    }, function(ret, err) {
+                        if (ret.buttonIndex == 1) {
+                            if (api.systemType == "android") {
+                                that.downloadapp(result.source);
+                            }
+                            if (api.systemType == "ios") {
+                                api.installApp({
+                                    appUri: result.source
+                                });
+                            }
+                        }
+                    });
                 }
-            }, {
-                ismain: true
+                if (err && showerr) {
+                    ns.toast(err);
+                }
             });
         },
         downloadapp: function(url) {

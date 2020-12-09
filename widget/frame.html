@@ -419,24 +419,24 @@
             if (pageParam.cansavepandian) {
                 $api.toggleCls($api.byId('right_save_pandian'), 'hidden');
             }
-            api.addEventListener({
-                name: 'do_start_edit'
-            }, function(ret) {
-                if (url == 'html/zcedit_frm.html' || url == 'html/weixiuedit_frm.html' || url == 'html/chuzhiedit_frm.html') {
-                    var saveElem = $api.byId('right_save');
-                    if ($api.hasCls(saveElem, 'hidden')) {
-                        $api.removeCls(saveElem, 'hidden');
-                    }
-                }
-            });
-            api.addEventListener({
-                name: 'do_start_edit_weixiu'
-            }, function(ret) {
-                var saveElem = $api.byId('right_save');
-                if ($api.hasCls(saveElem, 'hidden')) {
-                    $api.removeCls(saveElem, 'hidden');
-                }
-            });
+            // api.addEventListener({
+            //     name: 'do_start_edit'
+            // }, function(ret) {
+            //     if (url == 'html/zcedit_frm.html' || url == 'html/weixiuedit_frm.html' || url == 'html/chuzhiedit_frm.html') {
+            //         var saveElem = $api.byId('right_save');
+            //         if ($api.hasCls(saveElem, 'hidden')) {
+            //             $api.removeCls(saveElem, 'hidden');
+            //         }
+            //     }
+            // });
+            // api.addEventListener({
+            //     name: 'do_start_edit_weixiu'
+            // }, function(ret) {
+            //     var saveElem = $api.byId('right_save');
+            //     if ($api.hasCls(saveElem, 'hidden')) {
+            //         $api.removeCls(saveElem, 'hidden');
+            //     }
+            // });
             // api.addEventListener({
             //     name: 'do_start_edit_zc'
             // }, function(ret) {
@@ -445,14 +445,14 @@
             //         $api.removeCls(saveElem, 'hidden');
             //     }
             // });
-            api.addEventListener({
-                name: 'do_start_edit_chuzhi'
-            }, function(ret) {
-                var saveElem = $api.byId('right_save_chuzhi');
-                if ($api.hasCls(saveElem, 'hidden')) {
-                    $api.removeCls(saveElem, 'hidden');
-                }
-            });
+            // api.addEventListener({
+            //     name: 'do_start_edit_chuzhi'
+            // }, function(ret) {
+            //     var saveElem = $api.byId('right_save_chuzhi');
+            //     if ($api.hasCls(saveElem, 'hidden')) {
+            //         $api.removeCls(saveElem, 'hidden');
+            //     }
+            // });
             if (url && url.length > 0 && url[0] != '.' && url[0] != '/' && url[0] != '\\') {
                 if (url.indexOf('http://') < 0 && url.indexOf('https://') < 0) {
                     url = 'html/' + url;

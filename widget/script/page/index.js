@@ -1,4 +1,4 @@
-var header_h, UIActionProgress, ajpush, ns;
+var header_h, ajpush, ns;
 var trycount = 0;
 var app = new Vue({
     el: '#app',
@@ -196,134 +196,6 @@ var app = new Vue({
                 }
             }
         },
-        checkupdate: function(isManual) {
-            var that = this;
-            if (isManual) {
-                ns.toast('当前是最新版本');
-            }
-            return;
-            ns.post({
-                action: 'APP_GETAPPVERSION',
-                version: api.appVersion,
-                versiontype: that.device_type,
-                APPType: 2
-            }, function(succeed, data, err) {
-                if (succeed) {
-                    var result = data;
-                    if (result && result.update == true && result.closed == false) {
-                        var str = '';
-                        if (result.version) {
-                            str += '新版本型号:' + result.version + ';';
-                        }
-                        if (result.versionDes) {
-                            str += '更新描述:' + result.versionDes + ';';
-                        }
-                        if (result.time) {
-                            str += '发布时间:' + result.time + ';';
-                        }
-                        if (result.isforceupdate) {
-                            api.alert({
-                                title: '有新的版本,请下载并安装',
-                                msg: str
-                            }, function(ret, err) {
-                                if (api.systemType == 'android') {
-                                    that.downloadapp(result.source);
-                                } else if (api.systemType == 'ios') {
-                                    api.installApp({
-                                        appUri: result.source
-                                    });
-                                }
-                            });
-                            return;
-                        }
-                        api.confirm({
-                            title: '有新的版本,是否下载并安装 ',
-                            msg: str,
-                            buttons: ['确定', '取消']
-                        }, function(ret, err) {
-                            if (ret.buttonIndex == 1) {
-                                if (that.device_type == "android") {
-                                    that.downloadapp(result.source);
-                                }
-                                if (that.device_type == "ios") {
-                                    api.installApp({
-                                        appUri: result.source
-                                    });
-                                }
-                            }
-                        });
-                    }
-                }
-            }, {
-                ismall: true
-            });
-        },
-        downloadapp: function(url) {
-            var that = this;
-            that.UIActionProgressOpen();
-            api.download({
-                url: url,
-                report: true
-            }, function(ret, err) {
-                if (ret && 0 == ret.state) { /* 下载进度 */
-                    that.UIActionProgressSetData(ret.percent);
-                }
-                if (ret && 1 == ret.state) { /* 下载完成 */
-                    UIActionProgress.close();
-                    var savePath = ret.savePath;
-                    api.installApp({
-                        appUri: savePath
-                    });
-                }
-            });
-        },
-        UIActionProgressOpen: function() {
-            UIActionProgress.open({
-                maskBg: 'rgba(0,0,0,0.5)',
-                styles: {
-                    h: 108,
-                    bg: '#fff',
-                    title: {
-                        size: 13,
-                        color: '#000',
-                        marginT: 10
-                    },
-                    msg: {
-                        size: 12,
-                        color: '#000',
-                        marginT: 5
-                    },
-                    lable: {
-                        size: 12,
-                        color: '#696969',
-                        marginB: 5
-                    },
-                    progressBar: {
-                        size: 2,
-                        normal: '#000',
-                        active: '#4876FF',
-                        marginB: 35,
-                        margin: 5
-                    }
-                },
-                data: {
-                    title: '正在更新',
-                    msg: '开始下载',
-                    value: 0
-                }
-            }, function(ret) {
-                // api.alert({ msg: JSON.stringify(ret) });
-            });
-        },
-        UIActionProgressSetData: function(value) {
-            UIActionProgress.setData({
-                data: {
-                    title: '正在更新...',
-                    msg: '',
-                    value: value
-                }
-            });
-        },
         set_status_bar: function() {
             var that = this;
             if (api.systemType != 'ios') {
@@ -348,14 +220,6 @@ apiready = function() {
     ajpush = api.require('ajpush');
     app.jp_init();
     app.openFrame();
-    setTimeout(function() {
-        app.checkupdate(false);
-    }, 10000)
-    api.addEventListener({
-        name: 'do_upgrade'
-    }, function() {
-        app.checkupdate(true);
-    });
     api.addEventListener({
         name: 'onlogin'
     }, function() {

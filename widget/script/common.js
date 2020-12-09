@@ -505,4 +505,76 @@ window.Foresight = window.Foresight || {};
             });
         }
     }
+    ns.Util.confirmPer = function(perm, callback) {
+        var has = ns.Util.hasPermission(perm);
+        var granted = true;
+        if (has && has.length > 0) {
+            for (var i = 0; i < has.length; i++) {
+                if (!has[i].granted) {
+                    granted = false;
+                }
+            }
+        }
+        if (!granted) {
+            api.confirm({
+                title: '提醒',
+                msg: '没有获得 ' + perm + " 权限\n是否前往设置？",
+                buttons: ['去设置', '取消']
+            }, function(ret, err) {
+                if (1 == ret.buttonIndex) {
+                    ns.Util.reqPermission(perm, callback);
+                }
+            });
+            return false;
+        }
+        if (callback) {
+            callback();
+        }
+        return true;
+    };
+    ns.Util.hasPermission = function(one_per) {
+        if (!one_per) {
+            return;
+        }
+        var perms = new Array();
+        perms.push(one_per);
+        perms.push('storage');
+        var rets = api.hasPermission({
+            list: perms
+        });
+        return rets;
+    };
+    ns.Util.reqPermission = function(one_per, callback) {
+        var perms = new Array();
+        perms.push(one_per);
+        perms.push('storage');
+        api.requestPermission({
+            list: perms,
+            code: 100001
+        }, function(ret, err) {
+            if (callback) {
+                var list = ret.list;
+                if (list && list.length > 0) {
+                    var granted = true;
+                    for (var i = 0; i < list.length; i++) {
+                        if (!list[i].granted) {
+                            granted = false;
+                        }
+                    }
+                    if (granted) {
+                        callback();
+                    }
+                }
+                return;
+            }
+            var str = '请求结果：\n';
+            str += '请求码: ' + ret.code + '\n';
+            str += "是否勾选\"不再询问\"按钮: " + (ret.never ? '是' : '否') + '\n';
+            str += '请求结果: \n';
+            var list = ret.list;
+            for (var i in list) {
+                str += list[i].name + '=' + list[i].granted + '\n';
+            }
+        });
+    };
 })(window.Foresight);
