@@ -1,4 +1,4 @@
-<!DOCTYPE HTML>
+﻿<!DOCTYPE HTML>
 <html>
 
 <head>
@@ -149,7 +149,7 @@
         }
         .aui-grid-100 {
             padding-top: 0px;
-            text-align: center;
+            text-align: center; 
         }
     </style>
 </head>
@@ -160,16 +160,16 @@
             <div class="aui-content">
                 <div class="aui-chart">
                     <div class="aui-grid-title ">
-                        <i class="small-icon iconyingyongguanli"></i> 资产统计
+                        <i class="small-icon manegement"></i> 资产统计
                     </div>
-                    <canvas id="myChart" height="260" style="width:100%;"></canvas>
+                    <canvas id="myChart" height="200" style="width:100%;"></canvas>
                 </div>
                 <section class="aui-grid more-less-grid">
                     <div class="aui-grid-title ">
                         <i class="small-icon iconyingyongguanli"></i> 资产状况
                     </div>
                     <div class="aui-row">
-                        <div class="aui-col-xs-100" v-on:click="open_zc(0)">
+                        <div class="aui-col-100" v-on:click="open_zc(0)">
                             <div class="aui-grid-label">总资产</div>
                             <label class="green">{{countform.totalcount}}</label>
                         </div>
@@ -198,7 +198,7 @@
                         <div class="aui-col-xs-4">
                             <div class="aui-grid-label">本月减少</div>
                             <div class="aui-grid-100"><span class="green">{{countform.monthreducecount}}</span>
-                                <i class="icon iconfont iconcujiantou1"></i>
+                                <i class="icon iconfont iconcujiantou"></i>
                             </div>
                         </div>
                         <div class="aui-col-xs-4" v-on:click="open_zc(10)">

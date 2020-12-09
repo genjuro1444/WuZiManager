@@ -9,6 +9,8 @@ var app = new Vue({
         form: {
             ID: 0,
             Code: '',
+            Status: 0,
+            StatusDesc: '',
             DeptName: '',
             DepartmentName: '',
             UserRealName: '',
@@ -18,7 +20,7 @@ var app = new Vue({
         sqlist: [],
         source: 'zcsqedit',
         tabtype: 1,
-        sqItemIndex: 0,
+        sqItemIndex: 0, 
         loglist: [],
         imglist: [],
         imgindex: 0,

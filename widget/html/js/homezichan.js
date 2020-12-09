@@ -88,7 +88,7 @@ var app = new Vue({
             if (item.url == 'scanner_frm') {
                 ns.openDirectWin('scanner_frm', '../html/scanner_frm.html', {
                     getzcdetail: true
-                })
+                }) 
                 return;
             }
             var title = item.name;
@@ -151,7 +151,7 @@ var app = new Vue({
             });
         },
         load_pie_chart: function(data) {
-            console.log(JSON.stringify(data));
+            //alert(JSON.stringify(data));
             const chart = new F2.Chart({
                 id: 'myChart',
                 pixelRatio: window.devicePixelRatio
@@ -188,7 +188,7 @@ var app = new Vue({
 
             chart.interval()
                 .position('const*y')
-                .color('name', ['#1890FF', '#13C2C2', '#2FC25B', '#FACC14', '#F04864'])
+                .color('name', ['#29ab91', '#ffc547', '#bfc4cd', '#FACC14', '#F04864'])
                 .adjust('stack');
             chart.render();
         }
