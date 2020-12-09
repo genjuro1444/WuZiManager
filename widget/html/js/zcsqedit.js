@@ -31,12 +31,12 @@ var app = new Vue({
         currentItem: null
     },
     methods: {
-        get_data: function() {
+        get_data: function () {
             var that = this;
             ns.post({
                 action: 'APP_GETZCSQGLMODEL',
                 id: that.form.ID
-            }, function(succeed, data, err) {
+            }, function (succeed, data, err) {
                 if (succeed) {
                     that.form = data.data;
                     that.sqlist = data.list;
@@ -54,10 +54,10 @@ var app = new Vue({
                     ns.toast(err);
                 }
             }, {
-                toast: true
-            });
+                    toast: true
+                });
         },
-        do_save: function() {
+        do_save: function () {
             var that = this;
             if (that.form.BranchCode == '' || that.form.BranchCode == null) {
                 ns.toast('请选择申请公司');
@@ -110,24 +110,24 @@ var app = new Vue({
                 data: JSON.stringify(that.form),
                 sqlist: JSON.stringify(sqlist)
             }
-            ns.post(options, function(succeed, data, err) {
+            ns.post(options, function (succeed, data, err) {
                 if (succeed) {
                     ns.toast('保存成功');
                     app.reload_list();
-                    setTimeout(function() {
+                    setTimeout(function () {
                         api.closeWin();
                     }, 500);
                 } else if (err) {
                     ns.toast(err);
                 }
             }, {
-                toast: true,
-                files: {
-                    file: filelist
-                }
-            });
+                    toast: true,
+                    files: {
+                        file: filelist
+                    }
+                });
         },
-        do_select_status: function() {
+        do_select_status: function () {
             var that = this;
             if (that.form.Shared == 1) {
                 that.form.Shared = 0;
@@ -135,7 +135,7 @@ var app = new Vue({
                 that.form.Shared = 1;
             }
         },
-        do_select_company: function() {
+        do_select_company: function () {
             var that = this;
             var title = '选择申请公司';
             var name = 'choosecompany_frm';
@@ -144,7 +144,7 @@ var app = new Vue({
                 BranchCode: that.form.BranchCode
             });
         },
-        do_select_department: function() {
+        do_select_department: function () {
             var that = this;
             if (that.form.BranchCode <= 0) {
                 ns.toast('请选择申请公司');
@@ -157,7 +157,7 @@ var app = new Vue({
                 source: that.source
             });
         },
-        do_select_userstaff: function() {
+        do_select_userstaff: function () {
             var that = this;
             if (that.form.BranchCode <= 0) {
                 ns.toast('请选择申请公司');
@@ -175,17 +175,17 @@ var app = new Vue({
                 source: that.source
             });
         },
-        do_open_operation: function() {
+        do_open_operation: function () {
             var that = this;
             var name = 'zcsqeditbtn_frm';
             var url = 'zcsqeditbtn_frm.html';
             ns.openFrame(name, url, {
                 type: 'push'
             }, {
-                status: that.form.Status
-            });
+                    status: that.form.Status
+                });
         },
-        do_open_edit: function() {
+        do_open_edit: function () {
             var that = this;
             var title = '申请单修改';
             var name = 'zcsqedit_frm_new';
@@ -197,11 +197,11 @@ var app = new Vue({
                 url: 'zcsqedit_frm.html'
             });
         },
-        open_cancel_sq: function() {
+        open_cancel_sq: function () {
             var that = this;
             ns.confirm({
                 msg: '确认作废申请单?'
-            }, function() {
+            }, function () {
                 api.closeFrame({
                     name: 'zcsqeditbtn_frm'
                 });
@@ -209,31 +209,31 @@ var app = new Vue({
                     action: 'APP_CANCELZCSQGLMODEL',
                     ID: that.form.ID
                 }
-                ns.post(options, function(succeed, data, err) {
+                ns.post(options, function (succeed, data, err) {
                     if (succeed) {
                         ns.toast('作废成功');
                         app.reload_list();
-                        setTimeout(function() {
+                        setTimeout(function () {
                             api.closeWin();
                         }, 500);
                     } else if (err) {
                         ns.toast(err);
                     }
                 }, {
-                    toast: true
-                });
+                        toast: true
+                    });
             })
         },
-        reload_list: function() {
+        reload_list: function () {
             api.sendEvent({
                 name: 'do_reload_zcsq_list'
             });
         },
-        do_select_tab: function(type) {
+        do_select_tab: function (type) {
             var that = this;
             that.tabtype = type;
         },
-        do_add_sq_item: function() {
+        do_add_sq_item: function () {
             var that = this;
             that.sqItemIndex++;
             that.sqlist.push({
@@ -247,30 +247,30 @@ var app = new Vue({
                 Depreciation: ''
             });
         },
-        remove_sq: function(ID, index) {
+        remove_sq: function (ID, index) {
             var that = this;
             ns.confirm({
                 msg: '确认删除?'
-            }, function() {
+            }, function () {
                 if (ID > 0) {
                     ns.post({
                         action: 'APP_REMOVEZCSQZCMODEL',
                         ID: ID
-                    }, function(succeed, data, err) {
+                    }, function (succeed, data, err) {
                         if (succeed) {
                             that.do_delete_sq_zc(ID, index);
                         } else if (err) {
                             ns.toast(err);
                         }
                     }, {
-                        toast: true
-                    });
+                            toast: true
+                        });
                 } else {
                     that.do_delete_sq_zc(ID, index);
                 }
             })
         },
-        do_delete_sq_zc: function(ID, index) {
+        do_delete_sq_zc: function (ID, index) {
             var that = this;
             var removeIndex = -1;
             for (var i = 0; i < that.sqlist.length; i++) {
@@ -288,7 +288,7 @@ var app = new Vue({
                 that.sqlist.splice(removeIndex, 1);
             }
         },
-        do_ruku: function(item) {
+        do_ruku: function (item) {
             var that = this;
             var title = '新增入库';
             var name = 'zcedit_frm';
@@ -304,10 +304,10 @@ var app = new Vue({
                 addmore: true,
             });
         },
-        do_close: function() {
+        do_close: function () {
             api.closeWin();
         },
-        do_open_ruku: function() {
+        do_open_ruku: function () {
             var that = this;
             var title = '选择资产';
             var name = 'zcsqedit_frm_new'
@@ -321,7 +321,7 @@ var app = new Vue({
                 url: 'zcsqedit_frm.html'
             });
         },
-        covertdate: function(datestr) {
+        covertdate: function (datestr) {
             var t = new Date(datestr);
             var str = "";
             if (!isNaN(t)) {
@@ -330,19 +330,19 @@ var app = new Vue({
             }
             return str;
         },
-        do_add_sq_file: function() {
+        do_add_sq_file: function () {
             var that = this;
-            ns.confirmPer('camera', function() {
+            ns.confirmPer('camera', function () {
                 that.do_add_sq_file_process();
             })
         },
-        do_add_sq_file_process: function() {
+        do_add_sq_file_process: function () {
             var that = this;
             actionsheet.init({
                 frameBounces: true, //当前页面是否弹动，（主要针对安卓端）
                 cancelTitle: '关闭',
                 buttons: ['拍照', '图库选择']
-            }, function(ret) {
+            }, function (ret) {
                 if (ret) {
                     if (ret.buttonIndex == 1) {
                         that.take_picture();
@@ -353,7 +353,7 @@ var app = new Vue({
             })
         },
 
-        take_picture: function() {
+        take_picture: function () {
             var that = this;
             api.getPicture({
                 sourceType: 'camera',
@@ -363,7 +363,7 @@ var app = new Vue({
                 allowEdit: true,
                 quality: 90,
                 saveToPhotoAlbum: false
-            }, function(ret, err) {
+            }, function (ret, err) {
                 if (ret && ret.data) {
                     that.imglist.push({
                         id: 0,
@@ -375,7 +375,7 @@ var app = new Vue({
                 }
             });
         },
-        choose_picture: function() {
+        choose_picture: function () {
             var that = this;
             api.getPicture({
                 sourceType: 'album',
@@ -384,7 +384,7 @@ var app = new Vue({
                 destinationType: 'url',
                 allowEdit: true,
                 quality: 80,
-            }, function(ret, err) {
+            }, function (ret, err) {
                 if (ret && ret.data) {
                     that.imglist.push({
                         index: that.imgindex,
@@ -395,17 +395,17 @@ var app = new Vue({
                 }
             });
         },
-        remove_img: function(index) {
+        remove_img: function (index) {
             var that = this;
             that.imglist.splice(index, 1);
         },
-        do_remove_image: function(item,index) {
+        do_remove_image: function (item, index) {
             var that = this;
             api.confirm({
                 title: '提示',
                 msg: '确定删除?',
                 buttons: ['确定', '取消']
-            }, function(ret, err) {
+            }, function (ret, err) {
                 if (ret.buttonIndex == 1) {
                     if (item.ID <= 0) {
                         that.remove_img(index);
@@ -415,19 +415,19 @@ var app = new Vue({
                         ID: that.form.ID,
                         FileID: item.ID,
                     }
-                    ns.post(options, function(succeed, data, err) {
+                    ns.post(options, function (succeed, data, err) {
                         if (succeed) {
                             that.remove_img(index);
                         } else if (err) {
                             ns.toast(err);
                         }
                     }, {
-                        toast: true
-                    });
+                            toast: true
+                        });
                 }
             });
         },
-        do_viewimages: function(activeIndex) {
+        do_viewimages: function (activeIndex) {
             var that = this;
             var imageUrls = [];
             for (var i = 0; i < that.imglist.length; i++) {
@@ -440,7 +440,7 @@ var app = new Vue({
                 imageUrls: imageUrls
             });
         },
-        do_select_type: function(item) {
+        do_select_type: function (item) {
             var that = this;
             var title = '选择资产分类';
             var name = 'choosezctype_frm';
@@ -449,30 +449,30 @@ var app = new Vue({
                 source: that.source
             });
         },
-        do_save_ruku: function() {
+        do_save_ruku: function () {
             var that = this;
             var options = {
                 action: 'APP_ADDZCSQRUKU',
                 ID: that.form.ID,
                 sqlist: JSON.stringify(that.sqlist)
             }
-            ns.post(options, function(succeed, data, err) {
+            ns.post(options, function (succeed, data, err) {
                 if (succeed) {
                     ns.toast('入库申请成功');
                     app.reload_list();
-                    setTimeout(function() {
+                    setTimeout(function () {
                         api.closeWin();
                     }, 500);
                 } else if (err) {
                     ns.toast(err);
                 }
             }, {
-                toast: true,
-            });
+                    toast: true,
+                });
         }
     }
 });
-apiready = function() {
+apiready = function () {
     api.parseTapmode();
     ns = window.Foresight.Util;
     app.form.ID = ns.getPageParam('id') || 0;
@@ -483,12 +483,12 @@ apiready = function() {
         app.source = 'zcsqedit_new';
     }
     actionsheet = new auiActionsheet();
-    setTimeout(function() {
+    setTimeout(function () {
         app.get_data();
     }, 500);
     api.addEventListener({
         name: 'do_choose_zctype_complete'
-    }, function(ret) {
+    }, function (ret) {
         if (ret.value && ret.value.source == app.source && app.currentItem != null) {
             app.currentItem.Title = ret.value.name;
             app.currentItem.TypeID = ret.value.id;
@@ -497,7 +497,7 @@ apiready = function() {
     });
     api.addEventListener({
         name: 'do_save_zcsq'
-    }, function() {
+    }, function () {
         if (!app.canedit) {
             return;
         }
@@ -505,7 +505,7 @@ apiready = function() {
     });
     api.addEventListener({
         name: 'do_save_zcsq_ruku'
-    }, function() {
+    }, function () {
         if (!app.canruku) {
             return;
         }
@@ -513,27 +513,27 @@ apiready = function() {
     });
     api.addEventListener({
         name: 'do_close_zcsqedit'
-    }, function() {
+    }, function () {
         app.do_close();
     });
     api.addEventListener({
         name: 'do_start_cancel_zcsq'
-    }, function(ret) {
+    }, function (ret) {
         app.open_cancel_sq();
     });
     api.addEventListener({
         name: 'do_start_ruku_zcsq'
-    }, function(ret, err) {
+    }, function (ret, err) {
         app.do_open_ruku();
     });
     api.addEventListener({
         name: 'do_start_edit_zcsq'
-    }, function(ret) {
+    }, function (ret) {
         app.do_open_edit();
     });
     api.addEventListener({
         name: 'do_choose_zccompany_complete'
-    }, function(ret) {
+    }, function (ret) {
         if (ret.value.source == app.source) {
             if (ret.value) {
                 app.form.BranchCode = ret.value.id;
@@ -543,7 +543,7 @@ apiready = function() {
     });
     api.addEventListener({
         name: 'do_choose_zcdepartment_complete'
-    }, function(ret) {
+    }, function (ret) {
         if (ret.value.source == app.source) {
             if (ret.value) {
                 if (app.form.UserGW != ret.value.name) {
@@ -557,7 +557,7 @@ apiready = function() {
     });
     api.addEventListener({
         name: 'do_choose_zcuseuser_complete'
-    }, function(ret) {
+    }, function (ret) {
         if (ret.value.source == app.source) {
             if (ret.value) {
                 app.form.UserName = ret.value.id;

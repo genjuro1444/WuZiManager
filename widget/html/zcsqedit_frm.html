@@ -1,4 +1,4 @@
-
+﻿
 <!DOCTYPE HTML>
 <html>
 
@@ -16,20 +16,22 @@
     <style>
         .aui-list .aui-list-item.aui-item-btn label {
             padding: 8px 30px 5px 30px;
+            background:#f0f0f0;
+            color:red;
         }
     </style>
 </head>
 
 <body>
     <div id="app">
-        <ul class="aui-tab fixed-top" v-if="form.ID>0&&!canedit&&!canruku">
+        <!--<ul class="aui-tab fixed-top" v-if="form.ID>0&&!canedit&&!canruku">
             <li class="aui-tab-item" v-on:click="do_select_tab(1)"><span v-bind:class="{'aui-active':tabtype==1}">申请信息</span></li>
             <li class="aui-tab-item" v-on:click="do_select_tab(2)"><span v-bind:class="{'aui-active':tabtype==2}">操作记录</span></li>
-        </ul>
+        </ul>-->
         <div v-if="!hideeditbtn&&tabtype==1&&form.Status==10" class="btnFloat" v-on:click="do_open_operation()">
             <i class="icon iconfont iconfont2 iconxiugai1"></i>
         </div>
-        <div v-if="tabtype==1" class="aui-content pb35" v-bind:class="{'pt35':form.ID>0&&!canedit&&!canruku}">
+        <div v-if="tabtype==1" class="aui-content pb35">
             <ul class="aui-list ">
                 <li class="aui-list-header">申请信息</li>
                 <li class="aui-list-item" v-if="form.ID>0&&!canedit">
@@ -42,10 +44,10 @@
                         </div>
                     </div>
                 </li>
-                <li class="aui-list-item" v-if="form.ID>0&&!canedit">
+                <li class="aui-list-item" v-if="form.ID>0">
                     <div class="aui-list-item-inner">
                         <div class="aui-list-item-label" v-bind:class="{'auto':form.ID>0}">
-                            申请编号：
+                            申请单编号：
                         </div>
                         <div class="aui-list-item-input" v-bind:class="{'auto':form.ID>0}">
                             <span>{{form.Code}}</span>
@@ -93,7 +95,6 @@
                 </div>
             </div>
             <ul class="aui-list mt10" v-for="item in sqlist" style="position:relative;">
-                <label class="aui-label-btn" v-on:click="remove_sq(item.ID,item.index)" v-if="(canedit&&form.Status==10)||form.ID<=0">删除</label>
                 <li class="aui-list-item">
                     <div class="aui-list-item-inner">
                         <div class="aui-list-item-label">
@@ -148,10 +149,12 @@
                         </div>
                     </div>
                 </li>
-                <!-- <li class="aui-list-item aui-item-btn" v-if="(canedit&&form.Status==10)||(canruku&&(item.RuKuCount<item.Qty))||form.ID<=0"> -->
-                <!-- <label v-on:click="remove_sq(item.ID,item.index)" v-if="(canedit&&form.Status==10)||form.ID<=0">删除</label> -->
-                <!-- <label v-on:click="do_ruku(item)" v-if="canruku&&(item.RuKuCount<item.Qty)">申请入库</label> -->
-                <!-- </li> -->
+                <li class="aui-list-item aui-item-btn" v-if="(canedit&&form.Status==10)||(canruku&&(item.RuKuCount<item.Qty))||form.ID<=0">
+                    <label v-on:click="remove_sq(item.ID,item.index)" v-if="(canedit&&form.Status==10)||form.ID<=0">删除</label>
+                    <!--<label v-on:click="do_ruku(item)" v-if="canruku&&(item.RuKuCount<item.Qty)">申请入库</label>-->
+                </li>
+
+                <!--<label class="aui-label-btn" v-on:click="remove_sq(item.ID,item.index)" v-if="(canedit&&form.Status==10)||form.ID<=0">删除</label>-->
             </ul>
             <div class="aui-list" style="margin-top:10px;">
                 <div class="aui-list-header">上传附件</div>
@@ -168,7 +171,7 @@
                 </div>
             </div>
         </div>
-        <div v-if="tabtype==2" class="aui-content pt25">
+        <div v-if="tabtype==2" class="aui-content">
             <div class="card infinite-scroll infinite-scroll-bottom">
                 <div class="card infinite-scroll infinite-scroll-bottom">
                     <div class="gridlist">

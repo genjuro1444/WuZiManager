@@ -46,30 +46,30 @@
                     <li class="aui-list-item">
                         <div class="aui-list-item-inner">
                             <div class="aui-list-item-label">
-                                申请部门：
+                                申请人-部门：
                             </div>
                             <div class="aui-list-item-input">
-                                {{item.DepartmentName}}
+                                {{item.UserRealName}}-{{item.DepartmentName}}
                             </div>
                         </div>
                     </li>
                     <li class="aui-list-item">
                         <div class="aui-list-item-inner">
                             <div class="aui-list-item-label">
-                                申请人：
-                            </div>
-                            <div class="aui-list-item-input">
-                                {{item.UserRealName}}
-                            </div>
-                        </div>
-                    </li>
-                    <li class="aui-list-item">
-                        <div class="aui-list-item-inner">
-                            <div class="aui-list-item-label">
-                                申请时间：
+                                申请日期：
                             </div>
                             <div class="aui-list-item-input">
                                 {{item.CRDateDesc}}
+                            </div>
+                        </div>
+                    </li>
+                    <li class="aui-list-item" v-if="item.Status>10">
+                        <div class="aui-list-item-inner">
+                            <div class="aui-list-item-label">
+                                <span v-if="item.Status==20">入库</span><span v-if="item.Status==30">作废</span>日期：
+                            </div>
+                            <div class="aui-list-item-input">
+                                {{item.UpdateDate}}
                             </div>
                         </div>
                     </li>
@@ -78,7 +78,7 @@
                             <div class="aui-list-item-label">
                                 申请资产：
                             </div>
-                            <div class="aui-list-item-input">
+                            <div class="aui-list-item-input" style="font-size:65%;">
                                 {{item.ZCName}}
                             </div>
                         </div>
