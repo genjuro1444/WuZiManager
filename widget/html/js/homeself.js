@@ -1,5 +1,4 @@
-﻿
-var ns, toast, actionsheet;
+var ns, toast, actionsheet, UIActionProgress;
 var app = new Vue({
     el: '#app',
     data: {
@@ -12,18 +11,18 @@ var app = new Vue({
         }
     },
     methods: {
-        get_data: function () {
+        get_data: function() {
             var that = this;
             var uid = ns.getPrefs('uid');
             var options = {
                 action: 'APP_GETMYSELFMODEL',
                 P1: uid
             };
-            ns.post(options, function (succeed, data, err) {
+            ns.post(options, function(succeed, data, err) {
                 if (succeed) {
                     that.userinfo = data.data;
                     if (data.headimg) {
-                        that.file.headimg = CONFIG.url + data.headimg;
+                        that.file.headimg = data.headimg;
                     } else {
                         that.file.headimg = '../image/default_user.png';
                     }
@@ -31,27 +30,25 @@ var app = new Vue({
                     ns.toast(err);
                 }
             }, {
-                    toast: true
-                });
+                toast: true
+            });
         },
-        changepwd: function () {
+        changepwd: function() {
             var that = this;
             var name = 'changepwd_frm';
             var title = '修改密码';
             ns.openWin(name, title);
         },
-        do_edit_self: function () {
+        do_edit_self: function() {
             var that = this;
             var name = 'myself_frm';
             var title = '个人中心';
             ns.openWin(name, title);
         },
-        checkupdate: function () {
-            api.sendEvent({
-                name: 'do_upgrade'
-            });
+        checkupdate: function() {
+            appupgrade.check_upgrade(true);
         },
-        do_logout: function () {
+        do_logout: function() {
             ns.removePrefs([], true);
             api.sendEvent({
                 name: 'onlogin'
@@ -59,20 +56,21 @@ var app = new Vue({
         }
     }
 });
-apiready = function () {
+apiready = function() {
     api.parseTapmode();
     ns = window.Foresight.Util;
+    UIActionProgress = api.require('UIActionProgress');
     toast = new auiToast();
     actionsheet = new auiActionsheet();
     app.get_data();
     api.addEventListener({
         name: 'do_reload_homeself'
-    }, function () {
+    }, function() {
         app.get_data();
     });
     api.addEventListener({
         name: 'onlogin'
-    }, function () {
+    }, function() {
         app.get_data();
     });
 }

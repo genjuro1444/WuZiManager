@@ -249,7 +249,7 @@
     min-height: 0.5rem;
     text-align: center;
     display: block;
-    padding-right: 10px
+    padding-right: 10px;
 }
 
 .aui-list .aui-list-item.aui-item-btn label {
@@ -260,6 +260,19 @@
     border-radius: 5px;
     line-height: 10px;
     margin: 5px 0 5px 10px;
+}
+
+.aui-label-btn {
+    position: absolute;
+    bottom: -5px;
+    font-size: 0.65rem;
+    color: red;
+    z-index: 99;
+    line-height: 30px;
+    text-align: center;
+    left: 50%;
+    width: 30px;
+    margin-left: -10px;
 }
 
 .aui-list .aui-list-item-input.aui-list-item-btn-scan {
@@ -304,6 +317,6 @@
 }
 
 .image-box .image-item .icon-close .iconfont {
-  font-size: 0.8rem;
-  color: #ff0000;
+    font-size: 0.8rem;
+    color: #ff0000;
 }

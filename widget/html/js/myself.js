@@ -25,7 +25,7 @@ var app = new Vue({
                 if (succeed) {
                     that.form = data.data;
                     if (data.headimg) {
-                        that.file.headimg = CONFIG.url + data.headimg;
+                        that.file.headimg = data.headimg;
                     }
                     if (data.department && data.department.length > 0) {
                         that.department = data.department[0];
@@ -75,7 +75,13 @@ var app = new Vue({
             var that = this;
             that.form.Sex = sex;
         },
-        choose_img: function () {
+        choose_img: function() {
+            var that = this;
+            ns.confirmPer('camera', function() {
+                that.choose_img_process();
+            })
+        },
+        choose_img_process: function () {
             var that = this;
             api.actionSheet({
                 cancelTitle: '关闭',
